@@ -436,34 +436,65 @@
         .getElementById("loginModal")
         .classList.remove("show");
     }
+    async function login() {
+    const email =
+        document.getElementById("email").value.trim();
 
-    function login() {
-
-      const email =
-        document.getElementById("email").value;
-
-      const password =
+    const password =
         document.getElementById("password").value;
 
-      const message =
+    const message =
         document.getElementById("loginMessage");
 
-      if (!email || !password) {
-
+    if (!email || !password) {
         message.textContent =
-          "Please enter your email and password.";
-
+            "Please enter your email and password.";
         message.style.color = "#dc2626";
-
         return;
-      }
-
-      message.textContent =
-        "Authentication will be connected to Supabase next.";
-
-      message.style.color = "#2563eb";
     }
 
+    if (!window.churchDB) {
+        message.textContent =
+            "Connecting to the database. Please try again.";
+        message.style.color = "#dc2626";
+        return;
+    }
+
+    message.textContent = "Signing in...";
+    message.style.color = "#2563eb";
+
+    try {
+
+        const { data, error } =
+            await window.churchDB.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+        if (error) {
+            throw error;
+        }
+
+        message.textContent = "Login successful!";
+        message.style.color = "#16a34a";
+
+        console.log("✅ User logged in:", data.user.email);
+
+        setTimeout(function () {
+            closeLogin();
+        }, 800);
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "Login failed: " + error.message;
+
+        message.style.color = "#dc2626";
+    }
+}
+    
   </script>
 <!-- Supabase Connection -->
 
@@ -472,13 +503,11 @@
 <script src="supabase.js"></script>
 
 <script>
-
 document.addEventListener(
   "DOMContentLoaded",
   function () {
 
     initializeSupabase();
-
   }
 );
 
