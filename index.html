@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Aim High For Jesus | Church Attendance</title>
 
-
-  <!-- QR CODE GENERATOR -->
+  <!-- QR GENERATOR -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <!-- QR CAMERA SCANNER -->
@@ -24,7 +17,6 @@
 
   <!-- YOUR SUPABASE CONNECTION -->
   <script src="supabase.js"></script>
-
 
   <style>
 
@@ -42,13 +34,11 @@
       --warning: #92400e;
     }
 
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
 
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -57,22 +47,17 @@
       min-height: 100vh;
     }
 
-
     button,
     input,
     select {
       font-family: inherit;
     }
 
-
     button {
       cursor: pointer;
     }
 
-
-    /* ==========================
-       HEADER
-       ========================== */
+    /* HEADER */
 
     .topbar {
       min-height: 70px;
@@ -85,7 +70,6 @@
       gap: 20px;
     }
 
-
     .brand {
       display: flex;
       align-items: center;
@@ -93,7 +77,6 @@
       font-weight: 700;
       font-size: 19px;
     }
-
 
     .logo {
       width: 42px;
@@ -108,16 +91,13 @@
       flex-shrink: 0;
     }
 
-
     .header-actions {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-
-    .signin,
-    .signout-btn {
+    .signin {
       background: var(--primary);
       color: white;
       border: none;
@@ -126,20 +106,20 @@
       font-weight: 700;
     }
 
-
-    .signout-btn {
-      background: #dc2626;
-    }
-
-
     .signin:hover {
       background: var(--primary-dark);
     }
 
+    .signout-btn {
+      background: var(--danger);
+      color: white;
+      border: none;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
 
-    /* ==========================
-       HERO
-       ========================== */
+    /* HERO */
 
     .hero {
       max-width: 1100px;
@@ -147,7 +127,6 @@
       padding: 80px 24px 50px;
       text-align: center;
     }
-
 
     .badge {
       display: inline-block;
@@ -160,7 +139,6 @@
       margin-bottom: 20px;
     }
 
-
     h1 {
       font-size: clamp(38px, 7vw, 68px);
       line-height: 1.05;
@@ -168,6 +146,9 @@
       letter-spacing: -2px;
     }
 
+    .aim-title {
+      color: var(--primary);
+    }
 
     .hero p {
       max-width: 700px;
@@ -177,12 +158,6 @@
       line-height: 1.7;
     }
 
-
-    .aim-title {
-      color: var(--primary);
-    }
-
-
     .actions {
       margin-top: 35px;
       display: flex;
@@ -190,7 +165,6 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-
 
     .primary-btn,
     .secondary-btn {
@@ -201,12 +175,10 @@
       font-weight: 700;
     }
 
-
     .primary-btn {
       background: var(--primary);
       color: white;
     }
-
 
     .secondary-btn {
       background: white;
@@ -214,10 +186,7 @@
       border: 1px solid var(--border);
     }
 
-
-    /* ==========================
-       FEATURES
-       ========================== */
+    /* FEATURES */
 
     .features {
       max-width: 1100px;
@@ -228,14 +197,12 @@
       gap: 18px;
     }
 
-
     .feature {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 28px;
     }
-
 
     .feature-icon {
       width: 48px;
@@ -249,12 +216,10 @@
       margin-bottom: 18px;
     }
 
-
     .feature h2 {
       font-size: 19px;
       margin-bottom: 8px;
     }
-
 
     .feature p {
       color: var(--muted);
@@ -262,10 +227,7 @@
       font-size: 14px;
     }
 
-
-    /* ==========================
-       GENERAL SECTIONS
-       ========================== */
+    /* GENERAL */
 
     .content-section {
       max-width: 1100px;
@@ -273,22 +235,17 @@
       padding: 0 24px;
     }
 
-
     .section-title {
       font-size: 32px;
       margin-bottom: 10px;
     }
-
 
     .section-description {
       color: var(--muted);
       margin-bottom: 25px;
     }
 
-
-    /* ==========================
-       EVENTS
-       ========================== */
+    /* EVENTS */
 
     .event-card {
       background: var(--card);
@@ -299,74 +256,12 @@
       box-shadow: 0 4px 12px rgba(0,0,0,.04);
     }
 
-
     .event-header {
       display: flex;
       justify-content: space-between;
       gap: 15px;
       flex-wrap: wrap;
     }
-
-
-    .event-label {
-      color: var(--primary);
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-
-
-    .event-name {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-
-    .event-info {
-      color: var(--muted);
-      margin-bottom: 7px;
-    }
-
-
-    .event-status {
-      align-self: flex-start;
-      background: #fef3c7;
-      color: var(--warning);
-      padding: 7px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-
-    .event-details {
-      margin-top: 20px;
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
-    }
-
-
-    .event-description {
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-
-
-    .church-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--muted);
-    }
-
-
-    .church-list {
-      margin-top: 8px;
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
 
     .aim-event-banner {
       display: inline-block;
@@ -379,22 +274,69 @@
       font-weight: 800;
     }
 
+    .event-label {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
 
-    /* ==========================
-       MEMBER PORTAL
-       ========================== */
+    .event-name {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .event-info {
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .event-status {
+      align-self: flex-start;
+      background: #fef3c7;
+      color: var(--warning);
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .event-details {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .event-description {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .church-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .church-list {
+      margin-top: 8px;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    /* MEMBER PORTAL */
 
     #member-portal {
       display: none;
     }
-
 
     .portal-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 18px;
     }
-
 
     .portal-card {
       background: var(--card);
@@ -404,18 +346,15 @@
       box-shadow: 0 4px 12px rgba(0,0,0,.04);
     }
 
-
     .portal-card h3 {
       font-size: 21px;
       margin-bottom: 8px;
     }
 
-
     .portal-muted {
       color: var(--muted);
       line-height: 1.6;
     }
-
 
     .member-name {
       font-size: 26px;
@@ -423,19 +362,16 @@
       margin: 10px 0;
     }
 
-
     .member-church {
       color: var(--primary);
       font-weight: 700;
       margin-bottom: 5px;
     }
 
-
     .member-id {
       color: var(--muted);
       font-size: 14px;
     }
-
 
     .qr-box {
       display: flex;
@@ -445,14 +381,12 @@
       margin: 20px 0;
     }
 
-
     #memberQr {
       padding: 15px;
       background: white;
       border-radius: 12px;
       display: inline-block;
     }
-
 
     .download-btn {
       display: block;
@@ -465,27 +399,22 @@
       font-weight: 700;
     }
 
-
     .attendance-list {
       margin-top: 15px;
     }
-
 
     .attendance-item {
       border-bottom: 1px solid var(--border);
       padding: 13px 0;
     }
 
-
     .attendance-item:last-child {
       border-bottom: none;
     }
 
-
     .attendance-event {
       font-weight: 700;
     }
-
 
     .attendance-date {
       color: var(--muted);
@@ -493,17 +422,17 @@
       margin-top: 4px;
     }
 
+    /* QR SCANNER */
 
-    /* ==========================
-       QR SCANNER
-       ========================== */
+    #qr-attendance {
+      display: none;
+    }
 
     .qr-section {
       max-width: 900px;
       margin: 30px auto 70px;
       padding: 0 24px;
     }
-
 
     .qr-card {
       background: var(--card);
@@ -513,37 +442,31 @@
       box-shadow: 0 4px 12px rgba(0,0,0,.04);
     }
 
-
     .qr-heading {
       text-align: center;
       margin-bottom: 25px;
     }
-
 
     .qr-icon {
       font-size: 42px;
       margin-bottom: 10px;
     }
 
-
     .qr-heading h2 {
       font-size: 30px;
       margin-bottom: 8px;
     }
-
 
     .qr-heading p {
       color: var(--muted);
       line-height: 1.6;
     }
 
-
     .qr-label {
       display: block;
       font-weight: 700;
       margin-bottom: 8px;
     }
-
 
     #qrEventSelect {
       width: 100%;
@@ -555,13 +478,11 @@
       margin-bottom: 20px;
     }
 
-
     #qr-reader {
       width: 100%;
       max-width: 500px;
       margin: 0 auto;
     }
-
 
     .scanner-buttons {
       display: flex;
@@ -570,7 +491,6 @@
       margin-top: 20px;
       flex-wrap: wrap;
     }
-
 
     .start-scanner {
       background: var(--primary);
@@ -581,7 +501,6 @@
       font-weight: 700;
     }
 
-
     .stop-scanner {
       background: white;
       color: var(--text);
@@ -590,7 +509,6 @@
       border-radius: 10px;
       font-weight: 700;
     }
-
 
     #qr-result {
       margin-top: 20px;
@@ -603,10 +521,7 @@
       min-height: 50px;
     }
 
-
-    /* ==========================
-       LOGIN / SIGNUP MODAL
-       ========================== */
+    /* AUTH MODAL */
 
     .modal {
       display: none;
@@ -620,11 +535,9 @@
       overflow-y: auto;
     }
 
-
     .modal.show {
       display: flex;
     }
-
 
     .auth-box {
       background: white;
@@ -636,11 +549,9 @@
       margin: 20px 0;
     }
 
-
     .auth-box h2 {
       margin-bottom: 8px;
     }
-
 
     .auth-description {
       color: var(--muted);
@@ -649,14 +560,12 @@
       line-height: 1.5;
     }
 
-
     .auth-tabs {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
       margin-bottom: 20px;
     }
-
 
     .auth-tab {
       padding: 11px;
@@ -666,28 +575,23 @@
       font-weight: 700;
     }
 
-
     .auth-tab.active {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
     }
 
-
     .auth-form {
       display: none;
     }
-
 
     .auth-form.active {
       display: block;
     }
 
-
     .form-group {
       margin-bottom: 13px;
     }
-
 
     .form-group label {
       display: block;
@@ -695,7 +599,6 @@
       margin-bottom: 7px;
       font-size: 14px;
     }
-
 
     .auth-box input,
     .auth-box select {
@@ -706,7 +609,6 @@
       font-size: 16px;
       background: white;
     }
-
 
     .login-submit,
     .signup-submit {
@@ -721,7 +623,6 @@
       margin-top: 5px;
     }
 
-
     .close {
       width: 100%;
       margin-top: 10px;
@@ -732,7 +633,6 @@
       font-weight: 700;
     }
 
-
     #loginMessage,
     #signupMessage {
       margin-top: 15px;
@@ -741,10 +641,7 @@
       font-size: 14px;
     }
 
-
-    /* ==========================
-       FOOTER
-       ========================== */
+    /* FOOTER */
 
     .footer {
       text-align: center;
@@ -753,10 +650,7 @@
       font-size: 13px;
     }
 
-
-    /* ==========================
-       MOBILE
-       ========================== */
+    /* MOBILE */
 
     @media (max-width: 700px) {
 
@@ -764,48 +658,39 @@
         grid-template-columns: 1fr;
       }
 
-
       .portal-grid {
         grid-template-columns: 1fr;
       }
-
 
       .topbar {
         padding: 12px 20px;
       }
 
-
       .brand span {
         font-size: 16px;
       }
-
 
       .signin,
       .signout-btn {
         padding: 10px 14px;
       }
 
-
       .hero {
         padding-top: 60px;
       }
 
-
       .event-card {
         padding: 22px;
       }
-
 
       .qr-card,
       .portal-card {
         padding: 22px;
       }
 
-
       h1 {
         letter-spacing: -1px;
       }
-
     }
 
   </style>
@@ -840,7 +725,7 @@
     <button
       id="headerAuthButton"
       class="signin"
-      onclick="openAuth()"
+      onclick="openAuth('login')"
     >
       Sign In
     </button>
@@ -1029,31 +914,22 @@
     <div class="portal-grid">
 
 
-      <!-- MEMBER INFORMATION -->
-
       <div class="portal-card">
 
         <h3>
           My Profile
         </h3>
 
-
         <p class="portal-muted">
           Your church membership information.
         </p>
 
-
         <div id="memberProfile">
-
           Loading profile...
-
         </div>
-
 
       </div>
 
-
-      <!-- QR CODE -->
 
       <div class="portal-card">
 
@@ -1061,16 +937,13 @@
           My QR Code
         </h3>
 
-
         <p class="portal-muted">
           Show this QR code when checking in at church.
         </p>
 
-
         <div class="qr-box">
 
-          <div id="memberQr">
-          </div>
+          <div id="memberQr"></div>
 
         </div>
 
@@ -1082,11 +955,8 @@
           📥 Save My QR Code
         </button>
 
-
       </div>
 
-
-      <!-- ATTENDANCE -->
 
       <div
         class="portal-card"
@@ -1097,19 +967,15 @@
           My Attendance
         </h3>
 
-
         <p class="portal-muted">
           Your recent attendance records.
         </p>
-
 
         <div
           id="myAttendance"
           class="attendance-list"
         >
-
           Loading attendance...
-
         </div>
 
       </div>
@@ -1121,7 +987,8 @@
 
 
   <!-- =====================================================
-       QR ATTENDANCE SCANNER
+       QR SCANNER
+       HIDDEN BY DEFAULT
        ===================================================== -->
 
   <section
@@ -1138,20 +1005,16 @@
           📱
         </div>
 
-
         <h2>
-          QR Attendance
+          QR Attendance Scanner
         </h2>
 
-
         <p>
-          Authorized church staff can scan a member's QR code.
+          Special access required.
         </p>
 
       </div>
 
-
-      <!-- EVENT -->
 
       <label
         class="qr-label"
@@ -1170,15 +1033,10 @@
       </select>
 
 
-      <!-- CAMERA -->
-
       <div id="qr-reader"></div>
 
 
-      <!-- BUTTONS -->
-
       <div class="scanner-buttons">
-
 
         <button
           class="start-scanner"
@@ -1195,11 +1053,8 @@
           Stop Scanner
         </button>
 
-
       </div>
 
-
-      <!-- RESULT -->
 
       <div id="qr-result">
         Scanner ready.
@@ -1214,13 +1069,10 @@
 </main>
 
 
-<!-- =====================================================
-     FOOTER
-     ===================================================== -->
-
 <footer class="footer">
 
-  © 2026 Aim High For Jesus | Church Attendance Management System
+  © 2026 Aim High For Jesus |
+  Church Attendance Management System
 
 </footer>
 
@@ -1243,11 +1095,12 @@
 
 
     <p class="auth-description">
-      Sign in to your account or create a new member account.
+
+      Sign in to your account or create
+      a new member account.
+
     </p>
 
-
-    <!-- TABS -->
 
     <div class="auth-tabs">
 
@@ -1271,9 +1124,7 @@
     </div>
 
 
-    <!-- =================================================
-         LOGIN FORM
-         ================================================= -->
+    <!-- LOGIN -->
 
     <div
       id="loginForm"
@@ -1325,20 +1176,17 @@
     </div>
 
 
-    <!-- =================================================
-         SIGNUP FORM
-         ================================================= -->
+    <!-- SIGN UP -->
 
     <div
       id="signupForm"
       class="auth-form"
     >
 
-
       <div class="form-group">
 
         <label for="signupFirstName">
-          First Name
+          First Name *
         </label>
 
         <input
@@ -1370,7 +1218,7 @@
       <div class="form-group">
 
         <label for="signupLastName">
-          Last Name
+          Last Name *
         </label>
 
         <input
@@ -1386,7 +1234,7 @@
       <div class="form-group">
 
         <label for="signupChurch">
-          Church / Branch
+          Church / Branch *
         </label>
 
         <select id="signupChurch">
@@ -1403,7 +1251,7 @@
       <div class="form-group">
 
         <label for="signupEmail">
-          Email
+          Email *
         </label>
 
         <input
@@ -1419,7 +1267,7 @@
       <div class="form-group">
 
         <label for="signupPassword">
-          Password
+          Password *
         </label>
 
         <input
@@ -1435,7 +1283,7 @@
       <div class="form-group">
 
         <label for="signupPasswordConfirm">
-          Confirm Password
+          Confirm Password *
         </label>
 
         <input
@@ -1480,24 +1328,31 @@
 
 <script>
 
-
 /* =====================================================
    GLOBAL VARIABLES
    ===================================================== */
 
 let qrScanner = null;
-
 let qrEvents = [];
-
 let selectedEventKey = null;
-
 let processingScan = false;
-
 let currentMember = null;
+let currentProfile = null;
 
 
 /* =====================================================
-   INITIALIZE SUPABASE
+   SPECIAL SCANNER ROLES
+   ===================================================== */
+
+const SCANNER_ROLES = [
+  "super_admin",
+  "church_admin",
+  "scanner"
+];
+
+
+/* =====================================================
+   INITIALIZE APPLICATION
    ===================================================== */
 
 function initializeApplication() {
@@ -1511,7 +1366,6 @@ function initializeApplication() {
 
   }
 
-
   if (!window.churchDB) {
 
     console.error(
@@ -1522,14 +1376,11 @@ function initializeApplication() {
 
   }
 
-
   console.log(
-    "Supabase connected."
+    "✅ Supabase connected."
   );
 
-
   return true;
-
 }
 
 
@@ -1541,38 +1392,21 @@ function openAuth(
   tab = "login"
 ) {
 
-  const modal =
-    document.getElementById(
-      "authModal"
-    );
+  document
+    .getElementById("authModal")
+    .classList.add("show");
 
-
-  modal.classList.add(
-    "show"
-  );
-
-
-  showAuthTab(
-    tab
-  );
-
+  showAuthTab(tab);
 
   loadChurches();
-
 }
 
 
 function closeAuth() {
 
-  const modal =
-    document.getElementById(
-      "authModal"
-    );
-
-
-  modal.classList.remove(
-    "show"
-  );
+  document
+    .getElementById("authModal")
+    .classList.remove("show");
 
 }
 
@@ -1581,27 +1415,22 @@ function closeAuth() {
    AUTH TABS
    ===================================================== */
 
-function showAuthTab(
-  tab
-) {
+function showAuthTab(tab) {
 
   const loginForm =
     document.getElementById(
       "loginForm"
     );
 
-
   const signupForm =
     document.getElementById(
       "signupForm"
     );
 
-
   const loginTab =
     document.getElementById(
       "loginTab"
     );
-
 
   const signupTab =
     document.getElementById(
@@ -1665,9 +1494,7 @@ async function loadChurches() {
 
 
   if (!select) {
-
     return;
-
   }
 
 
@@ -1688,20 +1515,16 @@ async function loadChurches() {
       error
     } =
       await window.churchDB
-
         .from("churches")
-
         .select(`
           id,
           name,
           branch_code
         `)
-
         .eq(
           "is_active",
           true
         )
-
         .order(
           "name",
           {
@@ -1711,9 +1534,7 @@ async function loadChurches() {
 
 
     if (error) {
-
       throw error;
-
     }
 
 
@@ -1735,22 +1556,18 @@ async function loadChurches() {
 
 
     data.forEach(
-      function (church) {
+      function(church) {
 
         const option =
           document.createElement(
             "option"
           );
 
-
         option.value =
           church.id;
 
-
         option.textContent =
-
           church.name +
-
           (
             church.branch_code
               ? " (" +
@@ -1758,7 +1575,6 @@ async function loadChurches() {
                 ")"
               : ""
           );
-
 
         select.appendChild(
           option
@@ -1769,14 +1585,12 @@ async function loadChurches() {
 
   }
 
-
   catch (error) {
 
     console.error(
       "Church loading error:",
       error
     );
-
 
     select.innerHTML =
       '<option value="">Unable to load churches</option>';
@@ -1851,8 +1665,6 @@ async function signup() {
     );
 
 
-  /* VALIDATION */
-
   if (
     !firstName ||
     !lastName ||
@@ -1925,23 +1737,12 @@ async function signup() {
 
   try {
 
-    /*
-      Store registration information
-      in Supabase Auth user metadata.
-
-      This allows registration to finish
-      after email confirmation if confirmation
-      is enabled in Supabase.
-    */
-
     const {
       data,
       error
     } =
       await window.churchDB
-
         .auth
-
         .signUp({
 
           email:
@@ -1974,15 +1775,13 @@ async function signup() {
 
 
     if (error) {
-
       throw error;
-
     }
 
 
     /*
-      If Supabase immediately gives us
-      a session, complete the member profile.
+      If email confirmation is disabled,
+      Supabase gives us a session immediately.
     */
 
     if (
@@ -1992,39 +1791,32 @@ async function signup() {
 
       await completeMemberRegistration();
 
+
       message.textContent =
-        "Account created successfully! Your QR code is ready.";
+        "Account created! Your QR code is ready.";
 
       message.style.color =
         "#16a34a";
 
 
+      await updateUserInterface();
+
+
       setTimeout(
-        function () {
-
+        function() {
           closeAuth();
-
         },
-        1200
+        1000
       );
 
     }
 
     else {
 
-      /*
-        Email confirmation is probably enabled.
-      */
-
       message.innerHTML =
-
         "Account created successfully!<br><br>" +
-
         "Please check your email and confirm your account. " +
-
-        "After confirmation, sign in to finish your member registration " +
-
-        "and receive your QR code.";
+        "Then sign in to receive your QR code.";
 
       message.style.color =
         "#16a34a";
@@ -2033,14 +1825,12 @@ async function signup() {
 
   }
 
-
   catch (error) {
 
     console.error(
       "Signup error:",
       error
     );
-
 
     message.textContent =
       "Registration failed: " +
@@ -2100,7 +1890,7 @@ async function completeMemberRegistration() {
 
 
   /*
-    Check whether member already exists.
+    Check if member already exists.
   */
 
   const {
@@ -2108,9 +1898,7 @@ async function completeMemberRegistration() {
     error: existingError
   } =
     await window.churchDB
-
       .from("members")
-
       .select(`
         id,
         member_id,
@@ -2122,19 +1910,15 @@ async function completeMemberRegistration() {
         membership_status,
         qr_token
       `)
-
       .eq(
         "user_id",
         user.id
       )
-
       .maybeSingle();
 
 
   if (existingError) {
-
     throw existingError;
-
   }
 
 
@@ -2162,7 +1946,7 @@ async function completeMemberRegistration() {
 
 
   /*
-    Call the Supabase function created earlier.
+    Supabase function created in SQL.
   */
 
   const {
@@ -2170,7 +1954,6 @@ async function completeMemberRegistration() {
     error: registerError
   } =
     await window.churchDB
-
       .rpc(
         "register_member",
         {
@@ -2179,7 +1962,8 @@ async function completeMemberRegistration() {
             metadata.first_name,
 
           p_middle_name:
-            metadata.middle_name || null,
+            metadata.middle_name ||
+            null,
 
           p_last_name:
             metadata.last_name,
@@ -2192,9 +1976,7 @@ async function completeMemberRegistration() {
 
 
   if (registerError) {
-
     throw registerError;
-
   }
 
 
@@ -2277,9 +2059,7 @@ async function login() {
       error
     } =
       await window.churchDB
-
         .auth
-
         .signInWithPassword({
 
           email:
@@ -2292,16 +2072,12 @@ async function login() {
 
 
     if (error) {
-
       throw error;
-
     }
 
 
     /*
-      Finish member registration if
-      the account was created earlier
-      and email confirmation was required.
+      Finish member registration if necessary.
     */
 
     try {
@@ -2330,17 +2106,17 @@ async function login() {
     await updateUserInterface();
 
 
+    await checkScannerAccess();
+
+
     setTimeout(
-      function () {
-
+      function() {
         closeAuth();
-
       },
       800
     );
 
   }
-
 
   catch (error) {
 
@@ -2348,7 +2124,6 @@ async function login() {
       "Login error:",
       error
     );
-
 
     message.textContent =
       "Login failed: " +
@@ -2363,15 +2138,13 @@ async function login() {
 
 
 /* =====================================================
-   SIGN OUT
+   LOGOUT
    ===================================================== */
 
 async function logout() {
 
   if (!window.churchDB) {
-
     return;
-
   }
 
 
@@ -2389,18 +2162,25 @@ async function logout() {
 
 
     if (error) {
-
       throw error;
-
     }
 
 
     currentMember =
       null;
 
+    currentProfile =
+      null;
+
 
     document.getElementById(
       "member-portal"
+    ).style.display =
+      "none";
+
+
+    document.getElementById(
+      "qr-attendance"
     ).style.display =
       "none";
 
@@ -2420,12 +2200,8 @@ async function logout() {
 
 
     button.onclick =
-      function () {
-
-        openAuth(
-          "login"
-        );
-
+      function() {
+        openAuth("login");
       };
 
 
@@ -2437,7 +2213,6 @@ async function logout() {
     );
 
   }
-
 
   catch (error) {
 
@@ -2452,15 +2227,189 @@ async function logout() {
 
 
 /* =====================================================
+   GET CURRENT PROFILE
+   ===================================================== */
+
+async function getCurrentProfile() {
+
+  if (!window.churchDB) {
+    return null;
+  }
+
+
+  const {
+    data: userData,
+    error: userError
+  } =
+    await window.churchDB
+      .auth
+      .getUser();
+
+
+  if (
+    userError ||
+    !userData ||
+    !userData.user
+  ) {
+
+    return null;
+
+  }
+
+
+  const {
+    data: profile,
+    error: profileError
+  } =
+    await window.churchDB
+      .from("profiles")
+      .select(`
+        id,
+        role,
+        is_active,
+        church_id
+      `)
+      .eq(
+        "id",
+        userData.user.id
+      )
+      .maybeSingle();
+
+
+  if (profileError) {
+
+    console.error(
+      "Profile error:",
+      profileError
+    );
+
+    return null;
+
+  }
+
+
+  currentProfile =
+    profile;
+
+
+  return profile;
+
+}
+
+
+/* =====================================================
+   CHECK SPECIAL SCANNER ACCESS
+   ===================================================== */
+
+async function checkScannerAccess() {
+
+  const scannerSection =
+    document.getElementById(
+      "qr-attendance"
+    );
+
+
+  if (!scannerSection) {
+    return false;
+  }
+
+
+  /*
+    Always hide scanner first.
+  */
+
+  scannerSection.style.display =
+    "none";
+
+
+  if (!window.churchDB) {
+    return false;
+  }
+
+
+  try {
+
+    const profile =
+      await getCurrentProfile();
+
+
+    if (!profile) {
+
+      console.log(
+        "Scanner: no profile."
+      );
+
+      return false;
+
+    }
+
+
+    const role =
+      String(
+        profile.role ||
+        ""
+      ).toLowerCase();
+
+
+    const allowed =
+      profile.is_active === true &&
+      SCANNER_ROLES.includes(
+        role
+      );
+
+
+    if (!allowed) {
+
+      console.log(
+        "Scanner access denied. Role:",
+        role
+      );
+
+      return false;
+
+    }
+
+
+    /*
+      Special-access user.
+    */
+
+    scannerSection.style.display =
+      "block";
+
+
+    console.log(
+      "✅ Scanner access granted:",
+      role
+    );
+
+
+    return true;
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Scanner access check error:",
+      error
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* =====================================================
    UPDATE USER INTERFACE
    ===================================================== */
 
 async function updateUserInterface() {
 
   if (!window.churchDB) {
-
     return;
-
   }
 
 
@@ -2486,10 +2435,6 @@ async function updateUserInterface() {
     }
 
 
-    const user =
-      data.user;
-
-
     const button =
       document.getElementById(
         "headerAuthButton"
@@ -2505,15 +2450,13 @@ async function updateUserInterface() {
 
 
     button.onclick =
-      function () {
-
+      function() {
         logout();
-
       };
 
 
     /*
-      Try to get member profile.
+      Find member.
     */
 
     const {
@@ -2521,9 +2464,7 @@ async function updateUserInterface() {
       error: memberError
     } =
       await window.churchDB
-
         .from("members")
-
         .select(`
           id,
           member_id,
@@ -2535,12 +2476,10 @@ async function updateUserInterface() {
           membership_status,
           qr_token
         `)
-
         .eq(
           "user_id",
-          user.id
+          data.user.id
         )
-
         .maybeSingle();
 
 
@@ -2550,8 +2489,6 @@ async function updateUserInterface() {
         "Member profile:",
         memberError.message
       );
-
-      return;
 
     }
 
@@ -2568,8 +2505,14 @@ async function updateUserInterface() {
 
     }
 
-  }
 
+    /*
+      Check scanner permission separately.
+    */
+
+    await checkScannerAccess();
+
+  }
 
   catch (error) {
 
@@ -2601,8 +2544,6 @@ async function showMemberPortal(
     "block";
 
 
-  /* PROFILE */
-
   const profile =
     document.getElementById(
       "memberProfile"
@@ -2619,18 +2560,14 @@ async function showMemberPortal(
       data: church
     } =
       await window.churchDB
-
         .from("churches")
-
         .select(
           "name, branch_code"
         )
-
         .eq(
           "id",
           member.church_id
         )
-
         .maybeSingle();
 
 
@@ -2638,7 +2575,6 @@ async function showMemberPortal(
 
       churchName =
         church.name +
-
         (
           church.branch_code
             ? " (" +
@@ -2699,7 +2635,10 @@ async function showMemberPortal(
     </div>
 
 
-    <div class="member-id" style="margin-top:8px;">
+    <div
+      class="member-id"
+      style="margin-top:8px;"
+    >
 
       Status:
       ${escapeHtml(
@@ -2712,14 +2651,10 @@ async function showMemberPortal(
   `;
 
 
-  /* QR */
-
   generateMemberQR(
     member
   );
 
-
-  /* ATTENDANCE */
 
   await loadMyAttendance(
     member.id
@@ -2736,13 +2671,13 @@ function generateMemberQR(
   member
 ) {
 
-  const qrContainer =
+  const container =
     document.getElementById(
       "memberQr"
     );
 
 
-  qrContainer.innerHTML =
+  container.innerHTML =
     "";
 
 
@@ -2751,7 +2686,7 @@ function generateMemberQR(
     !member.qr_token
   ) {
 
-    qrContainer.innerHTML =
+    container.innerHTML =
       "<p style='color:#dc2626;'>" +
       "QR code is not available." +
       "</p>";
@@ -2762,7 +2697,7 @@ function generateMemberQR(
 
 
   new QRCode(
-    qrContainer,
+    container,
     {
 
       text:
@@ -2796,9 +2731,7 @@ function downloadMemberQR() {
 
 
   if (!container) {
-
     return;
-
   }
 
 
@@ -2857,7 +2790,7 @@ function downloadMemberQR() {
 
 
   link.download =
-    "my-church-qr-code.png";
+    "aim-high-for-jesus-qr.png";
 
 
   document.body.appendChild(
@@ -2890,9 +2823,7 @@ async function loadMyAttendance(
 
 
   if (!container) {
-
     return;
-
   }
 
 
@@ -2903,34 +2834,27 @@ async function loadMyAttendance(
       error
     } =
       await window.churchDB
-
         .from("attendance")
-
         .select(`
           id,
           attendance_time,
           event_id
         `)
-
         .eq(
           "member_id",
           memberId
         )
-
         .order(
           "attendance_time",
           {
             ascending: false
           }
         )
-
         .limit(20);
 
 
     if (error) {
-
       throw error;
-
     }
 
 
@@ -2949,17 +2873,11 @@ async function loadMyAttendance(
     }
 
 
-    /*
-      Get event names.
-    */
-
     const eventIds =
       data
         .map(
-          function (row) {
-
+          function(row) {
             return row.event_id;
-
           }
         )
         .filter(Boolean);
@@ -2976,13 +2894,10 @@ async function loadMyAttendance(
         data: events
       } =
         await window.churchDB
-
           .from("events")
-
           .select(
             "id, name, event_date"
           )
-
           .in(
             "id",
             eventIds
@@ -2992,7 +2907,7 @@ async function loadMyAttendance(
       if (events) {
 
         events.forEach(
-          function (event) {
+          function(event) {
 
             eventMap[
               event.id
@@ -3010,9 +2925,8 @@ async function loadMyAttendance(
     container.innerHTML =
 
       data
-
         .map(
-          function (row) {
+          function(row) {
 
             const event =
               eventMap[
@@ -3061,11 +2975,9 @@ async function loadMyAttendance(
 
           }
         )
-
         .join("");
 
   }
-
 
   catch (error) {
 
@@ -3098,9 +3010,7 @@ async function loadEvents() {
 
 
   if (!eventsList) {
-
     return;
-
   }
 
 
@@ -3123,9 +3033,7 @@ async function loadEvents() {
       error
     } =
       await window.churchDB
-
         .from("events")
-
         .select(`
           id,
           name,
@@ -3137,19 +3045,16 @@ async function loadEvents() {
           status,
           church_id
         `)
-
         .gte(
           "event_date",
           new Date()
             .toISOString()
             .split("T")[0]
         )
-
         .neq(
           "status",
           "cancelled"
         )
-
         .order(
           "event_date",
           {
@@ -3159,9 +3064,7 @@ async function loadEvents() {
 
 
     if (error) {
-
       throw error;
-
     }
 
 
@@ -3181,8 +3084,7 @@ async function loadEvents() {
 
 
     /*
-      Group the 7 church-specific rows
-      into one displayed event.
+      GROUP EVENTS BY NAME + DATE
     */
 
     const grouped =
@@ -3190,7 +3092,7 @@ async function loadEvents() {
 
 
     data.forEach(
-      function (event) {
+      function(event) {
 
         const key =
           event.name +
@@ -3225,7 +3127,7 @@ async function loadEvents() {
       )
 
       .map(
-        function (event) {
+        function(event) {
 
           const date =
             new Date(
@@ -3240,13 +3142,10 @@ async function loadEvents() {
               {
                 weekday:
                   "long",
-
                 month:
                   "long",
-
                 day:
                   "numeric",
-
                 year:
                   "numeric"
               }
@@ -3274,6 +3173,7 @@ async function loadEvents() {
 
 
               <div class="event-header">
+
 
                 <div>
 
@@ -3370,11 +3270,9 @@ async function loadEvents() {
 
         }
       )
-
       .join("");
 
   }
-
 
   catch (error) {
 
@@ -3410,9 +3308,7 @@ async function loadQREvents() {
 
 
   if (!select) {
-
     return;
-
   }
 
 
@@ -3433,9 +3329,7 @@ async function loadQREvents() {
       error
     } =
       await window.churchDB
-
         .from("events")
-
         .select(`
           id,
           name,
@@ -3447,19 +3341,16 @@ async function loadQREvents() {
           status,
           church_id
         `)
-
         .gte(
           "event_date",
           new Date()
             .toISOString()
             .split("T")[0]
         )
-
         .neq(
           "status",
           "cancelled"
         )
-
         .order(
           "event_date",
           {
@@ -3469,9 +3360,7 @@ async function loadQREvents() {
 
 
     if (error) {
-
       throw error;
-
     }
 
 
@@ -3491,17 +3380,12 @@ async function loadQREvents() {
     }
 
 
-    /*
-      Group the 7 church events
-      into one dropdown event.
-    */
-
     const groups =
       {};
 
 
     qrEvents.forEach(
-      function (event) {
+      function(event) {
 
         const key =
           event.name +
@@ -3528,7 +3412,7 @@ async function loadQREvents() {
       groups
     )
     .forEach(
-      function (key) {
+      function(key) {
 
         const event =
           groups[key];
@@ -3561,10 +3445,8 @@ async function loadQREvents() {
             {
               month:
                 "short",
-
               day:
                 "numeric",
-
               year:
                 "numeric"
             }
@@ -3579,7 +3461,6 @@ async function loadQREvents() {
     );
 
   }
-
 
   catch (error) {
 
@@ -3610,15 +3491,13 @@ function setupEventSelection() {
 
 
   if (!select) {
-
     return;
-
   }
 
 
   select.addEventListener(
     "change",
-    function () {
+    function() {
 
       selectedEventKey =
         this.value ||
@@ -3632,9 +3511,7 @@ function setupEventSelection() {
 
 
       if (!result) {
-
         return;
-
       }
 
 
@@ -3679,13 +3556,30 @@ async function startQRScanner() {
 
 
   if (!result) {
+    return;
+  }
+
+
+  /*
+    SECURITY CHECK
+  */
+
+  const hasAccess =
+    await checkScannerAccess();
+
+
+  if (!hasAccess) {
+
+    result.textContent =
+      "❌ You do not have scanner access.";
+
+    result.style.color =
+      "#dc2626";
 
     return;
 
   }
 
-
-  /* EVENT */
 
   if (!selectedEventKey) {
 
@@ -3700,8 +3594,6 @@ async function startQRScanner() {
   }
 
 
-  /* ALREADY RUNNING */
-
   if (qrScanner) {
 
     result.textContent =
@@ -3711,8 +3603,6 @@ async function startQRScanner() {
 
   }
 
-
-  /* LIBRARY */
 
   if (
     typeof Html5Qrcode ===
@@ -3730,53 +3620,7 @@ async function startQRScanner() {
   }
 
 
-  /* DATABASE */
-
-  if (!window.churchDB) {
-
-    result.textContent =
-      "Database connection is not ready.";
-
-    result.style.color =
-      "#dc2626";
-
-    return;
-
-  }
-
-
   try {
-
-    /*
-      Only authenticated users
-      can scan attendance.
-    */
-
-    const {
-      data,
-      error
-    } =
-      await window.churchDB
-        .auth
-        .getUser();
-
-
-    if (
-      error ||
-      !data ||
-      !data.user
-    ) {
-
-      result.textContent =
-        "Please sign in before scanning attendance.";
-
-      result.style.color =
-        "#dc2626";
-
-      return;
-
-    }
-
 
     qrScanner =
       new Html5Qrcode(
@@ -3807,8 +3651,8 @@ async function startQRScanner() {
 
       handleQRScan,
 
-      function () {
-        /* Normal scanner errors ignored. */
+      function() {
+        /* Ignore normal scanner errors. */
       }
 
     );
@@ -3821,7 +3665,6 @@ async function startQRScanner() {
       "#2563eb";
 
   }
-
 
   catch (error) {
 
@@ -3853,9 +3696,7 @@ async function startQRScanner() {
 async function stopQRScanner() {
 
   if (!qrScanner) {
-
     return;
-
   }
 
 
@@ -3866,7 +3707,6 @@ async function stopQRScanner() {
     await qrScanner.clear();
 
   }
-
 
   catch (error) {
 
@@ -3909,12 +3749,8 @@ async function handleQRScan(
   decodedText
 ) {
 
-  if (
-    processingScan
-  ) {
-
+  if (processingScan) {
     return;
-
   }
 
 
@@ -3937,7 +3773,26 @@ async function handleQRScan(
 
   try {
 
-    /* CHECK AUTH */
+    /*
+      SECURITY CHECK AGAIN
+    */
+
+    const hasAccess =
+      await checkScannerAccess();
+
+
+    if (!hasAccess) {
+
+      throw new Error(
+        "You do not have scanner access."
+      );
+
+    }
+
+
+    /*
+      CURRENT USER
+    */
 
     const {
       data: authData,
@@ -3961,16 +3816,16 @@ async function handleQRScan(
     }
 
 
-    /* FIND MEMBER */
+    /*
+      FIND MEMBER
+    */
 
     const {
       data: member,
       error: memberError
     } =
       await window.churchDB
-
         .from("members")
-
         .select(`
           id,
           member_id,
@@ -3981,19 +3836,15 @@ async function handleQRScan(
           membership_status,
           qr_token
         `)
-
         .eq(
           "qr_token",
           decodedText
         )
-
         .maybeSingle();
 
 
     if (memberError) {
-
       throw memberError;
-
     }
 
 
@@ -4013,20 +3864,15 @@ async function handleQRScan(
     }
 
 
-    /* EVENT */
+    /*
+      SELECTED EVENT
+    */
 
     if (!selectedEventKey) {
 
-      result.textContent =
-        "❌ Please select an event first.";
-
-      result.style.color =
-        "#dc2626";
-
-      processingScan =
-        false;
-
-      return;
+      throw new Error(
+        "Please select an event first."
+      );
 
     }
 
@@ -4044,13 +3890,12 @@ async function handleQRScan(
 
 
     /*
-      Find the event belonging
-      to this member's church.
+      FIND EVENT FOR MEMBER'S CHURCH
     */
 
     const event =
       qrEvents.find(
-        function (e) {
+        function(e) {
 
           return (
 
@@ -4085,37 +3930,32 @@ async function handleQRScan(
     }
 
 
-    /* CHECK DUPLICATE */
+    /*
+      CHECK DUPLICATE
+    */
 
     const {
       data: existing,
       error: existingError
     } =
       await window.churchDB
-
         .from("attendance")
-
         .select(
           "id"
         )
-
         .eq(
           "member_id",
           member.id
         )
-
         .eq(
           "event_id",
           event.id
         )
-
         .limit(1);
 
 
     if (existingError) {
-
       throw existingError;
-
     }
 
 
@@ -4129,11 +3969,9 @@ async function handleQRScan(
         "⚠️ <strong>" +
 
         escapeHtml(
-
           member.first_name +
           " " +
           member.last_name
-
         ) +
 
         "</strong><br>" +
@@ -4154,15 +3992,15 @@ async function handleQRScan(
     }
 
 
-    /* RECORD ATTENDANCE */
+    /*
+      RECORD ATTENDANCE
+    */
 
     const {
       error: attendanceError
     } =
       await window.churchDB
-
         .from("attendance")
-
         .insert({
 
           member_id:
@@ -4184,13 +4022,13 @@ async function handleQRScan(
 
 
     if (attendanceError) {
-
       throw attendanceError;
-
     }
 
 
-    /* SUCCESS */
+    /*
+      SUCCESS
+    */
 
     result.innerHTML =
 
@@ -4228,7 +4066,6 @@ async function handleQRScan(
 
   }
 
-
   catch (error) {
 
     console.error(
@@ -4249,7 +4086,7 @@ async function handleQRScan(
 
 
   setTimeout(
-    function () {
+    function() {
 
       processingScan =
         false;
@@ -4312,13 +4149,11 @@ function formatTime(
 
 
   return (
-
     hour +
     ":" +
     minutes +
     " " +
     ampm
-
   );
 
 }
@@ -4379,14 +4214,12 @@ function escapeHtml(
 function setupAuthState() {
 
   if (!window.churchDB) {
-
     return;
-
   }
 
 
   window.churchDB.auth.onAuthStateChange(
-    async function (
+    async function(
       event,
       session
     ) {
@@ -4402,11 +4235,6 @@ function setupAuthState() {
         session.user
       ) {
 
-        /*
-          If this is a newly confirmed
-          account, finish member registration.
-        */
-
         try {
 
           await completeMemberRegistration();
@@ -4416,7 +4244,7 @@ function setupAuthState() {
         catch (error) {
 
           console.warn(
-            "Registration completion:",
+            "Member registration:",
             error.message
           );
 
@@ -4425,6 +4253,9 @@ function setupAuthState() {
 
         await updateUserInterface();
 
+
+        await checkScannerAccess();
+
       }
 
       else {
@@ -4432,8 +4263,18 @@ function setupAuthState() {
         currentMember =
           null;
 
+        currentProfile =
+          null;
+
+
         document.getElementById(
           "member-portal"
+        ).style.display =
+          "none";
+
+
+        document.getElementById(
+          "qr-attendance"
         ).style.display =
           "none";
 
@@ -4453,11 +4294,9 @@ function setupAuthState() {
 
 
         button.onclick =
-          function () {
+          function() {
 
-            openAuth(
-              "login"
-            );
+            openAuth("login");
 
           };
 
@@ -4470,7 +4309,7 @@ function setupAuthState() {
 
 
 /* =====================================================
-   INITIAL PAGE LOAD
+   START APPLICATION
    ===================================================== */
 
 async function startApplication() {
@@ -4513,15 +4352,18 @@ async function startApplication() {
 
   await loadChurches();
 
+
   await loadEvents();
 
+
   await loadQREvents();
+
 
   setupAuthState();
 
 
   /*
-    Check whether user is already signed in.
+    Check existing login session.
   */
 
   try {
@@ -4548,7 +4390,7 @@ async function startApplication() {
       catch (error) {
 
         console.warn(
-          "Existing member registration:",
+          "Existing registration:",
           error.message
         );
 
@@ -4556,6 +4398,9 @@ async function startApplication() {
 
 
       await updateUserInterface();
+
+
+      await checkScannerAccess();
 
     }
 
@@ -4595,10 +4440,7 @@ else {
 
 }
 
-
 </script>
 
-
 </body>
-
 </html>
