@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Church Attendance</title>
+
 
   <style>
 
@@ -20,11 +26,13 @@
       --border: #e2e8f0;
     }
 
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
 
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -32,6 +40,7 @@
       color: var(--text);
       min-height: 100vh;
     }
+
 
     .topbar {
       height: 70px;
@@ -43,6 +52,7 @@
       padding: 0 6%;
     }
 
+
     .brand {
       display: flex;
       align-items: center;
@@ -50,6 +60,7 @@
       font-weight: 700;
       font-size: 19px;
     }
+
 
     .logo {
       width: 42px;
@@ -63,6 +74,7 @@
       font-size: 21px;
     }
 
+
     .signin {
       background: var(--primary);
       color: white;
@@ -73,9 +85,11 @@
       cursor: pointer;
     }
 
+
     .signin:hover {
       background: var(--primary-dark);
     }
+
 
     .hero {
       max-width: 1100px;
@@ -83,6 +97,7 @@
       padding: 80px 24px 50px;
       text-align: center;
     }
+
 
     .badge {
       display: inline-block;
@@ -95,12 +110,14 @@
       margin-bottom: 20px;
     }
 
+
     h1 {
       font-size: clamp(38px, 7vw, 68px);
       line-height: 1.05;
       margin-bottom: 22px;
       letter-spacing: -2px;
     }
+
 
     .hero p {
       max-width: 700px;
@@ -110,6 +127,7 @@
       line-height: 1.7;
     }
 
+
     .actions {
       margin-top: 35px;
       display: flex;
@@ -117,6 +135,7 @@
       gap: 12px;
       flex-wrap: wrap;
     }
+
 
     .primary-btn,
     .secondary-btn {
@@ -128,16 +147,19 @@
       cursor: pointer;
     }
 
+
     .primary-btn {
       background: var(--primary);
       color: white;
     }
+
 
     .secondary-btn {
       background: white;
       color: var(--text);
       border: 1px solid var(--border);
     }
+
 
     .features {
       max-width: 1100px;
@@ -148,12 +170,14 @@
       gap: 18px;
     }
 
+
     .feature {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 28px;
     }
+
 
     .feature-icon {
       width: 48px;
@@ -167,10 +191,12 @@
       margin-bottom: 18px;
     }
 
+
     .feature h2 {
       font-size: 19px;
       margin-bottom: 8px;
     }
+
 
     .feature p {
       color: var(--muted);
@@ -178,12 +204,16 @@
       font-size: 14px;
     }
 
+
     .footer {
       text-align: center;
       padding: 30px;
       color: var(--muted);
       font-size: 13px;
     }
+
+
+    /* LOGIN MODAL */
 
     .modal {
       display: none;
@@ -193,12 +223,14 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      z-index: 10;
+      z-index: 100;
     }
+
 
     .modal.show {
       display: flex;
     }
+
 
     .login-box {
       background: white;
@@ -209,15 +241,18 @@
       box-shadow: 0 20px 50px rgba(0,0,0,.2);
     }
 
+
     .login-box h2 {
       margin-bottom: 8px;
     }
+
 
     .login-box p {
       color: var(--muted);
       margin-bottom: 22px;
       font-size: 14px;
     }
+
 
     .login-box input {
       width: 100%;
@@ -227,6 +262,7 @@
       margin-bottom: 12px;
       font-size: 16px;
     }
+
 
     .login-submit {
       width: 100%;
@@ -240,6 +276,7 @@
       cursor: pointer;
     }
 
+
     .close {
       width: 100%;
       margin-top: 10px;
@@ -250,22 +287,243 @@
       cursor: pointer;
     }
 
+
+    /* EVENT SECTION */
+
+    .content-section {
+      max-width: 1100px;
+      margin: 20px auto 70px;
+      padding: 0 24px;
+    }
+
+
+    .section-title {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+
+    .section-description {
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+
+    .event-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.04);
+    }
+
+
+    .event-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+
+    .event-label {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+
+    .event-name {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+
+    .event-info {
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+
+    .event-status {
+      align-self: flex-start;
+      background: #fef3c7;
+      color: #92400e;
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+
+    .event-details {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+
+    .event-description {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+
+    .church-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+
+    .church-list {
+      margin-top: 8px;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+
+    /* QR */
+
+    .qr-section {
+      max-width: 900px;
+      margin: 30px auto 70px;
+      padding: 0 24px;
+    }
+
+
+    .qr-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.04);
+    }
+
+
+    .qr-heading {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+
+    .qr-icon {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+
+    .qr-heading h2 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+
+    .qr-heading p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+
+    .qr-label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+
+    #qrEventSelect {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 16px;
+      background: white;
+      margin-bottom: 20px;
+    }
+
+
+    #qr-reader {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+
+    .scanner-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+
+    .start-scanner {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+
+    .stop-scanner {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+
+    #qr-result {
+      margin-top: 20px;
+      text-align: center;
+      padding: 15px;
+      border-radius: 10px;
+      background: #f8fafc;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+
     @media (max-width: 700px) {
 
       .features {
         grid-template-columns: 1fr;
       }
 
+
       .topbar {
         padding: 0 20px;
       }
+
 
       .topbar .signin {
         padding: 10px 15px;
       }
 
+
       .hero {
         padding-top: 60px;
+      }
+
+
+      .event-card {
+        padding: 22px;
+      }
+
+
+      .qr-card {
+        padding: 22px;
       }
 
     }
@@ -274,12 +532,13 @@
 
 </head>
 
+
 <body>
 
 
-<!-- ============================= -->
-<!-- TOP BAR -->
-<!-- ============================= -->
+<!-- ================================= -->
+<!-- HEADER -->
+<!-- ================================= -->
 
 <header class="topbar">
 
@@ -295,6 +554,7 @@
 
   </div>
 
+
   <button
     class="signin"
     onclick="openLogin()"
@@ -305,11 +565,12 @@
 </header>
 
 
-<!-- ============================= -->
-<!-- HERO -->
-<!-- ============================= -->
+<!-- ================================= -->
+<!-- MAIN HERO -->
+<!-- ================================= -->
 
 <main>
+
 
   <section class="hero">
 
@@ -317,16 +578,19 @@
       ⛪ Church Management System
     </div>
 
+
     <h1>
       Church Attendance<br>
       Management System
     </h1>
+
 
     <p>
       A secure and modern attendance system for churches,
       branches, members and ministry events. Scan a member's
       QR code and record attendance in seconds.
     </p>
+
 
     <div class="actions">
 
@@ -336,6 +600,7 @@
       >
         Get Started
       </button>
+
 
       <button
         class="secondary-btn"
@@ -349,11 +614,12 @@
   </section>
 
 
-  <!-- ============================= -->
+  <!-- ================================= -->
   <!-- FEATURES -->
-  <!-- ============================= -->
+  <!-- ================================= -->
 
   <section class="features">
+
 
     <div class="feature">
 
@@ -408,26 +674,166 @@
 
     </div>
 
+
   </section>
+
+
+  <!-- ================================= -->
+  <!-- UPCOMING EVENTS -->
+  <!-- ================================= -->
+
+  <section
+    id="events-section"
+    class="content-section"
+  >
+
+    <h2 class="section-title">
+      Upcoming Events
+    </h2>
+
+
+    <p class="section-description">
+      RICM events and ministry activities
+    </p>
+
+
+    <div id="events-list">
+
+      <p style="color:var(--muted);">
+        Loading events...
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================================= -->
+  <!-- QR ATTENDANCE -->
+  <!-- ================================= -->
+
+  <section
+    id="qr-attendance"
+    class="qr-section"
+  >
+
+    <div class="qr-card">
+
+
+      <div class="qr-heading">
+
+        <div class="qr-icon">
+          📱
+        </div>
+
+
+        <h2>
+          QR Attendance
+        </h2>
+
+
+        <p>
+          Scan a member's QR code to record attendance.
+        </p>
+
+      </div>
+
+
+      <!-- EVENT SELECTION -->
+
+      <label
+        class="qr-label"
+        for="qrEventSelect"
+      >
+        Select Event
+      </label>
+
+
+      <select id="qrEventSelect">
+
+        <option value="">
+          Select an event
+        </option>
+
+      </select>
+
+
+      <!-- SCANNER -->
+
+      <div id="qr-reader"></div>
+
+
+      <!-- BUTTONS -->
+
+      <div class="scanner-buttons">
+
+
+        <button
+          class="start-scanner"
+          onclick="startQRScanner()"
+        >
+          📷 Start Scanner
+        </button>
+
+
+        <button
+          class="stop-scanner"
+          onclick="stopQRScanner()"
+        >
+          Stop Scanner
+        </button>
+
+
+      </div>
+
+
+      <!-- RESULT -->
+
+      <div id="qr-result">
+        Scanner ready.
+      </div>
+
+
+    </div>
+
+  </section>
+
 
 </main>
 
 
-<!-- ============================= -->
-<!-- LOGIN MODAL -->
-<!-- ============================= -->
+<!-- ================================= -->
+<!-- FOOTER -->
+<!-- ================================= -->
 
-<div id="loginModal" class="modal">
+<footer class="footer">
+
+  © 2026 Church Attendance Management System
+
+</footer>
+
+
+<!-- ================================= -->
+<!-- LOGIN MODAL -->
+<!-- ================================= -->
+
+<div
+  id="loginModal"
+  class="modal"
+>
 
   <div class="login-box">
+
 
     <h2>
       Sign In
     </h2>
 
+
     <p>
       Sign in to your Church Attendance account.
     </p>
+
 
     <input
       type="email"
@@ -435,11 +841,13 @@
       placeholder="Email address"
     >
 
+
     <input
       type="password"
       id="password"
       placeholder="Password"
     >
+
 
     <button
       class="login-submit"
@@ -448,6 +856,7 @@
       Sign In
     </button>
 
+
     <button
       class="close"
       onclick="closeLogin()"
@@ -455,19 +864,24 @@
       Cancel
     </button>
 
+
     <p
       id="loginMessage"
-      style="margin-top:15px;text-align:center;"
+      style="
+        margin-top:15px;
+        text-align:center;
+      "
     ></p>
+
 
   </div>
 
 </div>
 
 
-<!-- ============================= -->
-<!-- LIBRARIES -->
-<!-- ============================= -->
+<!-- ================================= -->
+<!-- EXTERNAL LIBRARIES -->
+<!-- ================================= -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
@@ -475,431 +889,216 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
+<!-- ================================= -->
+<!-- YOUR SUPABASE CONNECTION -->
+<!-- ================================= -->
+
 <script src="supabase.js"></script>
 
 
-<!-- ============================= -->
-<!-- SUPABASE INITIALIZATION -->
-<!-- ============================= -->
-
-<script>
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function () {
-
-    initializeSupabase();
-
-  }
-);
-
-</script>
-
-
-<!-- ============================= -->
-<!-- UPCOMING EVENTS -->
-<!-- ============================= -->
-
-<section
-  id="events-section"
-  style="
-    max-width:1100px;
-    margin:20px auto 70px;
-    padding:0 24px;
-  "
->
-
-  <h2
-    style="
-      font-size:32px;
-      margin-bottom:10px;
-    "
-  >
-    Upcoming Events
-  </h2>
-
-  <p
-    style="
-      color:var(--muted);
-      margin-bottom:25px;
-    "
-  >
-    RICM events and ministry activities
-  </p>
-
-  <div id="events-list">
-
-    <p style="color:var(--muted);">
-      Loading events...
-    </p>
-
-  </div>
-
-</section>
-
-
 <script>
 
 /* ================================= */
-/* LOAD UPCOMING EVENTS */
+/* INITIALIZE SUPABASE */
 /* ================================= */
 
-async function loadEvents() {
+initializeSupabase();
 
-  const eventsList =
-    document.getElementById("events-list");
 
-  if (!eventsList) {
+/* ================================= */
+/* LOGIN MODAL */
+/* ================================= */
+
+function openLogin() {
+
+  document
+    .getElementById("loginModal")
+    .classList
+    .add("show");
+
+}
+
+
+function closeLogin() {
+
+  document
+    .getElementById("loginModal")
+    .classList
+    .remove("show");
+
+}
+
+
+/* ================================= */
+/* LOGIN */
+/* ================================= */
+
+async function login() {
+
+  const email =
+    document
+      .getElementById("email")
+      .value
+      .trim();
+
+
+  const password =
+    document
+      .getElementById("password")
+      .value;
+
+
+  const message =
+    document.getElementById(
+      "loginMessage"
+    );
+
+
+  if (!email || !password) {
+
+    message.textContent =
+      "Please enter your email and password.";
+
+    message.style.color =
+      "#dc2626";
+
     return;
+
   }
+
 
   if (!window.churchDB) {
 
-    eventsList.innerHTML =
-      "<p style='color:#dc2626;'>Database connection not initialized.</p>";
+    message.textContent =
+      "Database connection is not ready.";
+
+    message.style.color =
+      "#dc2626";
 
     return;
+
   }
+
+
+  message.textContent =
+    "Signing in...";
+
+  message.style.color =
+    "#2563eb";
+
 
   try {
 
     const {
       data,
       error
-    } = await window.churchDB
+    } =
+      await window.churchDB
+        .auth
+        .signInWithPassword({
 
-      .from("events")
+          email: email,
 
-      .select(`
-        id,
-        name,
-        event_type,
-        description,
-        event_date,
-        start_time,
-        end_time,
-        status,
-        churches (
-          name,
-          branch_code
-        )
-      `)
+          password: password
 
-      .gte(
-        "event_date",
-        new Date().toISOString().split("T")[0]
-      )
-
-      .neq(
-        "status",
-        "cancelled"
-      )
-
-      .order(
-        "event_date",
-        {
-          ascending: true
-        }
-      );
+        });
 
 
     if (error) {
 
-      console.error(
-        "Events error:",
-        error
-      );
-
-      eventsList.innerHTML =
-        "<p style='color:#dc2626;'>Error: " +
-        escapeHtml(error.message) +
-        "</p>";
-
-      return;
+      throw error;
 
     }
 
 
-    if (!data || data.length === 0) {
+    message.textContent =
+      "Login successful!";
 
-      eventsList.innerHTML =
-        "<p style='color:var(--muted);'>No upcoming events.</p>";
-
-      return;
-
-    }
+    message.style.color =
+      "#16a34a";
 
 
-    /* ============================= */
-    /* GROUP EVENTS */
-    /* ============================= */
-
-    const groupedEvents = {};
-
-
-    data.forEach(
-      function (event) {
-
-        const key =
-          event.name +
-          "|" +
-          event.event_date;
-
-
-        if (!groupedEvents[key]) {
-
-          groupedEvents[key] = {
-            ...event,
-            churches: []
-          };
-
-        }
-
-
-        if (event.churches) {
-
-          groupedEvents[key]
-            .churches
-            .push(
-              event.churches
-            );
-
-        }
-
-      }
+    console.log(
+      "User logged in:",
+      data.user.email
     );
 
 
-    /* ============================= */
-    /* DISPLAY EVENTS */
-    /* ============================= */
+    setTimeout(
+      function () {
 
-    eventsList.innerHTML =
+        closeLogin();
 
-      Object.values(groupedEvents)
-
-      .map(
-        function (event) {
-
-          const date =
-            new Date(
-              event.event_date +
-              "T00:00:00"
-            );
-
-
-          const formattedDate =
-            date.toLocaleDateString(
-              "en-US",
-              {
-                weekday: "long",
-                month: "long",
-                day: "numeric",
-                year: "numeric"
-              }
-            );
-
-
-          const time =
-            event.start_time
-
-              ? formatTime(
-                  event.start_time
-                )
-
-              : "Time to be announced";
-
-
-          return `
-
-            <div
-              style="
-                background:var(--card);
-                border:1px solid var(--border);
-                border-radius:18px;
-                padding:28px;
-                margin-bottom:18px;
-                box-shadow:0 4px 12px rgba(0,0,0,.04);
-              "
-            >
-
-              <div
-                style="
-                  display:flex;
-                  justify-content:space-between;
-                  gap:15px;
-                  flex-wrap:wrap;
-                "
-              >
-
-                <div>
-
-                  <div
-                    style="
-                      color:var(--primary);
-                      font-size:13px;
-                      font-weight:700;
-                      margin-bottom:8px;
-                    "
-                  >
-                    📅 RICM ONE BODY EVENT
-                  </div>
-
-
-                  <h3
-                    style="
-                      font-size:24px;
-                      margin-bottom:10px;
-                    "
-                  >
-                    ${escapeHtml(event.name)}
-                  </h3>
-
-
-                  <p
-                    style="
-                      color:var(--muted);
-                      margin-bottom:7px;
-                    "
-                  >
-                    📍 All RICM Churches — One Body
-                  </p>
-
-
-                  <p
-                    style="
-                      color:var(--muted);
-                      margin-bottom:7px;
-                    "
-                  >
-                    🗓️ ${formattedDate}
-                  </p>
-
-
-                  <p
-                    style="
-                      color:var(--muted);
-                    "
-                  >
-                    🕐 ${escapeHtml(time)}
-                  </p>
-
-                </div>
-
-
-                <div
-                  style="
-                    align-self:flex-start;
-                    background:#fef3c7;
-                    color:#92400e;
-                    padding:7px 12px;
-                    border-radius:20px;
-                    font-size:12px;
-                    font-weight:700;
-                  "
-                >
-                  ${escapeHtml(
-                    event.status
-                  ).toUpperCase()}
-                </div>
-
-              </div>
-
-
-              <div
-                style="
-                  margin-top:20px;
-                  padding-top:18px;
-                  border-top:1px solid var(--border);
-                "
-              >
-
-                <p
-                  style="
-                    color:var(--muted);
-                    line-height:1.6;
-                    margin-bottom:12px;
-                  "
-                >
-                  ${escapeHtml(
-                    event.description ||
-                    "A united RICM celebration for all churches."
-                  )}
-                </p>
-
-
-                <p
-                  style="
-                    font-size:13px;
-                    font-weight:600;
-                    color:var(--muted);
-                  "
-                >
-                  Participating Churches:
-                </p>
-
-
-                <p
-                  style="
-                    margin-top:8px;
-                    line-height:1.8;
-                    font-size:14px;
-                  "
-                >
-
-                  ${event.churches
-                    .map(
-                      function (church) {
-
-                        return escapeHtml(
-
-                          church.name +
-
-                          (
-                            church.branch_code
-
-                            ? " (" +
-                              church.branch_code +
-                              ")"
-
-                            : ""
-                          )
-
-                        );
-
-                      }
-                    )
-                    .join(" • ")
-                  }
-
-                </p>
-
-              </div>
-
-            </div>
-
-          `;
-
-        }
-      )
-
-      .join("");
+      },
+      800
+    );
 
   }
+
 
   catch (error) {
 
     console.error(
-      "Unable to load events:",
+      "Login error:",
       error
     );
 
-    eventsList.innerHTML =
-      "<p style='color:#dc2626;'>Unable to load events: " +
-      escapeHtml(error.message) +
-      "</p>";
+
+    message.textContent =
+      "Login failed: " +
+      error.message;
+
+    message.style.color =
+      "#dc2626";
 
   }
+
+}
+
+
+/* ================================= */
+/* ESCAPE HTML */
+/* ================================= */
+
+function escapeHtml(value) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+
+    return "";
+
+  }
+
+
+  return String(value)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
@@ -961,19 +1160,1187 @@ function formatTime(time) {
 
 
 /* ================================= */
-/* ESCAPE HTML */
+/* LOAD UPCOMING EVENTS */
 /* ================================= */
 
-function escapeHtml(value) {
+async function loadEvents() {
 
-  if (!value) {
+  const eventsList =
+    document.getElementById(
+      "events-list"
+    );
 
-    return "";
+
+  if (!eventsList) {
+
+    return;
 
   }
 
 
-  return String(value)
+  if (!window.churchDB) {
 
-    .replace(
-      /
+    eventsList.innerHTML =
+      "<p style='color:#dc2626;'>" +
+      "Database connection not initialized." +
+      "</p>";
+
+    return;
+
+  }
+
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await window.churchDB
+
+        .from("events")
+
+        .select(`
+          id,
+          name,
+          event_type,
+          description,
+          event_date,
+          start_time,
+          end_time,
+          status,
+          churches (
+            name,
+            branch_code
+          )
+        `)
+
+        .gte(
+          "event_date",
+          new Date()
+            .toISOString()
+            .split("T")[0]
+        )
+
+        .neq(
+          "status",
+          "cancelled"
+        )
+
+        .order(
+          "event_date",
+          {
+            ascending: true
+          }
+        );
+
+
+    if (error) {
+
+      console.error(
+        "Events error:",
+        error
+      );
+
+
+      eventsList.innerHTML =
+        "<p style='color:#dc2626;'>" +
+        "Error: " +
+        escapeHtml(
+          error.message
+        ) +
+        "</p>";
+
+      return;
+
+    }
+
+
+    if (
+      !data ||
+      data.length === 0
+    ) {
+
+      eventsList.innerHTML =
+        "<p style='color:var(--muted);'>" +
+        "No upcoming events." +
+        "</p>";
+
+      return;
+
+    }
+
+
+    /* ============================= */
+    /* GROUP SAME EVENT */
+    /* ============================= */
+
+    const groupedEvents = {};
+
+
+    data.forEach(
+      function (event) {
+
+        const key =
+          event.name +
+          "|" +
+          event.event_date;
+
+
+        if (!groupedEvents[key]) {
+
+          groupedEvents[key] = {
+
+            ...event,
+
+            churches: []
+
+          };
+
+        }
+
+
+        if (event.churches) {
+
+          groupedEvents[key]
+            .churches
+            .push(
+              event.churches
+            );
+
+        }
+
+      }
+    );
+
+
+    /* ============================= */
+    /* DISPLAY EVENTS */
+    /* ============================= */
+
+    eventsList.innerHTML =
+
+      Object.values(
+        groupedEvents
+      )
+
+      .map(
+        function (event) {
+
+          const date =
+            new Date(
+              event.event_date +
+              "T00:00:00"
+            );
+
+
+          const formattedDate =
+            date.toLocaleDateString(
+              "en-US",
+              {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+              }
+            );
+
+
+          const time =
+            event.start_time
+              ? formatTime(
+                  event.start_time
+                )
+              : "Time to be announced";
+
+
+          const churches =
+            event.churches
+              .map(
+                function (church) {
+
+                  return escapeHtml(
+
+                    church.name +
+
+                    (
+                      church.branch_code
+
+                        ? " (" +
+                          church.branch_code +
+                          ")"
+
+                        : ""
+                    )
+
+                  );
+
+                }
+              )
+              .join(" • ");
+
+
+          return `
+
+            <div class="event-card">
+
+
+              <div class="event-header">
+
+
+                <div>
+
+                  <div class="event-label">
+                    📅 RICM ONE BODY EVENT
+                  </div>
+
+
+                  <h3 class="event-name">
+                    ${escapeHtml(event.name)}
+                  </h3>
+
+
+                  <p class="event-info">
+                    📍 All RICM Churches — One Body
+                  </p>
+
+
+                  <p class="event-info">
+                    🗓️ ${formattedDate}
+                  </p>
+
+
+                  <p class="event-info">
+                    🕐 ${escapeHtml(time)}
+                  </p>
+
+                </div>
+
+
+                <div class="event-status">
+
+                  ${escapeHtml(
+                    event.status
+                  ).toUpperCase()}
+
+                </div>
+
+
+              </div>
+
+
+              <div class="event-details">
+
+
+                <p class="event-description">
+
+                  ${escapeHtml(
+                    event.description ||
+                    "A united RICM celebration for all churches."
+                  )}
+
+                </p>
+
+
+                <p class="church-title">
+                  Participating Churches:
+                </p>
+
+
+                <p class="church-list">
+
+                  ${churches}
+
+                </p>
+
+
+              </div>
+
+
+            </div>
+
+          `;
+
+        }
+      )
+
+      .join("");
+
+  }
+
+
+  catch (error) {
+
+    console.error(
+      "Unable to load events:",
+      error
+    );
+
+
+    eventsList.innerHTML =
+      "<p style='color:#dc2626;'>" +
+      "Unable to load events: " +
+      escapeHtml(
+        error.message
+      ) +
+      "</p>";
+
+  }
+
+}
+
+
+/* ================================= */
+/* QR VARIABLES */
+/* ================================= */
+
+let qrScanner = null;
+
+let qrEvents = [];
+
+let selectedEventKey = null;
+
+let processingScan = false;
+
+
+/* ================================= */
+/* LOAD QR EVENTS */
+/* ================================= */
+
+async function loadQREvents() {
+
+  const select =
+    document.getElementById(
+      "qrEventSelect"
+    );
+
+
+  if (!select) {
+
+    return;
+
+  }
+
+
+  if (!window.churchDB) {
+
+    select.innerHTML =
+      '<option value="">Database not connected</option>';
+
+    return;
+
+  }
+
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await window.churchDB
+
+        .from("events")
+
+        .select(`
+          id,
+          name,
+          event_type,
+          description,
+          event_date,
+          start_time,
+          end_time,
+          status,
+          church_id
+        `)
+
+        .gte(
+          "event_date",
+          new Date()
+            .toISOString()
+            .split("T")[0]
+        )
+
+        .neq(
+          "status",
+          "cancelled"
+        )
+
+        .order(
+          "event_date",
+          {
+            ascending: true
+          }
+        );
+
+
+    if (error) {
+
+      console.error(
+        "QR events error:",
+        error
+      );
+
+
+      select.innerHTML =
+        '<option value="">Unable to load events</option>';
+
+      return;
+
+    }
+
+
+    qrEvents =
+      data || [];
+
+
+    /* ============================= */
+    /* GROUP EVENTS */
+    /* ============================= */
+
+    const groups = {};
+
+
+    qrEvents.forEach(
+      function (event) {
+
+        const key =
+          event.name +
+          "|" +
+          event.event_date;
+
+
+        if (!groups[key]) {
+
+          groups[key] =
+            event;
+
+        }
+
+      }
+    );
+
+
+    select.innerHTML =
+      '<option value="">Select an event</option>';
+
+
+    Object.keys(groups)
+      .forEach(
+        function (key) {
+
+          const event =
+            groups[key];
+
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+
+          option.value =
+            key;
+
+
+          option.textContent =
+
+            event.name +
+            " — " +
+
+            new Date(
+              event.event_date +
+              "T00:00:00"
+            )
+            .toLocaleDateString(
+              "en-US",
+              {
+                month: "short",
+                day: "numeric",
+                year: "numeric"
+              }
+            );
+
+
+          select.appendChild(
+            option
+          );
+
+        }
+      );
+
+  }
+
+
+  catch (error) {
+
+    console.error(
+      "QR events error:",
+      error
+    );
+
+
+    select.innerHTML =
+      '<option value="">Unable to load events</option>';
+
+  }
+
+}
+
+
+/* ================================= */
+/* EVENT SELECTION */
+/* ================================= */
+
+document
+  .getElementById("qrEventSelect")
+  .addEventListener(
+    "change",
+    function () {
+
+      selectedEventKey =
+        this.value ||
+        null;
+
+
+      const result =
+        document.getElementById(
+          "qr-result"
+        );
+
+
+      if (selectedEventKey) {
+
+        result.textContent =
+          "Event selected. Start the scanner.";
+
+        result.style.color =
+          "#2563eb";
+
+      }
+
+      else {
+
+        result.textContent =
+          "Please select an event.";
+
+        result.style.color =
+          "#64748b";
+
+      }
+
+    }
+  );
+
+
+/* ================================= */
+/* START QR SCANNER */
+/* ================================= */
+
+async function startQRScanner() {
+
+  const result =
+    document.getElementById(
+      "qr-result"
+    );
+
+
+  if (!selectedEventKey) {
+
+    result.textContent =
+      "Please select an event first.";
+
+    result.style.color =
+      "#dc2626";
+
+    return;
+
+  }
+
+
+  if (qrScanner) {
+
+    result.textContent =
+      "Scanner is already running.";
+
+    return;
+
+  }
+
+
+  if (
+    typeof Html5Qrcode ===
+    "undefined"
+  ) {
+
+    result.textContent =
+      "QR scanner library failed to load.";
+
+    result.style.color =
+      "#dc2626";
+
+    return;
+
+  }
+
+
+  /* ============================= */
+  /* CHECK LOGIN */
+  /* ============================= */
+
+  const {
+    data: authData
+  } =
+    await window.churchDB
+      .auth
+      .getUser();
+
+
+  if (
+    !authData ||
+    !authData.user
+  ) {
+
+    result.textContent =
+      "Please sign in before scanning attendance.";
+
+    result.style.color =
+      "#dc2626";
+
+    return;
+
+  }
+
+
+  qrScanner =
+    new Html5Qrcode(
+      "qr-reader"
+    );
+
+
+  try {
+
+    await qrScanner.start(
+
+      {
+        facingMode:
+          "environment"
+      },
+
+      {
+        fps: 10,
+
+        qrbox: {
+          width: 250,
+          height: 250
+        }
+
+      },
+
+      handleQRScan,
+
+      function () {
+        // Normal scan errors are ignored.
+      }
+
+    );
+
+
+    result.textContent =
+      "Camera active. Point it at the member's QR code.";
+
+    result.style.color =
+      "#2563eb";
+
+  }
+
+
+  catch (error) {
+
+    console.error(
+      "Camera error:",
+      error
+    );
+
+
+    qrScanner =
+      null;
+
+
+    result.textContent =
+      "Unable to start camera. Please allow camera access.";
+
+    result.style.color =
+      "#dc2626";
+
+  }
+
+}
+
+
+/* ================================= */
+/* STOP QR SCANNER */
+/* ================================= */
+
+async function stopQRScanner() {
+
+  if (!qrScanner) {
+
+    return;
+
+  }
+
+
+  try {
+
+    await qrScanner.stop();
+
+    await qrScanner.clear();
+
+  }
+
+
+  catch (error) {
+
+    console.error(
+      "Scanner stop error:",
+      error
+    );
+
+  }
+
+
+  qrScanner =
+    null;
+
+
+  const result =
+    document.getElementById(
+      "qr-result"
+    );
+
+
+  result.textContent =
+    "Scanner stopped.";
+
+  result.style.color =
+    "#64748b";
+
+}
+
+
+/* ================================= */
+/* HANDLE QR SCAN */
+/* ================================= */
+
+async function handleQRScan(
+  decodedText
+) {
+
+  if (processingScan) {
+
+    return;
+
+  }
+
+
+  processingScan =
+    true;
+
+
+  const result =
+    document.getElementById(
+      "qr-result"
+    );
+
+
+  result.textContent =
+    "QR detected. Checking member...";
+
+  result.style.color =
+    "#2563eb";
+
+
+  try {
+
+    /* ============================= */
+    /* FIND MEMBER */
+    /* ============================= */
+
+    const {
+      data: member,
+      error: memberError
+    } =
+      await window.churchDB
+
+        .from("members")
+
+        .select(`
+          id,
+          member_id,
+          church_id,
+          first_name,
+          middle_name,
+          last_name,
+          membership_status,
+          qr_token
+        `)
+
+        .eq(
+          "qr_token",
+          decodedText
+        )
+
+        .maybeSingle();
+
+
+    if (memberError) {
+
+      throw memberError;
+
+    }
+
+
+    if (!member) {
+
+      result.textContent =
+        "❌ Member QR code not found.";
+
+      result.style.color =
+        "#dc2626";
+
+      processingScan =
+        false;
+
+      return;
+
+    }
+
+
+    /* ============================= */
+    /* CHECK EVENT */
+    /* ============================= */
+
+    if (!selectedEventKey) {
+
+      result.textContent =
+        "❌ Please select an event first.";
+
+      result.style.color =
+        "#dc2626";
+
+      processingScan =
+        false;
+
+      return;
+
+    }
+
+
+    const eventParts =
+      selectedEventKey.split("|");
+
+
+    const eventName =
+      eventParts[0];
+
+
+    const eventDate =
+      eventParts[1];
+
+
+    /* ============================= */
+    /* FIND MEMBER'S CHURCH EVENT */
+    /* ============================= */
+
+    const event =
+      qrEvents.find(
+        function (e) {
+
+          return (
+
+            e.name ===
+              eventName &&
+
+            e.event_date ===
+              eventDate &&
+
+            e.church_id ===
+              member.church_id
+
+          );
+
+        }
+      );
+
+
+    if (!event) {
+
+      result.textContent =
+        "❌ This event is not available for the member's church.";
+
+      result.style.color =
+        "#dc2626";
+
+      processingScan =
+        false;
+
+      return;
+
+    }
+
+
+    /* ============================= */
+    /* DUPLICATE CHECK */
+    /* ============================= */
+
+    const dayStart =
+      event.event_date +
+      "T00:00:00";
+
+
+    const nextDay =
+      new Date(
+        event.event_date +
+        "T00:00:00"
+      );
+
+
+    nextDay.setDate(
+      nextDay.getDate() + 1
+    );
+
+
+    const {
+      data: existing,
+      error: existingError
+    } =
+      await window.churchDB
+
+        .from("attendance")
+
+        .select("id")
+
+        .eq(
+          "member_id",
+          member.id
+        )
+
+        .eq(
+          "event_id",
+          event.id
+        )
+
+        .gte(
+          "attendance_time",
+          dayStart
+        )
+
+        .lt(
+          "attendance_time",
+          nextDay.toISOString()
+        )
+
+        .limit(1);
+
+
+    if (existingError) {
+
+      throw existingError;
+
+    }
+
+
+    if (
+      existing &&
+      existing.length > 0
+    ) {
+
+      result.innerHTML =
+
+        "⚠️ <strong>" +
+
+        escapeHtml(
+          member.first_name +
+          " " +
+          member.last_name
+        ) +
+
+        "</strong><br>" +
+
+        "Already recorded for this event.";
+
+
+      result.style.color =
+        "#92400e";
+
+
+      processingScan =
+        false;
+
+
+      return;
+
+    }
+
+
+    /* ============================= */
+    /* CURRENT USER */
+    /* ============================= */
+
+    const {
+      data: authData
+    } =
+      await window.churchDB
+        .auth
+        .getUser();
+
+
+    const scannedBy =
+
+      authData &&
+      authData.user
+
+        ? authData.user.id
+
+        : null;
+
+
+    if (!scannedBy) {
+
+      result.textContent =
+        "❌ Please sign in before recording attendance.";
+
+      result.style.color =
+        "#dc2626";
+
+      processingScan =
+        false;
+
+      return;
+
+    }
+
+
+    /* ============================= */
+    /* RECORD ATTENDANCE */
+    /* ============================= */
+
+    const {
+      error: attendanceError
+    } =
+      await window.churchDB
+
+        .from("attendance")
+
+        .insert({
+
+          member_id:
+            member.id,
+
+          church_id:
+            member.church_id,
+
+          event_id:
+            event.id,
+
+          scanned_by:
+            scannedBy,
+
+          attendance_time:
+            new Date().toISOString()
+
+        });
+
+
+    if (attendanceError) {
+
+      throw attendanceError;
+
+    }
+
+
+    /* ============================= */
+    /* SUCCESS */
+    /* ============================= */
+
+    result.innerHTML =
+
+      "✅ <strong>Attendance Recorded!</strong><br><br>" +
+
+      escapeHtml(
+
+        member.first_name +
+        " " +
+
+        (
+          member.middle_name
+            ? member.middle_name + " "
+            : ""
+        ) +
+
+        member.last_name
+
+      ) +
+
+      "<br><small>" +
+
+      escapeHtml(
+        member.member_id
+      ) +
+
+      "</small>";
+
+
+    result.style.color =
+      "#16a34a";
+
+  }
+
+
+  catch (error) {
+
+    console.error(
+      "Attendance error:",
+      error
+    );
+
+
+    result.textContent =
+      "❌ Error: " +
+      error.message;
+
+
+    result.style.color =
+      "#dc2626";
+
+  }
+
+
+  setTimeout(
+    function () {
+
+      processingScan =
+        false;
+
+    },
+    2000
+  );
+
+}
+
+
+/* ================================= */
+/* LOAD EVERYTHING */
+/* ================================= */
+
+loadEvents();
+
+loadQREvents();
+
+</script>
+
+
+</body>
+
+</html>
