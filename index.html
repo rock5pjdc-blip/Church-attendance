@@ -484,7 +484,353 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     waitForSupabase();
-});
+  </script><!-- EVENTS FROM SUPABASE -->
+  <section id="events-section" style="
+  max-width:1100px;
+  margin:20px auto 70px;
+  padding:0 24px;
+">
+
+  <h2 style="
+    font-size:32px;
+    margin-bottom:10px;
+  ">
+    Upcoming Events
+  </h2>
+
+  <p style="
+    color:var(--muted);
+    margin-bottom:25px;
+  ">
+    RICM events and ministry activities
+  </p>
+
+  <div id="events-list">
+
+    <p style="color:var(--muted);">
+      Loading events...
+    </p>
+
+  </div>
+
+</section>
+
+  <script>
+async function loadEvents() {
+
+  const eventsList = document.getElementById("events-list");
+
+  try {
+
+    const { data, error } = await window.churchDB
+      .from("events")
+      .select(`
+        id,
+        name,
+        event_type,
+        description,
+        event_date,
+        start_time,
+        end_time,
+        status,
+        churches (
+          name,
+          branch_code
+        )
+      `)
+      .gte(
+        "event_date",
+        new Date().toISOString().split("T")[0]
+      )
+      .neq("status", "cancelled")
+      .order("event_date", { ascending: true });
+
+    if (error) {
+      console.error(error);
+
+      eventsList.innerHTML =
+        "<p style='color:#dc2626;'>Unable to load events.</p>";
+
+      return;
+    }
+
+    if (!data || data.length === 0) {
+
+      eventsList.innerHTML =
+        "<p style='color:var(--muted);'>No upcoming events.</p>";
+
+      return;
+    }
+
+
+    /*
+      GROUP EVENTS BY NAME + DATE
+
+      Since the same anniversary was created
+      for all 7 churches, the website will
+      display it only once.
+    */
+
+    const groupedEvents = {};
+
+    data.forEach(event => {
+
+      const key =
+        event.name + "|" + event.event_date;
+
+      if (!groupedEvents[key]) {
+
+        groupedEvents[key] = {
+          ...event,
+          churches: []
+        };
+
+      }
+
+      if (event.churches) {
+
+        groupedEvents[key].churches.push(
+          event.churches
+        );
+
+      }
+
+    });
+
+
+    eventsList.innerHTML =
+      Object.values(groupedEvents)
+      .map(event => {
+
+        const date =
+          new Date(event.event_date + "T00:00:00");
+
+        const formattedDate =
+          date.toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+          });
+
+
+        const time = event.start_time
+          ? formatTime(event.start_time)
+          : "Time to be announced";
+
+
+        return `
+          <div style="
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:18px;
+            padding:28px;
+            margin-bottom:18px;
+            box-shadow:0 4px 12px rgba(0,0,0,.04);
+          ">
+
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              gap:15px;
+              flex-wrap:wrap;
+            ">
+
+              <div>
+
+                <div style="
+                  color:var(--primary);
+                  font-size:13px;
+                  font-weight:700;
+                  margin-bottom:8px;
+                ">
+                  📅 RICM ONE BODY EVENT
+                </div>
+
+
+                <h3 style="
+                  font-size:24px;
+                  margin-bottom:10px;
+                ">
+                  ${escapeHtml(event.name)}
+                </h3>
+
+
+                <p style="
+                  color:var(--muted);
+                  margin-bottom:7px;
+                ">
+                  📍 All RICM Churches — One Body
+                </p>
+
+
+                <p style="
+                  color:var(--muted);
+                  margin-bottom:7px;
+                ">
+                  🗓️ ${formattedDate}
+                </p>
+
+
+                <p style="
+                  color:var(--muted);
+                ">
+                  🕐 ${escapeHtml(time)}
+                </p>
+
+              </div>
+
+
+              <div style="
+                align-self:flex-start;
+                background:#fef3c7;
+                color:#92400e;
+                padding:7px 12px;
+                border-radius:20px;
+                font-size:12px;
+                font-weight:700;
+              ">
+                ${escapeHtml(event.status).toUpperCase()}
+              </div>
+
+            </div>
+
+
+            <div style="
+              margin-top:20px;
+              padding-top:18px;
+              border-top:1px solid var(--border);
+            ">
+
+              <p style="
+                color:var(--muted);
+                line-height:1.6;
+                margin-bottom:12px;
+              ">
+                ${escapeHtml(
+                  event.description ||
+                  "A united RICM celebration for all churches."
+                )}
+              </p>
+
+
+              <p style="
+                font-size:13px;
+                font-weight:600;
+                color:var(--muted);
+              ">
+                Participating Churches:
+              </p>
+
+
+              <p style="
+                margin-top:8px;
+                line-height:1.8;
+                font-size:14px;
+              ">
+                ${event.churches
+                  .map(church =>
+                    escapeHtml(
+                      church.name +
+                      (church.branch_code
+                        ? " (" + church.branch_code + ")"
+                        : "")
+                    )
+                  )
+                  .join(" • ")
+                }
+              </p>
+
+            </div>
+
+          </div>
+        `;
+
+      })
+      .join("");
+
+
+  } catch (err) {
+
+    console.error(err);
+
+    eventsList.innerHTML =
+      "<p style='color:#dc2626;'>Unable to load events.</p>";
+
+  }
+
+}
+
+
+function formatTime(time) {
+
+  if (!time)
+    return "Time to be announced";
+
+  const parts = time.split(":");
+
+  let hour = parseInt(parts[0]);
+
+  const minutes = parts[1];
+
+  const ampm =
+    hour >= 12 ? "PM" : "AM";
+
+  hour = hour % 12;
+
+  if (hour === 0)
+    hour = 12;
+
+  return `${hour}:${minutes} ${ampm}`;
+
+}
+
+
+function escapeHtml(value) {
+
+  if (!value)
+    return "";
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+async function waitAndLoadEvents() {
+
+  if (window.churchDB) {
+
+    await loadEvents();
+
+  } else {
+
+    setTimeout(
+      waitAndLoadEvents,
+      300
+    );
+
+  }
+
+}
+
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+
+    waitAndLoadEvents();
+
+  }
+);
+
 </script>
+  <footer class="footer">
+  © 2026 Church Attendance Management System
+</footer>
 </body>
 </html>
