@@ -497,7 +497,8 @@
     
   </script>
 <!-- Supabase Connection -->
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="supabase.js"></script>
@@ -859,5 +860,594 @@ document.addEventListener(
   <footer class="footer">
   © 2026 Church Attendance Management System
 </footer>
+  <!-- QR ATTENDANCE SCANNER -->
+
+<section id="qr-attendance" style="
+  max-width:900px;
+  margin:30px auto 70px;
+  padding:0 24px;
+">
+
+  <div style="
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 4px 12px rgba(0,0,0,.04);
+  ">
+
+    <div style="
+      text-align:center;
+      margin-bottom:25px;
+    ">
+
+      <div style="
+        font-size:42px;
+        margin-bottom:10px;
+      ">
+        📱
+      </div>
+
+      <h2 style="
+        font-size:30px;
+        margin-bottom:8px;
+      ">
+        QR Attendance
+      </h2>
+
+      <p style="
+        color:var(--muted);
+        line-height:1.6;
+      ">
+        Scan a member's QR code to record attendance.
+      </p>
+
+    </div>
+
+
+    <!-- EVENT SELECTION -->
+
+    <label style="
+      display:block;
+      font-weight:700;
+      margin-bottom:8px;
+    ">
+      Select Event
+    </label>
+
+    <select id="qrEventSelect" style="
+      width:100%;
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      font-size:16px;
+      background:white;
+      margin-bottom:20px;
+    ">
+
+      <option value="">
+        Select an event
+      </option>
+
+    </select>
+
+
+    <!-- SCANNER -->
+
+    <div id="qr-reader" style="
+      width:100%;
+      max-width:500px;
+      margin:0 auto;
+    ">
+    </div>
+<div style="
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:20px;
+  flex-wrap:wrap;
+">
+
+  <button
+    onclick="startQRScanner()"
+    style="
+      background:var(--primary);
+      color:white;
+      border:none;
+      padding:13px 22px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+    "
+  >
+    📷 Start Scanner
+  </button>
+
+  <button
+    onclick="stopQRScanner()"
+    style="
+      background:white;
+      color:var(--text);
+      border:1px solid var(--border);
+      padding:13px 22px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+    "
+  >
+    Stop Scanner
+  </button>
+
+</div>
+
+    <!-- SCAN RESULT -->
+
+    <div id="qr-result" style="
+      margin-top:20px;
+      text-align:center;
+      padding:15px;
+      border-radius:10px;
+      background:#f8fafc;
+      color:var(--muted);
+    ">
+      Scanner ready.
+    </div>
+
+  </div>
+
+</section>
+  </section>
+
+<script>
+
+let qrScanner = null;
+let qrEvents = [];
+let selectedEventKey = null;
+let processingScan = false;
+
+
+// LOAD EVENTS
+async function loadQREvents() {
+
+  const select =
+    document.getElementById("qrEventSelect");
+
+  if (!window.churchDB) {
+    select.innerHTML =
+      '<option value="">Database not connected</option>';
+    return;
+  }
+
+  const { data, error } =
+    await window.churchDB
+      .from("events")
+      .select(`
+        id,
+        name,
+        event_type,
+        description,
+        event_date,
+        start_time,
+        end_time,
+        status,
+        church_id
+      `)
+      .gte(
+        "event_date",
+        new Date().toISOString().split("T")[0]
+      )
+      .neq("status", "cancelled")
+      .order("event_date", {
+        ascending: true
+      });
+
+  if (error) {
+
+    console.error(error);
+
+    select.innerHTML =
+      '<option value="">Unable to load events</option>';
+
+    return;
+  }
+
+  qrEvents = data || [];
+
+  const groups = {};
+
+  qrEvents.forEach(event => {
+
+    const key =
+      event.name + "|" + event.event_date;
+
+    if (!groups[key]) {
+      groups[key] = event;
+    }
+
+  });
+
+  select.innerHTML =
+    '<option value="">Select an event</option>';
+
+  Object.keys(groups).forEach(key => {
+
+    const event = groups[key];
+
+    const option =
+      document.createElement("option");
+
+    option.value = key;
+
+    option.textContent =
+      event.name +
+      " — " +
+      new Date(
+        event.event_date + "T00:00:00"
+      ).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+      });
+
+    select.appendChild(option);
+
+  });
+
+}
+
+
+// EVENT SELECTION
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+
+    const select =
+      document.getElementById("qrEventSelect");
+
+    select.addEventListener(
+      "change",
+      function () {
+
+        selectedEventKey =
+          this.value || null;
+
+        const result =
+          document.getElementById("qr-result");
+
+        if (selectedEventKey) {
+
+          result.textContent =
+            "Event selected. Start the scanner.";
+
+        } else {
+
+          result.textContent =
+            "Please select an event.";
+
+        }
+
+      }
+    );
+
+    loadQREvents();
+
+  }
+);
+
+
+// START SCANNER
+async function startQRScanner() {
+
+  const result =
+    document.getElementById("qr-result");
+
+  if (!selectedEventKey) {
+
+    result.textContent =
+      "Please select an event first.";
+
+    result.style.color = "#dc2626";
+
+    return;
+  }
+
+  if (qrScanner) {
+
+    result.textContent =
+      "Scanner is already running.";
+
+    return;
+  }
+
+  qrScanner =
+    new Html5Qrcode("qr-reader");
+
+  try {
+
+    await qrScanner.start(
+
+      {
+        facingMode: "environment"
+      },
+
+      {
+        fps: 10,
+        qrbox: {
+          width: 250,
+          height: 250
+        }
+      },
+
+      handleQRScan,
+
+      function () {
+        // Ignore normal scanning errors
+      }
+
+    );
+
+    result.textContent =
+      "Camera active. Point it at the member's QR code.";
+
+    result.style.color = "#2563eb";
+
+  } catch (error) {
+
+    console.error(error);
+
+    qrScanner = null;
+
+    result.textContent =
+      "Unable to start camera. Please allow camera access.";
+
+    result.style.color = "#dc2626";
+
+  }
+
+}
+
+
+// STOP SCANNER
+async function stopQRScanner() {
+
+  if (!qrScanner)
+    return;
+
+  try {
+
+    await qrScanner.stop();
+    await qrScanner.clear();
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+  qrScanner = null;
+
+  document.getElementById("qr-result").textContent =
+    "Scanner stopped.";
+
+}
+
+
+// HANDLE QR SCAN
+async function handleQRScan(decodedText) {
+
+  if (processingScan)
+    return;
+
+  processingScan = true;
+
+  const result =
+    document.getElementById("qr-result");
+
+  result.textContent =
+    "QR detected. Checking member...";
+
+  result.style.color = "#2563eb";
+
+
+  try {
+
+    // Find member using QR token
+    const { data: member, error: memberError } =
+      await window.churchDB
+        .from("members")
+        .select(`
+          id,
+          member_id,
+          church_id,
+          first_name,
+          middle_name,
+          last_name,
+          membership_status,
+          qr_token
+        `)
+        .eq("qr_token", decodedText)
+        .maybeSingle();
+
+
+    if (memberError)
+      throw memberError;
+
+
+    if (!member) {
+
+      result.textContent =
+        "❌ Member QR code not found.";
+
+      result.style.color = "#dc2626";
+
+      processingScan = false;
+
+      return;
+    }
+
+
+    // Find selected event
+    const eventParts =
+      selectedEventKey.split("|");
+
+    const eventName =
+      eventParts[0];
+
+    const eventDate =
+      eventParts[1];
+
+
+    // Find event belonging to member's church
+    const event =
+      qrEvents.find(e =>
+        e.name === eventName &&
+        e.event_date === eventDate &&
+        e.church_id === member.church_id
+      );
+
+
+    if (!event) {
+
+      result.textContent =
+        "❌ This event is not available for the member's church.";
+
+      result.style.color = "#dc2626";
+
+      processingScan = false;
+
+      return;
+    }
+
+
+    // Check for duplicate attendance
+    const dayStart =
+      event.event_date + "T00:00:00";
+
+    const nextDay =
+      new Date(
+        event.event_date + "T00:00:00"
+      );
+
+    nextDay.setDate(
+      nextDay.getDate() + 1
+    );
+
+
+    const { data: existing } =
+      await window.churchDB
+        .from("attendance")
+        .select("id")
+        .eq("member_id", member.id)
+        .eq("event_id", event.id)
+        .gte(
+          "attendance_time",
+          dayStart
+        )
+        .lt(
+          "attendance_time",
+          nextDay.toISOString()
+        )
+        .limit(1);
+
+
+    if (existing && existing.length > 0) {
+
+      result.innerHTML =
+        "⚠️ <strong>" +
+        escapeHtml(
+          member.first_name +
+          " " +
+          member.last_name
+        ) +
+        "</strong><br>Already recorded for this event.";
+
+      result.style.color = "#92400e";
+
+      processingScan = false;
+
+      return;
+    }
+
+
+    // Current logged-in user
+    const {
+      data: authData
+    } =
+      await window.churchDB.auth.getUser();
+
+
+    const scannedBy =
+      authData &&
+      authData.user
+        ? authData.user.id
+        : null;
+
+
+    // Record attendance
+    const { error: attendanceError } =
+      await window.churchDB
+        .from("attendance")
+        .insert({
+
+          member_id: member.id,
+
+          church_id: member.church_id,
+
+          event_id: event.id,
+
+          scanned_by: scannedBy,
+
+          attendance_time:
+            new Date().toISOString()
+
+        });
+
+
+    if (attendanceError)
+      throw attendanceError;
+
+
+    result.innerHTML =
+      "✅ <strong>Attendance Recorded!</strong><br><br>" +
+
+      escapeHtml(
+        member.first_name +
+        " " +
+        (member.middle_name
+          ? member.middle_name + " "
+          : "") +
+        member.last_name
+      ) +
+
+      "<br><small>" +
+      escapeHtml(member.member_id) +
+      "</small>";
+
+
+    result.style.color = "#16a34a";
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    result.textContent =
+      "❌ Error: " + error.message;
+
+    result.style.color = "#dc2626";
+
+  }
+
+
+  setTimeout(function () {
+
+    processingScan = false;
+
+  }, 2000);
+
+}
+
+</script>
+
 </body>
-</html>
+</Khtml>
