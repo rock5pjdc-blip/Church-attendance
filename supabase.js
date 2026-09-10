@@ -1,20 +1,35 @@
 // Church Attendance - Supabase Connection
 
-const SUPABASE_URL = "https://gzjtdjotpmgluyfifujm.supabase.co";
+const SUPABASE_URL =
+  "https://gzjtdjotpmgluyfifujm.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_4M_hw8Ni-yyYo6ahL1h8-g_iJJcWKfS";
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_4M_hw8Ni-yyYo6ahL1h8-g_iJJcWKfS";
 
-const script = document.createElement("script");
+window.churchDB = null;
 
-script.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+function initializeSupabase() {
 
-script.onload = function () {
-    window.supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
+  if (!window.supabase) {
+
+    console.error(
+      "Supabase library has not loaded."
     );
 
-    console.log("Supabase connected successfully.");
-};
+    return false;
 
-document.head.appendChild(script);
+  }
+
+  window.churchDB =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+  console.log(
+    "✅ Supabase connected successfully"
+  );
+
+  return true;
+
+}
