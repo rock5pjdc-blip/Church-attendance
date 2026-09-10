@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Church Attendance</title>
+  <title>Church Attendance Management System</title>
 
 
   <style>
@@ -18,7 +18,6 @@
     :root {
       --primary: #1d4ed8;
       --primary-dark: #1e3a8a;
-      --accent: #f59e0b;
       --background: #f8fafc;
       --card: #ffffff;
       --text: #111827;
@@ -41,6 +40,10 @@
       min-height: 100vh;
     }
 
+
+    /* ==============================
+       HEADER
+       ============================== */
 
     .topbar {
       height: 70px;
@@ -90,6 +93,10 @@
       background: var(--primary-dark);
     }
 
+
+    /* ==============================
+       HERO
+       ============================== */
 
     .hero {
       max-width: 1100px;
@@ -161,6 +168,10 @@
     }
 
 
+    /* ==============================
+       FEATURES
+       ============================== */
+
     .features {
       max-width: 1100px;
       margin: 20px auto 70px;
@@ -205,90 +216,9 @@
     }
 
 
-    .footer {
-      text-align: center;
-      padding: 30px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-
-    /* LOGIN MODAL */
-
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.6);
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 100;
-    }
-
-
-    .modal.show {
-      display: flex;
-    }
-
-
-    .login-box {
-      background: white;
-      width: 100%;
-      max-width: 420px;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.2);
-    }
-
-
-    .login-box h2 {
-      margin-bottom: 8px;
-    }
-
-
-    .login-box p {
-      color: var(--muted);
-      margin-bottom: 22px;
-      font-size: 14px;
-    }
-
-
-    .login-box input {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      margin-bottom: 12px;
-      font-size: 16px;
-    }
-
-
-    .login-submit {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      background: var(--primary);
-      color: white;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-
-    .close {
-      width: 100%;
-      margin-top: 10px;
-      padding: 12px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-
-    /* EVENT SECTION */
+    /* ==============================
+       EVENTS
+       ============================== */
 
     .content-section {
       max-width: 1100px;
@@ -386,7 +316,9 @@
     }
 
 
-    /* QR */
+    /* ==============================
+       QR ATTENDANCE
+       ============================== */
 
     .qr-section {
       max-width: 900px;
@@ -495,6 +427,99 @@
     }
 
 
+    /* ==============================
+       FOOTER
+       ============================== */
+
+    .footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+
+    /* ==============================
+       LOGIN MODAL
+       ============================== */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+
+    .modal.show {
+      display: flex;
+    }
+
+
+    .login-box {
+      background: white;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.2);
+    }
+
+
+    .login-box h2 {
+      margin-bottom: 8px;
+    }
+
+
+    .login-box p {
+      color: var(--muted);
+      margin-bottom: 22px;
+      font-size: 14px;
+    }
+
+
+    .login-box input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+
+    .login-submit {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+
+    .close {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+
+    /* ==============================
+       MOBILE
+       ============================== */
+
     @media (max-width: 700px) {
 
       .features {
@@ -536,9 +561,9 @@
 <body>
 
 
-<!-- ================================= -->
-<!-- HEADER -->
-<!-- ================================= -->
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
 
 <header class="topbar">
 
@@ -565,12 +590,11 @@
 </header>
 
 
-<!-- ================================= -->
-<!-- MAIN HERO -->
-<!-- ================================= -->
+<!-- =====================================================
+     HERO
+     ===================================================== -->
 
 <main>
-
 
   <section class="hero">
 
@@ -614,9 +638,9 @@
   </section>
 
 
-  <!-- ================================= -->
-  <!-- FEATURES -->
-  <!-- ================================= -->
+  <!-- =====================================================
+       FEATURES
+       ===================================================== -->
 
   <section class="features">
 
@@ -678,9 +702,9 @@
   </section>
 
 
-  <!-- ================================= -->
-  <!-- UPCOMING EVENTS -->
-  <!-- ================================= -->
+  <!-- =====================================================
+       UPCOMING EVENTS
+       ===================================================== -->
 
   <section
     id="events-section"
@@ -708,9 +732,9 @@
   </section>
 
 
-  <!-- ================================= -->
-  <!-- QR ATTENDANCE -->
-  <!-- ================================= -->
+  <!-- =====================================================
+       QR ATTENDANCE
+       ===================================================== -->
 
   <section
     id="qr-attendance"
@@ -758,12 +782,12 @@
       </select>
 
 
-      <!-- SCANNER -->
+      <!-- QR READER -->
 
       <div id="qr-reader"></div>
 
 
-      <!-- BUTTONS -->
+      <!-- SCANNER BUTTONS -->
 
       <div class="scanner-buttons">
 
@@ -802,9 +826,9 @@
 </main>
 
 
-<!-- ================================= -->
-<!-- FOOTER -->
-<!-- ================================= -->
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
 
 <footer class="footer">
 
@@ -813,9 +837,9 @@
 </footer>
 
 
-<!-- ================================= -->
-<!-- LOGIN MODAL -->
-<!-- ================================= -->
+<!-- =====================================================
+     LOGIN MODAL
+     ===================================================== -->
 
 <div
   id="loginModal"
@@ -879,9 +903,9 @@
 </div>
 
 
-<!-- ================================= -->
-<!-- EXTERNAL LIBRARIES -->
-<!-- ================================= -->
+<!-- =====================================================
+     EXTERNAL LIBRARIES
+     ===================================================== -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
@@ -890,69 +914,105 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-<!-- ================================= -->
-<!-- YOUR SUPABASE CONNECTION -->
-<!-- ================================= -->
+<!-- =====================================================
+     SUPABASE CONNECTION
+     ===================================================== -->
 
 <script src="supabase.js"></script>
 
 
+<!-- =====================================================
+     COMPLETE APPLICATION JAVASCRIPT
+     ===================================================== -->
+
 <script>
 
-/* ================================= */
-/* INITIALIZE SUPABASE */
-/* ================================= */
+
+/* =====================================================
+   INITIALIZE SUPABASE
+   ===================================================== */
 
 initializeSupabase();
 
 
-/* ================================= */
-/* LOGIN MODAL */
-/* ================================= */
+/* =====================================================
+   GLOBAL VARIABLES
+   ===================================================== */
+
+let qrScanner = null;
+
+let qrEvents = [];
+
+let selectedEventKey = null;
+
+let processingScan = false;
+
+
+/* =====================================================
+   LOGIN MODAL
+   ===================================================== */
 
 function openLogin() {
 
-  document
-    .getElementById("loginModal")
-    .classList
-    .add("show");
+  const modal =
+    document.getElementById("loginModal");
+
+  if (modal) {
+
+    modal.classList.add("show");
+
+  }
 
 }
 
 
 function closeLogin() {
 
-  document
-    .getElementById("loginModal")
-    .classList
-    .remove("show");
+  const modal =
+    document.getElementById("loginModal");
+
+  if (modal) {
+
+    modal.classList.remove("show");
+
+  }
 
 }
 
 
-/* ================================= */
-/* LOGIN */
-/* ================================= */
+/* =====================================================
+   LOGIN
+   ===================================================== */
 
 async function login() {
 
+  const emailInput =
+    document.getElementById("email");
+
+  const passwordInput =
+    document.getElementById("password");
+
+  const message =
+    document.getElementById("loginMessage");
+
+
+  if (
+    !emailInput ||
+    !passwordInput ||
+    !message
+  ) {
+
+    return;
+
+  }
+
+
   const email =
-    document
-      .getElementById("email")
-      .value
-      .trim();
+    emailInput.value.trim();
 
 
   const password =
-    document
-      .getElementById("password")
-      .value;
-
-
-  const message =
-    document.getElementById(
-      "loginMessage"
-    );
+    passwordInput.value;
 
 
   if (!email || !password) {
@@ -998,9 +1058,11 @@ async function login() {
         .auth
         .signInWithPassword({
 
-          email: email,
+          email:
+            email,
 
-          password: password
+          password:
+            password
 
         });
 
@@ -1057,9 +1119,9 @@ async function login() {
 }
 
 
-/* ================================= */
-/* ESCAPE HTML */
-/* ================================= */
+/* =====================================================
+   ESCAPE HTML
+   ===================================================== */
 
 function escapeHtml(value) {
 
@@ -1103,9 +1165,9 @@ function escapeHtml(value) {
 }
 
 
-/* ================================= */
-/* FORMAT TIME */
-/* ================================= */
+/* =====================================================
+   FORMAT TIME
+   ===================================================== */
 
 function formatTime(time) {
 
@@ -1159,9 +1221,9 @@ function formatTime(time) {
 }
 
 
-/* ================================= */
-/* LOAD UPCOMING EVENTS */
-/* ================================= */
+/* =====================================================
+   LOAD UPCOMING EVENTS
+   ===================================================== */
 
 async function loadEvents() {
 
@@ -1190,6 +1252,12 @@ async function loadEvents() {
   }
 
 
+  eventsList.innerHTML =
+    "<p style='color:var(--muted);'>" +
+    "Loading events..." +
+    "</p>";
+
+
   try {
 
     const {
@@ -1209,10 +1277,7 @@ async function loadEvents() {
           start_time,
           end_time,
           status,
-          churches (
-            name,
-            branch_code
-          )
+          church_id
         `)
 
         .gte(
@@ -1251,6 +1316,7 @@ async function loadEvents() {
         ) +
         "</p>";
 
+
       return;
 
     }
@@ -1266,14 +1332,15 @@ async function loadEvents() {
         "No upcoming events." +
         "</p>";
 
+
       return;
 
     }
 
 
-    /* ============================= */
-    /* GROUP SAME EVENT */
-    /* ============================= */
+    /* -----------------------------------------
+       GROUP EVENTS BY NAME + DATE
+       ----------------------------------------- */
 
     const groupedEvents = {};
 
@@ -1293,19 +1360,19 @@ async function loadEvents() {
 
             ...event,
 
-            churches: []
+            churchIds: []
 
           };
 
         }
 
 
-        if (event.churches) {
+        if (event.church_id) {
 
           groupedEvents[key]
-            .churches
+            .churchIds
             .push(
-              event.churches
+              event.church_id
             );
 
         }
@@ -1314,9 +1381,9 @@ async function loadEvents() {
     );
 
 
-    /* ============================= */
-    /* DISPLAY EVENTS */
-    /* ============================= */
+    /* -----------------------------------------
+       DISPLAY EVENTS
+       ----------------------------------------- */
 
     eventsList.innerHTML =
 
@@ -1348,45 +1415,25 @@ async function loadEvents() {
 
           const time =
             event.start_time
+
               ? formatTime(
                   event.start_time
                 )
+
               : "Time to be announced";
 
 
-          const churches =
-            event.churches
-              .map(
-                function (church) {
-
-                  return escapeHtml(
-
-                    church.name +
-
-                    (
-                      church.branch_code
-
-                        ? " (" +
-                          church.branch_code +
-                          ")"
-
-                        : ""
-                    )
-
-                  );
-
-                }
-              )
-              .join(" • ");
+          const status =
+            event.status
+              ? event.status.toUpperCase()
+              : "";
 
 
           return `
 
             <div class="event-card">
 
-
               <div class="event-header">
-
 
                 <div>
 
@@ -1396,7 +1443,9 @@ async function loadEvents() {
 
 
                   <h3 class="event-name">
-                    ${escapeHtml(event.name)}
+                    ${escapeHtml(
+                      event.name
+                    )}
                   </h3>
 
 
@@ -1411,26 +1460,24 @@ async function loadEvents() {
 
 
                   <p class="event-info">
-                    🕐 ${escapeHtml(time)}
+                    🕐 ${escapeHtml(
+                      time
+                    )}
                   </p>
 
                 </div>
 
 
                 <div class="event-status">
-
                   ${escapeHtml(
-                    event.status
-                  ).toUpperCase()}
-
+                    status
+                  )}
                 </div>
-
 
               </div>
 
 
               <div class="event-details">
-
 
                 <p class="event-description">
 
@@ -1449,13 +1496,12 @@ async function loadEvents() {
 
                 <p class="church-list">
 
-                  ${churches}
+                  All RICM Churches —
+                  R1 • R2 • R3 • R5 • RH • RA • R7
 
                 </p>
 
-
               </div>
-
 
             </div>
 
@@ -1490,22 +1536,9 @@ async function loadEvents() {
 }
 
 
-/* ================================= */
-/* QR VARIABLES */
-/* ================================= */
-
-let qrScanner = null;
-
-let qrEvents = [];
-
-let selectedEventKey = null;
-
-let processingScan = false;
-
-
-/* ================================= */
-/* LOAD QR EVENTS */
-/* ================================= */
+/* =====================================================
+   LOAD EVENTS FOR QR DROPDOWN
+   ===================================================== */
 
 async function loadQREvents() {
 
@@ -1585,6 +1618,7 @@ async function loadQREvents() {
       select.innerHTML =
         '<option value="">Unable to load events</option>';
 
+
       return;
 
     }
@@ -1594,9 +1628,9 @@ async function loadQREvents() {
       data || [];
 
 
-    /* ============================= */
-    /* GROUP EVENTS */
-    /* ============================= */
+    /* -----------------------------------------
+       GROUP EVENTS
+       ----------------------------------------- */
 
     const groups = {};
 
@@ -1675,7 +1709,7 @@ async function loadQREvents() {
   catch (error) {
 
     console.error(
-      "QR events error:",
+      "QR event loading error:",
       error
     );
 
@@ -1688,13 +1722,26 @@ async function loadQREvents() {
 }
 
 
-/* ================================= */
-/* EVENT SELECTION */
-/* ================================= */
+/* =====================================================
+   EVENT DROPDOWN
+   ===================================================== */
 
-document
-  .getElementById("qrEventSelect")
-  .addEventListener(
+function setupEventSelection() {
+
+  const select =
+    document.getElementById(
+      "qrEventSelect"
+    );
+
+
+  if (!select) {
+
+    return;
+
+  }
+
+
+  select.addEventListener(
     "change",
     function () {
 
@@ -1707,6 +1754,13 @@ document
         document.getElementById(
           "qr-result"
         );
+
+
+      if (!result) {
+
+        return;
+
+      }
 
 
       if (selectedEventKey) {
@@ -1732,10 +1786,12 @@ document
     }
   );
 
+}
 
-/* ================================= */
-/* START QR SCANNER */
-/* ================================= */
+
+/* =====================================================
+   START QR SCANNER
+   ===================================================== */
 
 async function startQRScanner() {
 
@@ -1743,6 +1799,13 @@ async function startQRScanner() {
     document.getElementById(
       "qr-result"
     );
+
+
+  if (!result) {
+
+    return;
+
+  }
 
 
   if (!selectedEventKey) {
@@ -1784,25 +1847,10 @@ async function startQRScanner() {
   }
 
 
-  /* ============================= */
-  /* CHECK LOGIN */
-  /* ============================= */
-
-  const {
-    data: authData
-  } =
-    await window.churchDB
-      .auth
-      .getUser();
-
-
-  if (
-    !authData ||
-    !authData.user
-  ) {
+  if (!window.churchDB) {
 
     result.textContent =
-      "Please sign in before scanning attendance.";
+      "Database connection is not ready.";
 
     result.style.color =
       "#dc2626";
@@ -1812,13 +1860,51 @@ async function startQRScanner() {
   }
 
 
-  qrScanner =
-    new Html5Qrcode(
-      "qr-reader"
-    );
-
-
   try {
+
+    /* -----------------------------------------
+       REQUIRE LOGIN
+       ----------------------------------------- */
+
+    const {
+      data: authData,
+      error: authError
+    } =
+      await window.churchDB
+        .auth
+        .getUser();
+
+
+    if (
+      authError ||
+      !authData ||
+      !authData.user
+    ) {
+
+      result.textContent =
+        "Please sign in before scanning attendance.";
+
+      result.style.color =
+        "#dc2626";
+
+      return;
+
+    }
+
+
+    /* -----------------------------------------
+       CREATE SCANNER
+       ----------------------------------------- */
+
+    qrScanner =
+      new Html5Qrcode(
+        "qr-reader"
+      );
+
+
+    /* -----------------------------------------
+       START CAMERA
+       ----------------------------------------- */
 
     await qrScanner.start(
 
@@ -1840,7 +1926,7 @@ async function startQRScanner() {
       handleQRScan,
 
       function () {
-        // Normal scan errors are ignored.
+        /* Normal scanner errors ignored. */
       }
 
     );
@@ -1878,9 +1964,9 @@ async function startQRScanner() {
 }
 
 
-/* ================================= */
-/* STOP QR SCANNER */
-/* ================================= */
+/* =====================================================
+   STOP QR SCANNER
+   ===================================================== */
 
 async function stopQRScanner() {
 
@@ -1920,18 +2006,22 @@ async function stopQRScanner() {
     );
 
 
-  result.textContent =
-    "Scanner stopped.";
+  if (result) {
 
-  result.style.color =
-    "#64748b";
+    result.textContent =
+      "Scanner stopped.";
+
+    result.style.color =
+      "#64748b";
+
+  }
 
 }
 
 
-/* ================================= */
-/* HANDLE QR SCAN */
-/* ================================= */
+/* =====================================================
+   HANDLE QR SCAN
+   ===================================================== */
 
 async function handleQRScan(
   decodedText
@@ -1954,6 +2044,16 @@ async function handleQRScan(
     );
 
 
+  if (!result) {
+
+    processingScan =
+      false;
+
+    return;
+
+  }
+
+
   result.textContent =
     "QR detected. Checking member...";
 
@@ -1963,9 +2063,22 @@ async function handleQRScan(
 
   try {
 
-    /* ============================= */
-    /* FIND MEMBER */
-    /* ============================= */
+    /* -----------------------------------------
+       CHECK DATABASE
+       ----------------------------------------- */
+
+    if (!window.churchDB) {
+
+      throw new Error(
+        "Database connection is not ready."
+      );
+
+    }
+
+
+    /* -----------------------------------------
+       FIND MEMBER
+       ----------------------------------------- */
 
     const {
       data: member,
@@ -2017,9 +2130,9 @@ async function handleQRScan(
     }
 
 
-    /* ============================= */
-    /* CHECK EVENT */
-    /* ============================= */
+    /* -----------------------------------------
+       CHECK SELECTED EVENT
+       ----------------------------------------- */
 
     if (!selectedEventKey) {
 
@@ -2049,9 +2162,9 @@ async function handleQRScan(
       eventParts[1];
 
 
-    /* ============================= */
-    /* FIND MEMBER'S CHURCH EVENT */
-    /* ============================= */
+    /* -----------------------------------------
+       FIND EVENT FOR MEMBER'S CHURCH
+       ----------------------------------------- */
 
     const event =
       qrEvents.find(
@@ -2090,26 +2203,9 @@ async function handleQRScan(
     }
 
 
-    /* ============================= */
-    /* DUPLICATE CHECK */
-    /* ============================= */
-
-    const dayStart =
-      event.event_date +
-      "T00:00:00";
-
-
-    const nextDay =
-      new Date(
-        event.event_date +
-        "T00:00:00"
-      );
-
-
-    nextDay.setDate(
-      nextDay.getDate() + 1
-    );
-
+    /* -----------------------------------------
+       CHECK DUPLICATE ATTENDANCE
+       ----------------------------------------- */
 
     const {
       data: existing,
@@ -2129,16 +2225,6 @@ async function handleQRScan(
         .eq(
           "event_id",
           event.id
-        )
-
-        .gte(
-          "attendance_time",
-          dayStart
-        )
-
-        .lt(
-          "attendance_time",
-          nextDay.toISOString()
         )
 
         .limit(1);
@@ -2184,29 +2270,24 @@ async function handleQRScan(
     }
 
 
-    /* ============================= */
-    /* CURRENT USER */
-    /* ============================= */
+    /* -----------------------------------------
+       GET CURRENT USER
+       ----------------------------------------- */
 
     const {
-      data: authData
+      data: authData,
+      error: authError
     } =
       await window.churchDB
         .auth
         .getUser();
 
 
-    const scannedBy =
-
-      authData &&
-      authData.user
-
-        ? authData.user.id
-
-        : null;
-
-
-    if (!scannedBy) {
+    if (
+      authError ||
+      !authData ||
+      !authData.user
+    ) {
 
       result.textContent =
         "❌ Please sign in before recording attendance.";
@@ -2222,9 +2303,13 @@ async function handleQRScan(
     }
 
 
-    /* ============================= */
-    /* RECORD ATTENDANCE */
-    /* ============================= */
+    const scannedBy =
+      authData.user.id;
+
+
+    /* -----------------------------------------
+       INSERT ATTENDANCE
+       ----------------------------------------- */
 
     const {
       error: attendanceError
@@ -2260,9 +2345,9 @@ async function handleQRScan(
     }
 
 
-    /* ============================= */
-    /* SUCCESS */
-    /* ============================= */
+    /* -----------------------------------------
+       SUCCESS
+       ----------------------------------------- */
 
     result.innerHTML =
 
@@ -2271,6 +2356,7 @@ async function handleQRScan(
       escapeHtml(
 
         member.first_name +
+
         " " +
 
         (
@@ -2330,13 +2416,82 @@ async function handleQRScan(
 }
 
 
-/* ================================= */
-/* LOAD EVERYTHING */
-/* ================================= */
+/* =====================================================
+   START APPLICATION
+   ===================================================== */
 
-loadEvents();
+function startApplication() {
 
-loadQREvents();
+  console.log(
+    "Church Attendance System starting..."
+  );
+
+
+  if (!window.churchDB) {
+
+    console.error(
+      "Supabase connection failed."
+    );
+
+    const eventsList =
+      document.getElementById(
+        "events-list"
+      );
+
+
+    if (eventsList) {
+
+      eventsList.innerHTML =
+        "<p style='color:#dc2626;'>" +
+        "Database connection failed. " +
+        "Please refresh the page." +
+        "</p>";
+
+    }
+
+    return;
+
+  }
+
+
+  console.log(
+    "Supabase connected successfully."
+  );
+
+
+  setupEventSelection();
+
+
+  loadEvents();
+
+
+  loadQREvents();
+
+}
+
+
+/* =====================================================
+   RUN APPLICATION AFTER PAGE LOAD
+   ===================================================== */
+
+if (
+  document.readyState ===
+  "loading"
+) {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    startApplication
+  );
+
+}
+
+else {
+
+  startApplication();
+
+}
+
 
 </script>
 
