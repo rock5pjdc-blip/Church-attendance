@@ -574,14 +574,16 @@ async function loadEvents() {
       .order("event_date", { ascending: true });
 
     if (error) {
-      console.error(error);
+  console.error(error);
 
-      eventsList.innerHTML =
-        "<p style='color:#dc2626;'>Unable to load events.</p>";
+  eventsList.innerHTML =
+    "<p style='color:#dc2626;'>Error: " +
+    escapeHtml(error.message) +
+    "</p>";
 
-      return;
+  return;
+}
     }
-
     if (!data || data.length === 0) {
 
       eventsList.innerHTML =
