@@ -466,25 +466,23 @@
 
   </script>
 <!-- Supabase Connection -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="supabase.js"></script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
 
-    function waitForSupabase() {
-        if (window.supabaseClient) {
-            console.log("✅ Supabase connected successfully");
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
 
-            // Make connection available to the attendance system
-            window.churchDB = window.supabaseClient;
+    initializeSupabase();
 
-        } else {
-            setTimeout(waitForSupabase, 300);
-        }
-    }
+  }
+);
 
-    waitForSupabase();
-  </script><!-- EVENTS FROM SUPABASE -->
+</script>
   <section id="events-section" style="
   max-width:1100px;
   margin:20px auto 70px;
