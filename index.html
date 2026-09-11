@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Aim High For Jesus | Church Attendance</title>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Aim High For Jesus - Church Attendance Management System"
+  >
+
+  <title>Aim High For Jesus</title>
 
   <!-- QR GENERATOR -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <!-- QR CAMERA SCANNER -->
-  <script src="https://unpkg.com/html5-qrcode"></script>
+  <!-- QR SCANNER -->
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
   <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -18,679 +28,515 @@
   <!-- YOUR SUPABASE CONNECTION -->
   <script src="supabase.js"></script>
 
-  <style>
 
-    :root {
-      --primary: #1d4ed8;
-      --primary-dark: #1e3a8a;
-      --accent: #f59e0b;
-      --background: #f8fafc;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --success: #16a34a;
-      --danger: #dc2626;
-      --warning: #92400e;
-    }
+  <style>
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--background);
-      color: var(--text);
-      min-height: 100vh;
+      margin: 0;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      background: #f5f7fb;
+      color: #172033;
     }
 
     button,
     input,
     select {
-      font-family: inherit;
+      font: inherit;
     }
 
     button {
       cursor: pointer;
     }
 
-    /* HEADER */
+    /* =====================================================
+       HEADER
+    ===================================================== */
 
-    .topbar {
-      min-height: 70px;
-      background: white;
-      border-bottom: 1px solid var(--border);
+    header {
+      background: linear-gradient(
+        135deg,
+        #111827,
+        #1e3a8a
+      );
+      color: white;
+      padding: 18px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 6%;
-      gap: 20px;
+      gap: 15px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 700;
-      font-size: 19px;
     }
 
-    .logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: var(--primary);
-      color: white;
+    .brand-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: white;
+      color: #1e3a8a;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 21px;
-      flex-shrink: 0;
+      font-weight: 900;
+      font-size: 20px;
     }
 
-    .header-actions {
+    .brand-text h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .brand-text p {
+      margin: 3px 0 0;
+      opacity: 0.8;
+      font-size: 12px;
+    }
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    nav {
       display: flex;
-      align-items: center;
-      gap: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
-    .signin {
-      background: var(--primary);
-      color: white;
+    nav button {
       border: none;
-      padding: 11px 20px;
-      border-radius: 10px;
-      font-weight: 700;
-    }
-
-    .signin:hover {
-      background: var(--primary-dark);
-    }
-
-    .signout-btn {
-      background: var(--danger);
+      background: rgba(255,255,255,0.12);
       color: white;
-      border: none;
-      padding: 11px 20px;
-      border-radius: 10px;
-      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 600;
     }
 
-    /* HERO */
+    nav button:hover {
+      background: rgba(255,255,255,0.22);
+    }
+
+    .admin-nav {
+      display: none;
+    }
+
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     .hero {
+      background:
+        linear-gradient(
+          135deg,
+          #1e3a8a,
+          #2563eb
+        );
+      color: white;
+      padding: 65px 20px;
+    }
+
+    .hero-inner {
       max-width: 1100px;
       margin: auto;
-      padding: 80px 24px 50px;
-      text-align: center;
     }
 
-    .badge {
-      display: inline-block;
-      background: #dbeafe;
-      color: var(--primary-dark);
-      padding: 8px 14px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: clamp(38px, 7vw, 68px);
+    .hero h2 {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 7vw, 58px);
       line-height: 1.05;
-      margin-bottom: 22px;
-      letter-spacing: -2px;
-    }
-
-    .aim-title {
-      color: var(--primary);
     }
 
     .hero p {
-      max-width: 700px;
-      margin: auto;
-      color: var(--muted);
+      max-width: 650px;
       font-size: 18px;
-      line-height: 1.7;
+      line-height: 1.6;
+      opacity: 0.92;
     }
 
-    .actions {
-      margin-top: 35px;
+    .hero-buttons {
       display: flex;
-      justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
+      margin-top: 25px;
     }
 
-    .primary-btn,
-    .secondary-btn {
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
+
+    .btn {
       border: none;
-      padding: 15px 25px;
-      border-radius: 12px;
-      font-size: 15px;
+      border-radius: 10px;
+      padding: 13px 18px;
       font-weight: 700;
+      transition: 0.2s;
     }
 
-    .primary-btn {
-      background: var(--primary);
+    .btn-primary {
+      background: white;
+      color: #1e3a8a;
+    }
+
+    .btn-blue {
+      background: #2563eb;
       color: white;
     }
 
-    .secondary-btn {
-      background: white;
-      color: var(--text);
-      border: 1px solid var(--border);
+    .btn-dark {
+      background: #111827;
+      color: white;
     }
 
-    /* FEATURES */
+    .btn-danger {
+      background: #dc2626;
+      color: white;
+    }
 
-    .features {
+    .btn-green {
+      background: #16a34a;
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.92;
+    }
+
+    /* =====================================================
+       MAIN
+    ===================================================== */
+
+    main {
       max-width: 1100px;
-      margin: 20px auto 70px;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      margin: auto;
+      padding: 35px 20px 70px;
     }
 
-    .feature {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 28px;
-    }
-
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: #eff6ff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 23px;
-      margin-bottom: 18px;
-    }
-
-    .feature h2 {
-      font-size: 19px;
-      margin-bottom: 8px;
-    }
-
-    .feature p {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    /* GENERAL */
-
-    .content-section {
-      max-width: 1100px;
-      margin: 20px auto 70px;
-      padding: 0 24px;
+    section {
+      margin-bottom: 45px;
     }
 
     .section-title {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .section-description {
-      color: var(--muted);
-      margin-bottom: 25px;
-    }
-
-    /* EVENTS */
-
-    .event-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 28px;
-      margin-bottom: 18px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.04);
-    }
-
-    .event-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .aim-event-banner {
-      display: inline-block;
-      margin-bottom: 12px;
-      padding: 7px 12px;
-      border-radius: 20px;
-      background: #dbeafe;
-      color: var(--primary-dark);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .event-label {
-      color: var(--primary);
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-
-    .event-name {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .event-info {
-      color: var(--muted);
-      margin-bottom: 7px;
-    }
-
-    .event-status {
-      align-self: flex-start;
-      background: #fef3c7;
-      color: var(--warning);
-      padding: 7px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .event-details {
-      margin-top: 20px;
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
-    }
-
-    .event-description {
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-
-    .church-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--muted);
-    }
-
-    .church-list {
-      margin-top: 8px;
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
-    /* MEMBER PORTAL */
-
-    #member-portal {
-      display: none;
-    }
-
-    .portal-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .portal-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 28px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.04);
-    }
-
-    .portal-card h3 {
-      font-size: 21px;
-      margin-bottom: 8px;
-    }
-
-    .portal-muted {
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .member-name {
-      font-size: 26px;
-      font-weight: 800;
-      margin: 10px 0;
-    }
-
-    .member-church {
-      color: var(--primary);
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-
-    .member-id {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .qr-box {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 280px;
-      margin: 20px 0;
-    }
-
-    #memberQr {
-      padding: 15px;
-      background: white;
-      border-radius: 12px;
-      display: inline-block;
-    }
-
-    .download-btn {
-      display: block;
-      width: 100%;
-      padding: 13px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-weight: 700;
-    }
-
-    .attendance-list {
-      margin-top: 15px;
-    }
-
-    .attendance-item {
-      border-bottom: 1px solid var(--border);
-      padding: 13px 0;
-    }
-
-    .attendance-item:last-child {
-      border-bottom: none;
-    }
-
-    .attendance-event {
-      font-weight: 700;
-    }
-
-    .attendance-date {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 4px;
-    }
-
-    /* QR SCANNER */
-
-    #qr-attendance {
-      display: none;
-    }
-
-    .qr-section {
-      max-width: 900px;
-      margin: 30px auto 70px;
-      padding: 0 24px;
-    }
-
-    .qr-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.04);
-    }
-
-    .qr-heading {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .qr-icon {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-
-    .qr-heading h2 {
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
-
-    .qr-heading p {
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .qr-label {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    #qrEventSelect {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 16px;
-      background: white;
       margin-bottom: 20px;
     }
 
-    #qr-reader {
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
+    .section-title h2 {
+      margin: 0;
+      font-size: 28px;
     }
 
-    .scanner-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
-      flex-wrap: wrap;
+    .section-title p {
+      margin: 6px 0 0;
+      color: #667085;
     }
 
-    .start-scanner {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 13px 22px;
-      border-radius: 10px;
-      font-weight: 700;
+    /* =====================================================
+       EVENT CARDS
+    ===================================================== */
+
+    .events-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(270px, 1fr));
+      gap: 18px;
     }
 
-    .stop-scanner {
+    .event-card {
       background: white;
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 13px 22px;
-      border-radius: 10px;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow:
+        0 5px 20px rgba(15,23,42,0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .event-badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1d4ed8;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .event-card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .event-info {
+      color: #667085;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* =====================================================
+       REGISTRATION
+    ===================================================== */
+
+    .registration-box {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow:
+        0 5px 20px rgba(15,23,42,0.08);
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
       font-weight: 700;
     }
 
-    #qr-result {
-      margin-top: 20px;
-      text-align: center;
-      padding: 15px;
-      border-radius: 10px;
-      background: #f8fafc;
-      color: var(--muted);
-      line-height: 1.6;
-      min-height: 50px;
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d0d5dd;
+      border-radius: 9px;
+      outline: none;
+      background: white;
     }
 
-    /* AUTH MODAL */
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #2563eb;
+      box-shadow:
+        0 0 0 3px rgba(37,99,235,0.12);
+    }
+
+    .message {
+      padding: 12px;
+      border-radius: 9px;
+      margin-bottom: 15px;
+      display: none;
+      font-size: 14px;
+    }
+
+    .message.error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .message.success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    /* =====================================================
+       QR RESULT
+    ===================================================== */
+
+    #qrResult {
+      display: none;
+      margin-top: 25px;
+      text-align: center;
+      background: #f8fafc;
+      padding: 25px;
+      border-radius: 15px;
+    }
+
+    #qrcode {
+      width: 256px;
+      min-height: 256px;
+      margin: 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    #qrcode img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .member-code {
+      font-size: 20px;
+      font-weight: 800;
+      color: #1e3a8a;
+    }
+
+    /* =====================================================
+       ADMIN / SCANNER
+    ===================================================== */
+
+    #adminSection {
+      display: none;
+    }
+
+    .admin-box {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow:
+        0 5px 20px rgba(15,23,42,0.08);
+    }
+
+    .scanner-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .scanner-controls select {
+      flex: 1;
+      min-width: 220px;
+      padding: 13px;
+      border: 1px solid #d0d5dd;
+      border-radius: 9px;
+    }
+
+    #reader {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    #scannerResult {
+      margin-top: 20px;
+    }
+
+    .scan-card {
+      padding: 18px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+    }
+
+    /* =====================================================
+       LOGIN MODAL
+    ===================================================== */
 
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(15,23,42,.65);
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      background: rgba(0,0,0,0.65);
       z-index: 1000;
+      padding: 20px;
       overflow-y: auto;
     }
 
-    .modal.show {
-      display: flex;
-    }
-
-    .auth-box {
+    .modal-content {
+      max-width: 450px;
+      margin: 70px auto;
       background: white;
-      width: 100%;
-      max-width: 460px;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.2);
-      margin: 20px 0;
+      border-radius: 18px;
+      padding: 28px;
+      position: relative;
     }
 
-    .auth-box h2 {
-      margin-bottom: 8px;
-    }
-
-    .auth-description {
-      color: var(--muted);
-      margin-bottom: 22px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .auth-tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .auth-tab {
-      padding: 11px;
-      border: 1px solid var(--border);
-      background: white;
-      border-radius: 10px;
-      font-weight: 700;
-    }
-
-    .auth-tab.active {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-
-    .auth-form {
-      display: none;
-    }
-
-    .auth-form.active {
-      display: block;
-    }
-
-    .form-group {
-      margin-bottom: 13px;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 7px;
-      font-size: 14px;
-    }
-
-    .auth-box input,
-    .auth-box select {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 16px;
-      background: white;
-    }
-
-    .login-submit,
-    .signup-submit {
-      width: 100%;
-      padding: 14px;
+    .modal-close {
+      position: absolute;
+      right: 18px;
+      top: 14px;
       border: none;
-      border-radius: 10px;
-      background: var(--primary);
-      color: white;
-      font-weight: 700;
-      font-size: 15px;
-      margin-top: 5px;
+      background: none;
+      font-size: 25px;
     }
 
-    .close {
-      width: 100%;
-      margin-top: 10px;
-      padding: 12px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-weight: 700;
+    .modal-content h2 {
+      margin-top: 0;
     }
 
-    #loginMessage,
-    #signupMessage {
-      margin-top: 15px;
-      text-align: center;
-      line-height: 1.5;
+    /* =====================================================
+       ADMIN STATUS
+    ===================================================== */
+
+    .admin-status {
+      background: #eff6ff;
+      color: #1e40af;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
       font-size: 14px;
     }
 
-    /* FOOTER */
+    /* =====================================================
+       FOOTER
+    ===================================================== */
 
-    .footer {
+    footer {
+      background: #111827;
+      color: white;
       text-align: center;
-      padding: 30px;
-      color: var(--muted);
-      font-size: 13px;
+      padding: 30px 20px;
     }
 
-    /* MOBILE */
+    footer p {
+      margin: 5px;
+      opacity: 0.8;
+    }
 
-    @media (max-width: 700px) {
+    /* =====================================================
+       MOBILE
+    ===================================================== */
 
-      .features {
-        grid-template-columns: 1fr;
+    @media (max-width: 650px) {
+
+      .header-inner {
+        align-items: flex-start;
       }
 
-      .portal-grid {
-        grid-template-columns: 1fr;
+      .brand-text h1 {
+        font-size: 17px;
       }
 
-      .topbar {
-        padding: 12px 20px;
+      nav {
+        width: 100%;
       }
 
-      .brand span {
-        font-size: 16px;
-      }
-
-      .signin,
-      .signout-btn {
-        padding: 10px 14px;
+      nav button {
+        flex: 1;
       }
 
       .hero {
-        padding-top: 60px;
+        padding: 45px 20px;
       }
 
-      .event-card {
-        padding: 22px;
+      .registration-box,
+      .admin-box {
+        padding: 20px;
       }
 
-      .qr-card,
-      .portal-card {
-        padding: 22px;
-      }
-
-      h1 {
-        letter-spacing: -1px;
-      }
     }
 
   </style>
@@ -700,366 +546,390 @@
 
 <body>
 
-
-<!-- =====================================================
+<!-- =========================================================
      HEADER
-     ===================================================== -->
+========================================================= -->
 
-<header class="topbar">
+<header>
 
-  <div class="brand">
+  <div class="header-inner">
 
-    <div class="logo">
-      ✝
+    <div class="brand">
+
+      <div class="brand-icon">
+        ✝
+      </div>
+
+      <div class="brand-text">
+
+        <h1>Aim High For Jesus</h1>
+
+        <p>
+          RICM Church Attendance
+        </p>
+
+      </div>
+
     </div>
 
-    <span>
-      Aim High For Jesus
-    </span>
 
-  </div>
+    <nav>
 
+      <button
+        onclick="scrollToSection('register')"
+      >
+        Register
+      </button>
 
-  <div class="header-actions">
+      <button
+        onclick="scrollToSection('events')"
+      >
+        Events
+      </button>
 
-    <button
-      id="headerAuthButton"
-      class="signin"
-      onclick="openAuth('login')"
-    >
-      Sign In
-    </button>
+      <button
+        id="loginButton"
+        onclick="openLogin()"
+      >
+        Admin Login
+      </button>
+
+      <button
+        id="logoutButton"
+        style="display:none;"
+        onclick="logoutAdmin()"
+      >
+        Logout
+      </button>
+
+    </nav>
 
   </div>
 
 </header>
 
 
-<!-- =====================================================
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+  <div class="hero-inner">
+
+    <h2>
+      Aim High For Jesus
+    </h2>
+
+    <p>
+      One Body. One Mission. One Purpose.
+      Register as a church member, receive your
+      personal QR code, and make attendance simple.
+    </p>
+
+
+    <div class="hero-buttons">
+
+      <button
+        class="btn btn-primary"
+        onclick="scrollToSection('register')"
+      >
+        Get My QR Code
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="scrollToSection('events')"
+      >
+        View Events
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
      MAIN
-     ===================================================== -->
+========================================================= -->
 
 <main>
 
 
-  <!-- HERO -->
+  <!-- =======================================================
+       EVENTS
+  ======================================================== -->
 
-  <section class="hero">
+  <section id="events">
 
-    <div class="badge">
-      ⛪ Church Attendance Management System
+    <div class="section-title">
+
+      <h2>
+        Upcoming Events
+      </h2>
+
+      <p>
+        RICM church events and gatherings.
+      </p>
+
     </div>
 
 
-    <h1>
-
-      Church Attendance<br>
-
-      <span class="aim-title">
-        Aim High For Jesus
-      </span>
-
-    </h1>
+    <div
+      id="eventsLoading"
+      style="color:#667085;"
+    >
+      Loading events...
+    </div>
 
 
-    <p>
-
-      A secure and modern attendance system for churches,
-      branches, members and ministry events. Create your account,
-      receive your personal QR code and record attendance easily.
-
-    </p>
-
-
-    <div class="actions">
-
-      <button
-        class="primary-btn"
-        onclick="openAuth('signup')"
-      >
-        Create Account
-      </button>
-
-
-      <button
-        class="secondary-btn"
-        onclick="openAuth('login')"
-      >
-        Sign In
-      </button>
-
+    <div
+      id="eventsGrid"
+      class="events-grid"
+    >
     </div>
 
   </section>
 
 
-  <!-- FEATURES -->
 
-  <section class="features">
+  <!-- =======================================================
+       MEMBER REGISTRATION
+  ======================================================== -->
 
+  <section id="register">
 
-    <div class="feature">
-
-      <div class="feature-icon">
-        👤
-      </div>
+    <div class="section-title">
 
       <h2>
-        Create Your Account
+        Church Member Registration
       </h2>
 
       <p>
-
-        Register with your name, email, password and
-        church branch. Your member profile is created
-        automatically.
-
+        Create your personal QR code.
+        No email or password required.
       </p>
 
     </div>
 
 
-    <div class="feature">
-
-      <div class="feature-icon">
-        📱
-      </div>
-
-      <h2>
-        Your Personal QR
-      </h2>
-
-      <p>
-
-        Every registered member receives a unique QR code
-        that can be saved and used for church attendance.
-
-      </p>
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        📊
-      </div>
-
-      <h2>
-        Attendance History
-      </h2>
-
-      <p>
-
-        View your attendance history and keep your church
-        participation records organized.
-
-      </p>
-
-    </div>
-
-
-  </section>
-
-
-  <!-- =====================================================
-       UPCOMING EVENTS
-       ===================================================== -->
-
-  <section
-    id="events-section"
-    class="content-section"
-  >
-
-    <h2 class="section-title">
-      Upcoming Events
-    </h2>
-
-
-    <p class="section-description">
-      RICM events and ministry activities
-    </p>
-
-
-    <div id="events-list">
-
-      <p style="color:var(--muted);">
-        Loading events...
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================================
-       MEMBER PORTAL
-       ===================================================== -->
-
-  <section
-    id="member-portal"
-    class="content-section"
-  >
-
-    <h2 class="section-title">
-      Member Portal
-    </h2>
-
-
-    <p class="section-description">
-      Your membership information and personal QR code
-    </p>
-
-
-    <div class="portal-grid">
-
-
-      <div class="portal-card">
-
-        <h3>
-          My Profile
-        </h3>
-
-        <p class="portal-muted">
-          Your church membership information.
-        </p>
-
-        <div id="memberProfile">
-          Loading profile...
-        </div>
-
-      </div>
-
-
-      <div class="portal-card">
-
-        <h3>
-          My QR Code
-        </h3>
-
-        <p class="portal-muted">
-          Show this QR code when checking in at church.
-        </p>
-
-        <div class="qr-box">
-
-          <div id="memberQr"></div>
-
-        </div>
-
-
-        <button
-          class="download-btn"
-          onclick="downloadMemberQR()"
-        >
-          📥 Save My QR Code
-        </button>
-
-      </div>
+    <div class="registration-box">
 
 
       <div
-        class="portal-card"
-        style="grid-column:1/-1;"
+        id="registrationError"
+        class="message error"
+      ></div>
+
+
+      <div
+        id="registrationSuccess"
+        class="message success"
+      ></div>
+
+
+      <form
+        id="registrationForm"
       >
 
-        <h3>
-          My Attendance
-        </h3>
 
-        <p class="portal-muted">
-          Your recent attendance records.
-        </p>
+        <div class="form-group">
 
-        <div
-          id="myAttendance"
-          class="attendance-list"
-        >
-          Loading attendance...
+          <label for="firstName">
+            First Name
+          </label>
+
+          <input
+            id="firstName"
+            type="text"
+            placeholder="Enter your first name"
+            required
+          >
+
         </div>
 
-      </div>
 
+        <div class="form-group">
+
+          <label for="lastName">
+            Last Name
+          </label>
+
+          <input
+            id="lastName"
+            type="text"
+            placeholder="Enter your last name"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="churchSelect">
+            Church
+          </label>
+
+          <select
+            id="churchSelect"
+            required
+          >
+
+            <option value="">
+              Loading churches...
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <button
+          id="registerButton"
+          type="submit"
+          class="btn btn-blue"
+          style="width:100%;"
+        >
+          Generate My QR Code
+        </button>
+
+
+      </form>
+
+
+
+      <!-- QR RESULT -->
+
+      <div id="qrResult">
+
+        <h3>
+          Registration Successful!
+        </h3>
+
+        <p>
+          Save this QR code.
+          It is your personal church attendance QR.
+        </p>
+
+
+        <div
+          id="qrcode"
+        >
+        </div>
+
+
+        <div>
+          Member ID
+        </div>
+
+        <div
+          id="memberCode"
+          class="member-code"
+        >
+        </div>
+
+
+        <p id="registeredName">
+        </p>
+
+        <p id="registeredChurch">
+        </p>
+
+
+        <button
+          class="btn btn-green"
+          onclick="downloadQR()"
+        >
+          Download My QR
+        </button>
+
+
+        <button
+          class="btn btn-dark"
+          onclick="printQR()"
+          style="margin-left:8px;"
+        >
+          Print QR
+        </button>
+
+      </div>
 
     </div>
 
   </section>
 
 
-  <!-- =====================================================
-       QR SCANNER
-       HIDDEN BY DEFAULT
-       ===================================================== -->
 
-  <section
-    id="qr-attendance"
-    class="qr-section"
-  >
+  <!-- =======================================================
+       ADMIN SCANNER
+  ======================================================== -->
 
-    <div class="qr-card">
+  <section id="adminSection">
 
+    <div class="section-title">
 
-      <div class="qr-heading">
+      <h2>
+        QR Attendance Scanner
+      </h2>
 
-        <div class="qr-icon">
-          📱
-        </div>
+      <p>
+        Authorized personnel only.
+      </p>
 
-        <h2>
-          QR Attendance Scanner
-        </h2>
-
-        <p>
-          Special access required.
-        </p>
-
-      </div>
+    </div>
 
 
-      <label
-        class="qr-label"
-        for="qrEventSelect"
+    <div class="admin-box">
+
+
+      <div
+        id="adminStatus"
+        class="admin-status"
       >
-        Select Event
-      </label>
+        Checking administrator access...
+      </div>
 
 
-      <select id="qrEventSelect">
+      <div class="scanner-controls">
 
-        <option value="">
-          Loading events...
-        </option>
+        <select id="eventSelect">
 
-      </select>
+          <option value="">
+            Select an event
+          </option>
 
+        </select>
 
-      <div id="qr-reader"></div>
-
-
-      <div class="scanner-buttons">
 
         <button
-          class="start-scanner"
-          onclick="startQRScanner()"
+          id="startScannerButton"
+          class="btn btn-blue"
+          onclick="startScanner()"
         >
-          📷 Start Scanner
+          Start Scanner
         </button>
 
 
         <button
-          class="stop-scanner"
-          onclick="stopQRScanner()"
+          class="btn btn-danger"
+          onclick="stopScanner()"
         >
-          Stop Scanner
+          Stop
         </button>
 
       </div>
 
 
-      <div id="qr-result">
-        Scanner ready.
-      </div>
+      <div id="reader"></div>
 
+
+      <div
+        id="scannerResult"
+      >
+      </div>
 
     </div>
 
@@ -1069,79 +939,55 @@
 </main>
 
 
-<footer class="footer">
-
-  © 2026 Aim High For Jesus |
-  Church Attendance Management System
-
-</footer>
-
-
-<!-- =====================================================
-     AUTH MODAL
-     ===================================================== -->
+<!-- =========================================================
+     LOGIN MODAL
+========================================================= -->
 
 <div
-  id="authModal"
+  id="loginModal"
   class="modal"
 >
 
-  <div class="auth-box">
+  <div class="modal-content">
+
+    <button
+      class="modal-close"
+      onclick="closeLogin()"
+    >
+      ×
+    </button>
 
 
     <h2>
-      Welcome
+      Admin Login
     </h2>
 
-
-    <p class="auth-description">
-
-      Sign in to your account or create
-      a new member account.
-
+    <p>
+      Only authorized system personnel can log in.
     </p>
 
 
-    <div class="auth-tabs">
-
-      <button
-        id="loginTab"
-        class="auth-tab active"
-        onclick="showAuthTab('login')"
-      >
-        Sign In
-      </button>
-
-
-      <button
-        id="signupTab"
-        class="auth-tab"
-        onclick="showAuthTab('signup')"
-      >
-        Create Account
-      </button>
-
-    </div>
-
-
-    <!-- LOGIN -->
-
     <div
+      id="loginError"
+      class="message error"
+    ></div>
+
+
+    <form
       id="loginForm"
-      class="auth-form active"
     >
 
       <div class="form-group">
 
-        <label for="loginEmail">
+        <label>
           Email
         </label>
 
         <input
-          type="email"
           id="loginEmail"
-          placeholder="Email address"
-          autocomplete="email"
+          type="email"
+          autocomplete="username"
+          required
         >
 
       </div>
@@ -1149,366 +995,171 @@
 
       <div class="form-group">
 
-        <label for="loginPassword">
+        <label>
           Password
         </label>
 
         <input
-          type="password"
           id="loginPassword"
-          placeholder="Password"
+          type="password"
           autocomplete="current-password"
+          required
         >
 
       </div>
 
 
       <button
-        class="login-submit"
-        onclick="login()"
+        type="submit"
+        class="btn btn-blue"
+        style="width:100%;"
       >
-        Sign In
+        Login
       </button>
 
-
-      <div id="loginMessage"></div>
-
-    </div>
-
-
-    <!-- SIGN UP -->
-
-    <div
-      id="signupForm"
-      class="auth-form"
-    >
-
-      <div class="form-group">
-
-        <label for="signupFirstName">
-          First Name *
-        </label>
-
-        <input
-          type="text"
-          id="signupFirstName"
-          placeholder="First name"
-          autocomplete="given-name"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="signupMiddleName">
-          Middle Name
-        </label>
-
-        <input
-          type="text"
-          id="signupMiddleName"
-          placeholder="Middle name (optional)"
-          autocomplete="additional-name"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="signupLastName">
-          Last Name *
-        </label>
-
-        <input
-          type="text"
-          id="signupLastName"
-          placeholder="Last name"
-          autocomplete="family-name"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="signupChurch">
-          Church / Branch *
-        </label>
-
-        <select id="signupChurch">
-
-          <option value="">
-            Loading churches...
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="signupEmail">
-          Email *
-        </label>
-
-        <input
-          type="email"
-          id="signupEmail"
-          placeholder="Email address"
-          autocomplete="email"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="signupPassword">
-          Password *
-        </label>
-
-        <input
-          type="password"
-          id="signupPassword"
-          placeholder="Create a password"
-          autocomplete="new-password"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="signupPasswordConfirm">
-          Confirm Password *
-        </label>
-
-        <input
-          type="password"
-          id="signupPasswordConfirm"
-          placeholder="Confirm password"
-          autocomplete="new-password"
-        >
-
-      </div>
-
-
-      <button
-        class="signup-submit"
-        onclick="signup()"
-      >
-        Create Account
-      </button>
-
-
-      <div id="signupMessage"></div>
-
-    </div>
-
-
-    <button
-      class="close"
-      onclick="closeAuth()"
-    >
-      Cancel
-    </button>
-
+    </form>
 
   </div>
 
 </div>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-     ===================================================== -->
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+  <h3>
+    Aim High For Jesus
+  </h3>
+
+  <p>
+    RICM Church Attendance Management System
+  </p>
+
+  <p>
+    One Body • One Mission • One Purpose
+  </p>
+
+</footer>
+
+
 
 <script>
 
-/* =====================================================
-   GLOBAL VARIABLES
-   ===================================================== */
+  /* =========================================================
+     GLOBAL VARIABLES
+  ========================================================= */
 
-let qrScanner = null;
-let qrEvents = [];
-let selectedEventKey = null;
-let processingScan = false;
-let currentMember = null;
-let currentProfile = null;
-
-
-/* =====================================================
-   SPECIAL SCANNER ROLES
-   ===================================================== */
-
-const SCANNER_ROLES = [
-  "super_admin",
-  "church_admin",
-  "scanner"
-];
+  let currentAdmin = null;
+  let currentAdminProfile = null;
+  let qrScanner = null;
+  let scannerRunning = false;
+  let currentQRValue = null;
 
 
-/* =====================================================
-   INITIALIZE APPLICATION
-   ===================================================== */
+  const SPECIAL_ROLES = [
+    "super_admin",
+    "church_admin",
+    "scanner"
+  ];
 
-function initializeApplication() {
 
-  if (
-    typeof initializeSupabase ===
-    "function"
-  ) {
 
-    initializeSupabase();
+  /* =========================================================
+     INITIALIZATION
+  ========================================================= */
 
-  }
+  document.addEventListener(
+    "DOMContentLoaded",
+    async function() {
 
-  if (!window.churchDB) {
+      console.log(
+        "Aim High For Jesus starting..."
+      );
 
-    console.error(
-      "Supabase was not initialized."
-    );
 
-    return false;
+      if (
+        typeof initializeSupabase !== "function"
+      ) {
 
-  }
+        console.error(
+          "initializeSupabase() was not found."
+        );
 
-  console.log(
-    "✅ Supabase connected."
+        return;
+
+      }
+
+
+      const connected =
+        initializeSupabase();
+
+
+      if (!connected) {
+
+        console.error(
+          "Supabase connection failed."
+        );
+
+        return;
+
+      }
+
+
+      await loadChurches();
+
+      await loadEvents();
+
+      await checkAdminSession();
+
+    }
   );
 
-  return true;
-}
 
 
-/* =====================================================
-   AUTH MODAL
-   ===================================================== */
+  /* =========================================================
+     SECTION NAVIGATION
+  ========================================================= */
 
-function openAuth(
-  tab = "login"
-) {
+  function scrollToSection(id) {
 
-  document
-    .getElementById("authModal")
-    .classList.add("show");
+    const element =
+      document.getElementById(id);
 
-  showAuthTab(tab);
+    if (element) {
 
-  loadChurches();
-}
+      element.scrollIntoView({
+        behavior: "smooth"
+      });
 
-
-function closeAuth() {
-
-  document
-    .getElementById("authModal")
-    .classList.remove("show");
-
-}
-
-
-/* =====================================================
-   AUTH TABS
-   ===================================================== */
-
-function showAuthTab(tab) {
-
-  const loginForm =
-    document.getElementById(
-      "loginForm"
-    );
-
-  const signupForm =
-    document.getElementById(
-      "signupForm"
-    );
-
-  const loginTab =
-    document.getElementById(
-      "loginTab"
-    );
-
-  const signupTab =
-    document.getElementById(
-      "signupTab"
-    );
-
-
-  if (tab === "signup") {
-
-    loginForm.classList.remove(
-      "active"
-    );
-
-    signupForm.classList.add(
-      "active"
-    );
-
-    loginTab.classList.remove(
-      "active"
-    );
-
-    signupTab.classList.add(
-      "active"
-    );
+    }
 
   }
 
-  else {
-
-    signupForm.classList.remove(
-      "active"
-    );
-
-    loginForm.classList.add(
-      "active"
-    );
-
-    signupTab.classList.remove(
-      "active"
-    );
-
-    loginTab.classList.add(
-      "active"
-    );
-
-  }
-
-}
 
 
-/* =====================================================
-   LOAD CHURCHES
-   ===================================================== */
+  /* =========================================================
+     LOAD CHURCHES
+  ========================================================= */
 
-async function loadChurches() {
+  async function loadChurches() {
 
-  const select =
-    document.getElementById(
-      "signupChurch"
-    );
-
-
-  if (!select) {
-    return;
-  }
+    const select =
+      document.getElementById(
+        "churchSelect"
+      );
 
 
-  if (!window.churchDB) {
+    if (!select) return;
+
 
     select.innerHTML =
-      '<option value="">Database not connected</option>';
+      `<option value="">
+        Select your church
+      </option>`;
 
-    return;
-
-  }
-
-
-  try {
 
     const {
       data,
@@ -1516,47 +1167,49 @@ async function loadChurches() {
     } =
       await window.churchDB
         .from("churches")
-        .select(`
-          id,
-          name,
-          branch_code
-        `)
+        .select(
+          "id,name,branch_code"
+        )
         .eq(
           "is_active",
           true
         )
         .order(
-          "name",
-          {
-            ascending: true
-          }
+          "name"
         );
 
 
     if (error) {
-      throw error;
-    }
 
-
-    if (
-      !data ||
-      data.length === 0
-    ) {
+      console.error(
+        "Church loading error:",
+        error
+      );
 
       select.innerHTML =
-        '<option value="">No churches available</option>';
+        `<option value="">
+          Unable to load churches
+        </option>`;
 
       return;
 
     }
 
 
-    select.innerHTML =
-      '<option value="">Select your church</option>';
+    if (!data || data.length === 0) {
+
+      select.innerHTML =
+        `<option value="">
+          No churches available
+        </option>`;
+
+      return;
+
+    }
 
 
     data.forEach(
-      function(church) {
+      church => {
 
         const option =
           document.createElement(
@@ -1567,14 +1220,9 @@ async function loadChurches() {
           church.id;
 
         option.textContent =
-          church.name +
-          (
-            church.branch_code
-              ? " (" +
-                church.branch_code +
-                ")"
-              : ""
-          );
+          church.branch_code
+            ? `${church.name} (${church.branch_code})`
+            : church.name;
 
         select.appendChild(
           option
@@ -1585,1448 +1233,27 @@ async function loadChurches() {
 
   }
 
-  catch (error) {
 
-    console.error(
-      "Church loading error:",
-      error
-    );
 
-    select.innerHTML =
-      '<option value="">Unable to load churches</option>';
+  /* =========================================================
+     LOAD EVENTS
+  ========================================================= */
 
-  }
+  async function loadEvents() {
 
-}
-
-
-/* =====================================================
-   SIGN UP
-   ===================================================== */
-
-async function signup() {
-
-  const firstName =
-    document.getElementById(
-      "signupFirstName"
-    )
-    .value
-    .trim();
-
-
-  const middleName =
-    document.getElementById(
-      "signupMiddleName"
-    )
-    .value
-    .trim();
-
-
-  const lastName =
-    document.getElementById(
-      "signupLastName"
-    )
-    .value
-    .trim();
-
-
-  const churchId =
-    document.getElementById(
-      "signupChurch"
-    )
-    .value;
-
-
-  const email =
-    document.getElementById(
-      "signupEmail"
-    )
-    .value
-    .trim();
-
-
-  const password =
-    document.getElementById(
-      "signupPassword"
-    )
-    .value;
-
-
-  const passwordConfirm =
-    document.getElementById(
-      "signupPasswordConfirm"
-    )
-    .value;
-
-
-  const message =
-    document.getElementById(
-      "signupMessage"
-    );
-
-
-  if (
-    !firstName ||
-    !lastName ||
-    !churchId ||
-    !email ||
-    !password
-  ) {
-
-    message.textContent =
-      "Please complete all required fields.";
-
-    message.style.color =
-      "#dc2626";
-
-    return;
-
-  }
-
-
-  if (
-    password.length < 6
-  ) {
-
-    message.textContent =
-      "Password must be at least 6 characters.";
-
-    message.style.color =
-      "#dc2626";
-
-    return;
-
-  }
-
-
-  if (
-    password !==
-    passwordConfirm
-  ) {
-
-    message.textContent =
-      "Passwords do not match.";
-
-    message.style.color =
-      "#dc2626";
-
-    return;
-
-  }
-
-
-  if (!window.churchDB) {
-
-    message.textContent =
-      "Database connection is not ready.";
-
-    message.style.color =
-      "#dc2626";
-
-    return;
-
-  }
-
-
-  message.textContent =
-    "Creating your account...";
-
-  message.style.color =
-    "#2563eb";
-
-
-  try {
-
-    const {
-      data,
-      error
-    } =
-      await window.churchDB
-        .auth
-        .signUp({
-
-          email:
-            email,
-
-          password:
-            password,
-
-          options: {
-
-            data: {
-
-              first_name:
-                firstName,
-
-              middle_name:
-                middleName,
-
-              last_name:
-                lastName,
-
-              church_id:
-                churchId
-
-            }
-
-          }
-
-        });
-
-
-    if (error) {
-      throw error;
-    }
-
-
-    /*
-      If email confirmation is disabled,
-      Supabase gives us a session immediately.
-    */
-
-    if (
-      data &&
-      data.session
-    ) {
-
-      await completeMemberRegistration();
-
-
-      message.textContent =
-        "Account created! Your QR code is ready.";
-
-      message.style.color =
-        "#16a34a";
-
-
-      await updateUserInterface();
-
-
-      setTimeout(
-        function() {
-          closeAuth();
-        },
-        1000
-      );
-
-    }
-
-    else {
-
-      message.innerHTML =
-        "Account created successfully!<br><br>" +
-        "Please check your email and confirm your account. " +
-        "Then sign in to receive your QR code.";
-
-      message.style.color =
-        "#16a34a";
-
-    }
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Signup error:",
-      error
-    );
-
-    message.textContent =
-      "Registration failed: " +
-      error.message;
-
-    message.style.color =
-      "#dc2626";
-
-  }
-
-}
-
-
-/* =====================================================
-   COMPLETE MEMBER REGISTRATION
-   ===================================================== */
-
-async function completeMemberRegistration() {
-
-  if (!window.churchDB) {
-
-    throw new Error(
-      "Database connection is not ready."
-    );
-
-  }
-
-
-  const {
-    data: userData,
-    error: userError
-  } =
-    await window.churchDB
-      .auth
-      .getUser();
-
-
-  if (
-    userError ||
-    !userData ||
-    !userData.user
-  ) {
-
-    throw new Error(
-      "You must be signed in."
-    );
-
-  }
-
-
-  const user =
-    userData.user;
-
-
-  const metadata =
-    user.user_metadata || {};
-
-
-  /*
-    Check if member already exists.
-  */
-
-  const {
-    data: existingMember,
-    error: existingError
-  } =
-    await window.churchDB
-      .from("members")
-      .select(`
-        id,
-        member_id,
-        user_id,
-        church_id,
-        first_name,
-        middle_name,
-        last_name,
-        membership_status,
-        qr_token
-      `)
-      .eq(
-        "user_id",
-        user.id
-      )
-      .maybeSingle();
-
-
-  if (existingError) {
-    throw existingError;
-  }
-
-
-  if (existingMember) {
-
-    currentMember =
-      existingMember;
-
-    return existingMember;
-
-  }
-
-
-  if (
-    !metadata.first_name ||
-    !metadata.last_name ||
-    !metadata.church_id
-  ) {
-
-    throw new Error(
-      "Registration information is incomplete."
-    );
-
-  }
-
-
-  /*
-    Supabase function created in SQL.
-  */
-
-  const {
-    data: newMember,
-    error: registerError
-  } =
-    await window.churchDB
-      .rpc(
-        "register_member",
-        {
-
-          p_first_name:
-            metadata.first_name,
-
-          p_middle_name:
-            metadata.middle_name ||
-            null,
-
-          p_last_name:
-            metadata.last_name,
-
-          p_church_id:
-            metadata.church_id
-
-        }
-      );
-
-
-  if (registerError) {
-    throw registerError;
-  }
-
-
-  currentMember =
-    newMember;
-
-
-  return newMember;
-
-}
-
-
-/* =====================================================
-   LOGIN
-   ===================================================== */
-
-async function login() {
-
-  const email =
-    document.getElementById(
-      "loginEmail"
-    )
-    .value
-    .trim();
-
-
-  const password =
-    document.getElementById(
-      "loginPassword"
-    )
-    .value;
-
-
-  const message =
-    document.getElementById(
-      "loginMessage"
-    );
-
-
-  if (
-    !email ||
-    !password
-  ) {
-
-    message.textContent =
-      "Please enter your email and password.";
-
-    message.style.color =
-      "#dc2626";
-
-    return;
-
-  }
-
-
-  if (!window.churchDB) {
-
-    message.textContent =
-      "Database connection is not ready.";
-
-    message.style.color =
-      "#dc2626";
-
-    return;
-
-  }
-
-
-  message.textContent =
-    "Signing in...";
-
-  message.style.color =
-    "#2563eb";
-
-
-  try {
-
-    const {
-      data,
-      error
-    } =
-      await window.churchDB
-        .auth
-        .signInWithPassword({
-
-          email:
-            email,
-
-          password:
-            password
-
-        });
-
-
-    if (error) {
-      throw error;
-    }
-
-
-    /*
-      Finish member registration if necessary.
-    */
-
-    try {
-
-      await completeMemberRegistration();
-
-    }
-
-    catch (registrationError) {
-
-      console.warn(
-        "Member registration:",
-        registrationError.message
-      );
-
-    }
-
-
-    message.textContent =
-      "Login successful!";
-
-    message.style.color =
-      "#16a34a";
-
-
-    await updateUserInterface();
-
-
-    await checkScannerAccess();
-
-
-    setTimeout(
-      function() {
-        closeAuth();
-      },
-      800
-    );
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Login error:",
-      error
-    );
-
-    message.textContent =
-      "Login failed: " +
-      error.message;
-
-    message.style.color =
-      "#dc2626";
-
-  }
-
-}
-
-
-/* =====================================================
-   LOGOUT
-   ===================================================== */
-
-async function logout() {
-
-  if (!window.churchDB) {
-    return;
-  }
-
-
-  try {
-
-    await stopQRScanner();
-
-
-    const {
-      error
-    } =
-      await window.churchDB
-        .auth
-        .signOut();
-
-
-    if (error) {
-      throw error;
-    }
-
-
-    currentMember =
-      null;
-
-    currentProfile =
-      null;
-
-
-    document.getElementById(
-      "member-portal"
-    ).style.display =
-      "none";
-
-
-    document.getElementById(
-      "qr-attendance"
-    ).style.display =
-      "none";
-
-
-    const button =
+    const loading =
       document.getElementById(
-        "headerAuthButton"
+        "eventsLoading"
       );
 
-
-    button.textContent =
-      "Sign In";
-
-
-    button.className =
-      "signin";
-
-
-    button.onclick =
-      function() {
-        openAuth("login");
-      };
-
-
-    window.scrollTo(
-      {
-        top: 0,
-        behavior: "smooth"
-      }
-    );
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Logout error:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   GET CURRENT PROFILE
-   ===================================================== */
-
-async function getCurrentProfile() {
-
-  if (!window.churchDB) {
-    return null;
-  }
-
-
-  const {
-    data: userData,
-    error: userError
-  } =
-    await window.churchDB
-      .auth
-      .getUser();
-
-
-  if (
-    userError ||
-    !userData ||
-    !userData.user
-  ) {
-
-    return null;
-
-  }
-
-
-  const {
-    data: profile,
-    error: profileError
-  } =
-    await window.churchDB
-      .from("profiles")
-      .select(`
-        id,
-        role,
-        is_active,
-        church_id
-      `)
-      .eq(
-        "id",
-        userData.user.id
-      )
-      .maybeSingle();
-
-
-  if (profileError) {
-
-    console.error(
-      "Profile error:",
-      profileError
-    );
-
-    return null;
-
-  }
-
-
-  currentProfile =
-    profile;
-
-
-  return profile;
-
-}
-
-
-/* =====================================================
-   CHECK SPECIAL SCANNER ACCESS
-   ===================================================== */
-
-async function checkScannerAccess() {
-
-  const scannerSection =
-    document.getElementById(
-      "qr-attendance"
-    );
-
-
-  if (!scannerSection) {
-    return false;
-  }
-
-
-  /*
-    Always hide scanner first.
-  */
-
-  scannerSection.style.display =
-    "none";
-
-
-  if (!window.churchDB) {
-    return false;
-  }
-
-
-  try {
-
-    const profile =
-      await getCurrentProfile();
-
-
-    if (!profile) {
-
-      console.log(
-        "Scanner: no profile."
-      );
-
-      return false;
-
-    }
-
-
-    const role =
-      String(
-        profile.role ||
-        ""
-      ).toLowerCase();
-
-
-    const allowed =
-      profile.is_active === true &&
-      SCANNER_ROLES.includes(
-        role
-      );
-
-
-    if (!allowed) {
-
-      console.log(
-        "Scanner access denied. Role:",
-        role
-      );
-
-      return false;
-
-    }
-
-
-    /*
-      Special-access user.
-    */
-
-    scannerSection.style.display =
-      "block";
-
-
-    console.log(
-      "✅ Scanner access granted:",
-      role
-    );
-
-
-    return true;
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Scanner access check error:",
-      error
-    );
-
-    return false;
-
-  }
-
-}
-
-
-/* =====================================================
-   UPDATE USER INTERFACE
-   ===================================================== */
-
-async function updateUserInterface() {
-
-  if (!window.churchDB) {
-    return;
-  }
-
-
-  try {
-
-    const {
-      data,
-      error
-    } =
-      await window.churchDB
-        .auth
-        .getUser();
-
-
-    if (
-      error ||
-      !data ||
-      !data.user
-    ) {
-
-      return;
-
-    }
-
-
-    const button =
+    const grid =
       document.getElementById(
-        "headerAuthButton"
+        "eventsGrid"
       );
 
 
-    button.textContent =
-      "Sign Out";
+    if (!grid) return;
 
-
-    button.className =
-      "signout-btn";
-
-
-    button.onclick =
-      function() {
-        logout();
-      };
-
-
-    /*
-      Find member.
-    */
-
-    const {
-      data: member,
-      error: memberError
-    } =
-      await window.churchDB
-        .from("members")
-        .select(`
-          id,
-          member_id,
-          user_id,
-          church_id,
-          first_name,
-          middle_name,
-          last_name,
-          membership_status,
-          qr_token
-        `)
-        .eq(
-          "user_id",
-          data.user.id
-        )
-        .maybeSingle();
-
-
-    if (memberError) {
-
-      console.warn(
-        "Member profile:",
-        memberError.message
-      );
-
-    }
-
-
-    if (member) {
-
-      currentMember =
-        member;
-
-
-      await showMemberPortal(
-        member
-      );
-
-    }
-
-
-    /*
-      Check scanner permission separately.
-    */
-
-    await checkScannerAccess();
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "UI update error:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   SHOW MEMBER PORTAL
-   ===================================================== */
-
-async function showMemberPortal(
-  member
-) {
-
-  const portal =
-    document.getElementById(
-      "member-portal"
-    );
-
-
-  portal.style.display =
-    "block";
-
-
-  const profile =
-    document.getElementById(
-      "memberProfile"
-    );
-
-
-  let churchName =
-    "Church";
-
-
-  try {
-
-    const {
-      data: church
-    } =
-      await window.churchDB
-        .from("churches")
-        .select(
-          "name, branch_code"
-        )
-        .eq(
-          "id",
-          member.church_id
-        )
-        .maybeSingle();
-
-
-    if (church) {
-
-      churchName =
-        church.name +
-        (
-          church.branch_code
-            ? " (" +
-              church.branch_code +
-              ")"
-            : ""
-        );
-
-    }
-
-  }
-
-  catch (error) {
-
-    console.warn(
-      error
-    );
-
-  }
-
-
-  profile.innerHTML = `
-
-    <div class="member-name">
-
-      ${escapeHtml(
-        member.first_name +
-        " " +
-        (
-          member.middle_name
-            ? member.middle_name +
-              " "
-            : ""
-        ) +
-        member.last_name
-      )}
-
-    </div>
-
-
-    <div class="member-church">
-
-      ${escapeHtml(
-        churchName
-      )}
-
-    </div>
-
-
-    <div class="member-id">
-
-      Member ID:
-      ${escapeHtml(
-        member.member_id ||
-        "Assigned by system"
-      )}
-
-    </div>
-
-
-    <div
-      class="member-id"
-      style="margin-top:8px;"
-    >
-
-      Status:
-      ${escapeHtml(
-        member.membership_status ||
-        "Active"
-      )}
-
-    </div>
-
-  `;
-
-
-  generateMemberQR(
-    member
-  );
-
-
-  await loadMyAttendance(
-    member.id
-  );
-
-}
-
-
-/* =====================================================
-   GENERATE MEMBER QR
-   ===================================================== */
-
-function generateMemberQR(
-  member
-) {
-
-  const container =
-    document.getElementById(
-      "memberQr"
-    );
-
-
-  container.innerHTML =
-    "";
-
-
-  if (
-    !member ||
-    !member.qr_token
-  ) {
-
-    container.innerHTML =
-      "<p style='color:#dc2626;'>" +
-      "QR code is not available." +
-      "</p>";
-
-    return;
-
-  }
-
-
-  new QRCode(
-    container,
-    {
-
-      text:
-        member.qr_token,
-
-      width:
-        240,
-
-      height:
-        240,
-
-      correctLevel:
-        QRCode.CorrectLevel.H
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   DOWNLOAD QR
-   ===================================================== */
-
-function downloadMemberQR() {
-
-  const container =
-    document.getElementById(
-      "memberQr"
-    );
-
-
-  if (!container) {
-    return;
-  }
-
-
-  const canvas =
-    container.querySelector(
-      "canvas"
-    );
-
-
-  const image =
-    container.querySelector(
-      "img"
-    );
-
-
-  let dataURL =
-    null;
-
-
-  if (canvas) {
-
-    dataURL =
-      canvas.toDataURL(
-        "image/png"
-      );
-
-  }
-
-  else if (image) {
-
-    dataURL =
-      image.src;
-
-  }
-
-
-  if (!dataURL) {
-
-    alert(
-      "QR code is not ready yet."
-    );
-
-    return;
-
-  }
-
-
-  const link =
-    document.createElement(
-      "a"
-    );
-
-
-  link.href =
-    dataURL;
-
-
-  link.download =
-    "aim-high-for-jesus-qr.png";
-
-
-  document.body.appendChild(
-    link
-  );
-
-
-  link.click();
-
-
-  document.body.removeChild(
-    link
-  );
-
-}
-
-
-/* =====================================================
-   LOAD MY ATTENDANCE
-   ===================================================== */
-
-async function loadMyAttendance(
-  memberId
-) {
-
-  const container =
-    document.getElementById(
-      "myAttendance"
-    );
-
-
-  if (!container) {
-    return;
-  }
-
-
-  try {
-
-    const {
-      data,
-      error
-    } =
-      await window.churchDB
-        .from("attendance")
-        .select(`
-          id,
-          attendance_time,
-          event_id
-        `)
-        .eq(
-          "member_id",
-          memberId
-        )
-        .order(
-          "attendance_time",
-          {
-            ascending: false
-          }
-        )
-        .limit(20);
-
-
-    if (error) {
-      throw error;
-    }
-
-
-    if (
-      !data ||
-      data.length === 0
-    ) {
-
-      container.innerHTML =
-        "<p class='portal-muted'>" +
-        "No attendance records yet." +
-        "</p>";
-
-      return;
-
-    }
-
-
-    const eventIds =
-      data
-        .map(
-          function(row) {
-            return row.event_id;
-          }
-        )
-        .filter(Boolean);
-
-
-    let eventMap = {};
-
-
-    if (
-      eventIds.length > 0
-    ) {
-
-      const {
-        data: events
-      } =
-        await window.churchDB
-          .from("events")
-          .select(
-            "id, name, event_date"
-          )
-          .in(
-            "id",
-            eventIds
-          );
-
-
-      if (events) {
-
-        events.forEach(
-          function(event) {
-
-            eventMap[
-              event.id
-            ] =
-              event;
-
-          }
-        );
-
-      }
-
-    }
-
-
-    container.innerHTML =
-
-      data
-        .map(
-          function(row) {
-
-            const event =
-              eventMap[
-                row.event_id
-              ];
-
-
-            const date =
-              new Date(
-                row.attendance_time
-              );
-
-
-            return `
-
-              <div class="attendance-item">
-
-                <div class="attendance-event">
-
-                  ${escapeHtml(
-                    event
-                      ? event.name
-                      : "Church Event"
-                  )}
-
-                </div>
-
-
-                <div class="attendance-date">
-
-                  ${date.toLocaleString(
-                    "en-US",
-                    {
-                      dateStyle:
-                        "medium",
-                      timeStyle:
-                        "short"
-                    }
-                  )}
-
-                </div>
-
-              </div>
-
-            `;
-
-          }
-        )
-        .join("");
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Attendance loading error:",
-      error
-    );
-
-
-    container.innerHTML =
-      "<p style='color:#dc2626;'>" +
-      "Unable to load attendance." +
-      "</p>";
-
-  }
-
-}
-
-
-/* =====================================================
-   LOAD UPCOMING EVENTS
-   ===================================================== */
-
-async function loadEvents() {
-
-  const eventsList =
-    document.getElementById(
-      "events-list"
-    );
-
-
-  if (!eventsList) {
-    return;
-  }
-
-
-  if (!window.churchDB) {
-
-    eventsList.innerHTML =
-      "<p style='color:#dc2626;'>" +
-      "Database connection not initialized." +
-      "</p>";
-
-    return;
-
-  }
-
-
-  try {
 
     const {
       data,
@@ -3036,14 +1263,14 @@ async function loadEvents() {
         .from("events")
         .select(`
           id,
+          church_id,
           name,
           event_type,
           description,
           event_date,
           start_time,
           end_time,
-          status,
-          church_id
+          status
         `)
         .gte(
           "event_date",
@@ -3063,20 +1290,47 @@ async function loadEvents() {
         );
 
 
-    if (error) {
-      throw error;
+    if (loading) {
+
+      loading.style.display =
+        "none";
+
     }
 
 
-    if (
-      !data ||
-      data.length === 0
-    ) {
+    if (error) {
 
-      eventsList.innerHTML =
-        "<p style='color:var(--muted);'>" +
-        "No upcoming events." +
-        "</p>";
+      console.error(
+        "Events error:",
+        error
+      );
+
+      grid.innerHTML =
+        `<div class="event-card">
+          <strong>
+            Unable to load events.
+          </strong>
+          <p>
+            Please refresh the page.
+          </p>
+        </div>`;
+
+      return;
+
+    }
+
+
+    if (!data || data.length === 0) {
+
+      grid.innerHTML =
+        `<div class="event-card">
+          <strong>
+            No upcoming events.
+          </strong>
+          <p>
+            Check back later.
+          </p>
+        </div>`;
 
       return;
 
@@ -3084,71 +1338,59 @@ async function loadEvents() {
 
 
     /*
-      GROUP EVENTS BY NAME + DATE
+      The database has one event row per church
+      for body-wide events.
+
+      We group them so the website displays
+      the anniversary only once.
     */
 
-    const grouped =
-      {};
+    const grouped = {};
 
 
     data.forEach(
-      function(event) {
+      event => {
 
         const key =
-          event.name +
-          "|" +
-          event.event_date;
-
+          `${event.name}|${event.event_date}`;
 
         if (!grouped[key]) {
 
           grouped[key] = {
-
             ...event,
-
-            churchCount:
-              0
-
+            churchCount: 1
           };
 
+        } else {
+
+          grouped[key]
+            .churchCount++;
+
         }
-
-
-        grouped[key].churchCount++;
 
       }
     );
 
 
-    eventsList.innerHTML =
+    grid.innerHTML = "";
 
-      Object.values(
-        grouped
-      )
 
-      .map(
-        function(event) {
+    Object.values(grouped)
+      .forEach(
+        event => {
 
-          const date =
-            new Date(
-              event.event_date +
-              "T00:00:00"
+          const card =
+            document.createElement(
+              "div"
             );
 
+          card.className =
+            "event-card";
 
-          const formattedDate =
-            date.toLocaleDateString(
-              "en-US",
-              {
-                weekday:
-                  "long",
-                month:
-                  "long",
-                day:
-                  "numeric",
-                year:
-                  "numeric"
-              }
+
+          const date =
+            formatDate(
+              event.event_date
             );
 
 
@@ -3160,169 +1402,907 @@ async function loadEvents() {
               : "Time to be announced";
 
 
-          return `
+          let churchText =
+            "Church event";
 
-            <div class="event-card">
+
+          if (
+            event.churchCount > 1
+          ) {
+
+            churchText =
+              "All RICM Churches — One Body";
+
+          }
 
 
-              <div class="aim-event-banner">
+          card.innerHTML = `
 
-                🎯 AIM HIGH FOR JESUS
+            <span class="event-badge">
+              ${escapeHTML(
+                event.event_type ||
+                "Event"
+              )}
+            </span>
 
+            <h3>
+              ${escapeHTML(
+                event.name
+              )}
+            </h3>
+
+            <div class="event-info">
+
+              <div>
+                📅 ${date}
               </div>
 
-
-              <div class="event-header">
-
-
-                <div>
-
-
-                  <div class="event-label">
-
-                    📅 Ministry Event
-
-                  </div>
-
-
-                  <h3 class="event-name">
-
-                    ${escapeHtml(
-                      event.name
-                    )}
-
-                  </h3>
-
-
-                  <p class="event-info">
-
-                    📍 All RICM Churches
-
-                  </p>
-
-
-                  <p class="event-info">
-
-                    🗓️ ${formattedDate}
-
-                  </p>
-
-
-                  <p class="event-info">
-
-                    🕐 ${escapeHtml(
-                      time
-                    )}
-
-                  </p>
-
-
-                </div>
-
-
-                <div class="event-status">
-
-                  ${escapeHtml(
-                    event.status ||
-                    ""
-                  ).toUpperCase()}
-
-                </div>
-
-
+              <div>
+                🕐 ${escapeHTML(time)}
               </div>
 
-
-              <div class="event-details">
-
-
-                <p class="event-description">
-
-                  ${escapeHtml(
-                    event.description ||
-                    "A united RICM celebration for all churches."
-                  )}
-
-                </p>
-
-
-                <p class="church-title">
-
-                  Participating Churches:
-
-                </p>
-
-
-                <p class="church-list">
-
-                  All RICM Churches —
-                  R1 • R2 • R3 • R5 • RH • RA • R7
-
-                </p>
-
-
+              <div>
+                ⛪ ${escapeHTML(
+                  churchText
+                )}
               </div>
 
+              ${
+                event.description
+                  ? `<div>
+                      ℹ️ ${escapeHTML(
+                        event.description
+                      )}
+                    </div>`
+                  : ""
+              }
 
             </div>
 
           `;
 
+
+          grid.appendChild(
+            card
+          );
+
         }
+      );
+
+  }
+
+
+
+  /* =========================================================
+     MEMBER REGISTRATION
+  ========================================================= */
+
+  document
+    .getElementById(
+      "registrationForm"
+    )
+    .addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        hideRegistrationMessages();
+
+
+        const firstName =
+          document
+            .getElementById(
+              "firstName"
+            )
+            .value
+            .trim();
+
+
+        const lastName =
+          document
+            .getElementById(
+              "lastName"
+            )
+            .value
+            .trim();
+
+
+        const churchId =
+          document
+            .getElementById(
+              "churchSelect"
+            )
+            .value;
+
+
+        if (!firstName) {
+
+          showRegistrationError(
+            "Please enter your first name."
+          );
+
+          return;
+
+        }
+
+
+        if (!lastName) {
+
+          showRegistrationError(
+            "Please enter your last name."
+          );
+
+          return;
+
+        }
+
+
+        if (!churchId) {
+
+          showRegistrationError(
+            "Please select your church."
+          );
+
+          return;
+
+        }
+
+
+        const button =
+          document.getElementById(
+            "registerButton"
+          );
+
+
+        button.disabled = true;
+
+        button.textContent =
+          "Creating your QR...";
+
+
+        try {
+
+          const {
+            data,
+            error
+          } =
+            await window.churchDB
+              .rpc(
+                "register_member",
+                {
+                  p_first_name:
+                    firstName,
+
+                  p_last_name:
+                    lastName,
+
+                  p_church_id:
+                    churchId
+                }
+              );
+
+
+          if (error) {
+
+            console.error(
+              "Registration error:",
+              error
+            );
+
+            throw error;
+
+          }
+
+
+          if (
+            !data ||
+            data.length === 0
+          ) {
+
+            throw new Error(
+              "Registration did not return a member record."
+            );
+
+          }
+
+
+          const member =
+            data[0];
+
+
+          displayMemberQR(
+            member
+          );
+
+
+          showRegistrationSuccess(
+            "Your QR code has been created successfully."
+          );
+
+
+          document
+            .getElementById(
+              "qrResult"
+            )
+            .scrollIntoView({
+              behavior: "smooth",
+              block: "center"
+            });
+
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+
+          showRegistrationError(
+            error.message ||
+            "Unable to create your QR code."
+          );
+
+        } finally {
+
+          button.disabled = false;
+
+          button.textContent =
+            "Generate My QR Code";
+
+        }
+
+      }
+    );
+
+
+
+  /* =========================================================
+     DISPLAY MEMBER QR
+  ========================================================= */
+
+  function displayMemberQR(
+    member
+  ) {
+
+    const qrContainer =
+      document.getElementById(
+        "qrcode"
+      );
+
+
+    qrContainer.innerHTML = "";
+
+
+    /*
+      Use the unique UUID QR token
+      as the actual QR value.
+    */
+
+    currentQRValue =
+      member.qr_token;
+
+
+    new QRCode(
+      qrContainer,
+      {
+        text:
+          member.qr_token,
+
+        width: 230,
+
+        height: 230,
+
+        correctLevel:
+          QRCode.CorrectLevel.H
+      }
+    );
+
+
+    document
+      .getElementById(
+        "memberCode"
       )
-      .join("");
+      .textContent =
+        member.member_id;
+
+
+    document
+      .getElementById(
+        "registeredName"
+      )
+      .textContent =
+        `${member.first_name} ${member.last_name}`;
+
+
+    document
+      .getElementById(
+        "registeredChurch"
+      )
+      .textContent =
+        member.church_name;
+
+
+    document
+      .getElementById(
+        "qrResult"
+      )
+      .style.display =
+        "block";
 
   }
 
-  catch (error) {
 
-    console.error(
-      "Events loading error:",
+
+  /* =========================================================
+     DOWNLOAD QR
+  ========================================================= */
+
+  function downloadQR() {
+
+    const qrContainer =
+      document.getElementById(
+        "qrcode"
+      );
+
+
+    const image =
+      qrContainer.querySelector(
+        "img"
+      );
+
+
+    if (!image) {
+
+      alert(
+        "QR code is not ready yet."
+      );
+
+      return;
+
+    }
+
+
+    const link =
+      document.createElement(
+        "a"
+      );
+
+
+    link.href =
+      image.src;
+
+
+    link.download =
+      "Aim-High-For-Jesus-QR.png";
+
+
+    document
+      .body
+      .appendChild(
+        link
+      );
+
+
+    link.click();
+
+
+    link.remove();
+
+  }
+
+
+
+  /* =========================================================
+     PRINT QR
+  ========================================================= */
+
+  function printQR() {
+
+    const qr =
+      document.getElementById(
+        "qrcode"
+      )
+      .innerHTML;
+
+
+    const code =
+      document.getElementById(
+        "memberCode"
+      )
+      .textContent;
+
+
+    const name =
+      document.getElementById(
+        "registeredName"
+      )
+      .textContent;
+
+
+    const church =
+      document.getElementById(
+        "registeredChurch"
+      )
+      .textContent;
+
+
+    const printWindow =
+      window.open(
+        "",
+        "_blank"
+      );
+
+
+    printWindow.document.write(`
+
+      <html>
+
+      <head>
+
+        <title>
+          Aim High For Jesus QR
+        </title>
+
+        <style>
+
+          body {
+            text-align:center;
+            font-family:Arial;
+            padding:40px;
+          }
+
+          img {
+            margin:20px;
+          }
+
+          h1 {
+            font-size:28px;
+          }
+
+        </style>
+
+      </head>
+
+      <body>
+
+        <h1>
+          Aim High For Jesus
+        </h1>
+
+        <h2>
+          Church Attendance QR
+        </h2>
+
+        ${qr}
+
+        <h3>
+          ${escapeHTML(name)}
+        </h3>
+
+        <p>
+          ${escapeHTML(church)}
+        </p>
+
+        <strong>
+          ${escapeHTML(code)}
+        </strong>
+
+      </body>
+
+      </html>
+
+    `);
+
+
+    printWindow.document.close();
+
+    printWindow.focus();
+
+    printWindow.print();
+
+  }
+
+
+
+  /* =========================================================
+     LOGIN
+  ========================================================= */
+
+  function openLogin() {
+
+    document
+      .getElementById(
+        "loginModal"
+      )
+      .style.display =
+        "block";
+
+  }
+
+
+  function closeLogin() {
+
+    document
+      .getElementById(
+        "loginModal"
+      )
+      .style.display =
+        "none";
+
+  }
+
+
+
+  /* =========================================================
+     ADMIN LOGIN
+  ========================================================= */
+
+  document
+    .getElementById(
+      "loginForm"
+    )
+    .addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        const email =
+          document
+            .getElementById(
+              "loginEmail"
+            )
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById(
+              "loginPassword"
+            )
+            .value;
+
+
+        hideLoginError();
+
+
+        try {
+
+          const {
+            data,
+            error
+          } =
+            await window.churchDB
+              .auth
+              .signInWithPassword({
+                email,
+                password
+              });
+
+
+          if (error) {
+
+            throw error;
+
+          }
+
+
+          if (!data.user) {
+
+            throw new Error(
+              "Login failed."
+            );
+
+          }
+
+
+          const allowed =
+            await checkAdminAccess(
+              data.user
+            );
+
+
+          if (!allowed) {
+
+            await window.churchDB
+              .auth
+              .signOut();
+
+
+            throw new Error(
+              "Your account does not have scanner/admin access."
+            );
+
+          }
+
+
+          closeLogin();
+
+          showAdminSection();
+
+          await loadAdminEvents();
+
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+
+          showLoginError(
+            error.message ||
+            "Login failed."
+          );
+
+        }
+
+      }
+    );
+
+
+
+  /* =========================================================
+     CHECK CURRENT ADMIN SESSION
+  ========================================================= */
+
+  async function checkAdminSession() {
+
+    const {
+      data
+    } =
+      await window.churchDB
+        .auth
+        .getSession();
+
+
+    if (
+      !data ||
+      !data.session
+    ) {
+
+      return;
+
+    }
+
+
+    const user =
+      data.session.user;
+
+
+    const allowed =
+      await checkAdminAccess(
+        user
+      );
+
+
+    if (allowed) {
+
+      showAdminSection();
+
+      await loadAdminEvents();
+
+    } else {
+
+      await window.churchDB
+        .auth
+        .signOut();
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     CHECK ADMIN ROLE
+  ========================================================= */
+
+  async function checkAdminAccess(
+    user
+  ) {
+
+    if (!user) {
+
+      return false;
+
+    }
+
+
+    const {
+      data,
       error
-    );
+    } =
+      await window.churchDB
+        .from("profiles")
+        .select(
+          "id,email,role,is_active,church_id"
+        )
+        .eq(
+          "id",
+          user.id
+        )
+        .maybeSingle();
 
 
-    eventsList.innerHTML =
-      "<p style='color:#dc2626;'>" +
-      "Unable to load events: " +
-      escapeHtml(
-        error.message
-      ) +
-      "</p>";
+    if (error) {
+
+      console.error(
+        "Profile error:",
+        error
+      );
+
+      return false;
+
+    }
+
+
+    if (!data) {
+
+      return false;
+
+    }
+
+
+    const role =
+      String(
+        data.role || ""
+      )
+      .toLowerCase();
+
+
+    const allowed =
+      data.is_active === true &&
+      SPECIAL_ROLES.includes(
+        role
+      );
+
+
+    if (allowed) {
+
+      currentAdmin =
+        user;
+
+      currentAdminProfile =
+        data;
+
+    }
+
+
+    return allowed;
 
   }
 
-}
 
 
-/* =====================================================
-   LOAD QR EVENTS
-   ===================================================== */
+  /* =========================================================
+     SHOW ADMIN
+  ========================================================= */
 
-async function loadQREvents() {
+  function showAdminSection() {
 
-  const select =
-    document.getElementById(
-      "qrEventSelect"
-    );
+    const section =
+      document.getElementById(
+        "adminSection"
+      );
 
 
-  if (!select) {
-    return;
+    section.style.display =
+      "block";
+
+
+    document
+      .getElementById(
+        "loginButton"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "logoutButton"
+      )
+      .style.display =
+        "inline-block";
+
+
+    const status =
+      document.getElementById(
+        "adminStatus"
+      );
+
+
+    status.textContent =
+      `Authorized access: ${currentAdminProfile.role}`;
+
+    status.style.background =
+      "#dcfce7";
+
+    status.style.color =
+      "#166534";
+
+
+    section.scrollIntoView({
+      behavior: "smooth"
+    });
+
   }
 
 
-  if (!window.churchDB) {
+
+  /* =========================================================
+     LOGOUT
+  ========================================================= */
+
+  async function logoutAdmin() {
+
+    stopScanner();
+
+
+    await window.churchDB
+      .auth
+      .signOut();
+
+
+    currentAdmin = null;
+
+    currentAdminProfile = null;
+
+
+    document
+      .getElementById(
+        "adminSection"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "loginButton"
+      )
+      .style.display =
+        "inline-block";
+
+
+    document
+      .getElementById(
+        "logoutButton"
+      )
+      .style.display =
+        "none";
+
+
+    alert(
+      "You have been logged out."
+    );
+
+  }
+
+
+
+  /* =========================================================
+     LOAD EVENTS FOR SCANNER
+  ========================================================= */
+
+  async function loadAdminEvents() {
+
+    const select =
+      document.getElementById(
+        "eventSelect"
+      );
+
 
     select.innerHTML =
-      '<option value="">Database not connected</option>';
+      `<option value="">
+        Select an event
+      </option>`;
 
-    return;
-
-  }
-
-
-  try {
 
     const {
       data,
@@ -3330,17 +2310,9 @@ async function loadQREvents() {
     } =
       await window.churchDB
         .from("events")
-        .select(`
-          id,
-          name,
-          event_type,
-          description,
-          event_date,
-          start_time,
-          end_time,
-          status,
-          church_id
-        `)
+        .select(
+          "id,name,event_date,start_time,status,church_id"
+        )
         .gte(
           "event_date",
           new Date()
@@ -3360,62 +2332,38 @@ async function loadQREvents() {
 
 
     if (error) {
-      throw error;
-    }
 
-
-    qrEvents =
-      data || [];
-
-
-    if (
-      qrEvents.length === 0
-    ) {
-
-      select.innerHTML =
-        '<option value="">No upcoming events</option>';
+      console.error(
+        "Admin event error:",
+        error
+      );
 
       return;
 
     }
 
 
-    const groups =
-      {};
+    const seen =
+      new Set();
 
 
-    qrEvents.forEach(
-      function(event) {
+    data.forEach(
+      event => {
 
         const key =
-          event.name +
-          "|" +
-          event.event_date;
+          `${event.name}|${event.event_date}`;
 
 
-        if (!groups[key]) {
+        if (
+          seen.has(key)
+        ) {
 
-          groups[key] =
-            event;
+          return;
 
         }
 
-      }
-    );
 
-
-    select.innerHTML =
-      '<option value="">Select an event</option>';
-
-
-    Object.keys(
-      groups
-    )
-    .forEach(
-      function(key) {
-
-        const event =
-          groups[key];
+        seen.add(key);
 
 
         const option =
@@ -3425,32 +2373,13 @@ async function loadQREvents() {
 
 
         option.value =
-          key;
+          event.id;
 
 
         option.textContent =
-
-          "🎯 AIM HIGH FOR JESUS — " +
-
-          event.name +
-
-          " — " +
-
-          new Date(
-            event.event_date +
-            "T00:00:00"
-          )
-          .toLocaleDateString(
-            "en-US",
-            {
-              month:
-                "short",
-              day:
-                "numeric",
-              year:
-                "numeric"
-            }
-          );
+          `${event.name} — ${formatDate(
+            event.event_date
+          )}`;
 
 
         select.appendChild(
@@ -3462,341 +2391,21 @@ async function loadQREvents() {
 
   }
 
-  catch (error) {
 
-    console.error(
-      "QR events error:",
-      error
-    );
 
+  /* =========================================================
+     START QR SCANNER
+  ========================================================= */
 
-    select.innerHTML =
-      '<option value="">Unable to load events</option>';
-
-  }
-
-}
-
-
-/* =====================================================
-   EVENT SELECTION
-   ===================================================== */
-
-function setupEventSelection() {
-
-  const select =
-    document.getElementById(
-      "qrEventSelect"
-    );
-
-
-  if (!select) {
-    return;
-  }
-
-
-  select.addEventListener(
-    "change",
-    function() {
-
-      selectedEventKey =
-        this.value ||
-        null;
-
-
-      const result =
-        document.getElementById(
-          "qr-result"
-        );
-
-
-      if (!result) {
-        return;
-      }
-
-
-      if (
-        selectedEventKey
-      ) {
-
-        result.textContent =
-          "Event selected. Start the scanner.";
-
-        result.style.color =
-          "#2563eb";
-
-      }
-
-      else {
-
-        result.textContent =
-          "Please select an event.";
-
-        result.style.color =
-          "#64748b";
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   START QR SCANNER
-   ===================================================== */
-
-async function startQRScanner() {
-
-  const result =
-    document.getElementById(
-      "qr-result"
-    );
-
-
-  if (!result) {
-    return;
-  }
-
-
-  /*
-    SECURITY CHECK
-  */
-
-  const hasAccess =
-    await checkScannerAccess();
-
-
-  if (!hasAccess) {
-
-    result.textContent =
-      "❌ You do not have scanner access.";
-
-    result.style.color =
-      "#dc2626";
-
-    return;
-
-  }
-
-
-  if (!selectedEventKey) {
-
-    result.textContent =
-      "Please select an event first.";
-
-    result.style.color =
-      "#dc2626";
-
-    return;
-
-  }
-
-
-  if (qrScanner) {
-
-    result.textContent =
-      "Scanner is already running.";
-
-    return;
-
-  }
-
-
-  if (
-    typeof Html5Qrcode ===
-    "undefined"
-  ) {
-
-    result.textContent =
-      "QR scanner library failed to load.";
-
-    result.style.color =
-      "#dc2626";
-
-    return;
-
-  }
-
-
-  try {
-
-    qrScanner =
-      new Html5Qrcode(
-        "qr-reader"
-      );
-
-
-    await qrScanner.start(
-
-      {
-        facingMode:
-          "environment"
-      },
-
-      {
-        fps:
-          10,
-
-        qrbox: {
-          width:
-            250,
-
-          height:
-            250
-        }
-
-      },
-
-      handleQRScan,
-
-      function() {
-        /* Ignore normal scanner errors. */
-      }
-
-    );
-
-
-    result.textContent =
-      "Camera active. Point it at the member's QR code.";
-
-    result.style.color =
-      "#2563eb";
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Scanner error:",
-      error
-    );
-
-
-    qrScanner =
-      null;
-
-
-    result.textContent =
-      "Unable to start camera. Please allow camera access.";
-
-    result.style.color =
-      "#dc2626";
-
-  }
-
-}
-
-
-/* =====================================================
-   STOP QR SCANNER
-   ===================================================== */
-
-async function stopQRScanner() {
-
-  if (!qrScanner) {
-    return;
-  }
-
-
-  try {
-
-    await qrScanner.stop();
-
-    await qrScanner.clear();
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Stop scanner error:",
-      error
-    );
-
-  }
-
-
-  qrScanner =
-    null;
-
-
-  const result =
-    document.getElementById(
-      "qr-result"
-    );
-
-
-  if (result) {
-
-    result.textContent =
-      "Scanner stopped.";
-
-    result.style.color =
-      "#64748b";
-
-  }
-
-}
-
-
-/* =====================================================
-   HANDLE QR SCAN
-   ===================================================== */
-
-async function handleQRScan(
-  decodedText
-) {
-
-  if (processingScan) {
-    return;
-  }
-
-
-  processingScan =
-    true;
-
-
-  const result =
-    document.getElementById(
-      "qr-result"
-    );
-
-
-  result.textContent =
-    "QR detected. Checking member...";
-
-  result.style.color =
-    "#2563eb";
-
-
-  try {
+  async function startScanner() {
 
     /*
-      SECURITY CHECK AGAIN
-    */
-
-    const hasAccess =
-      await checkScannerAccess();
-
-
-    if (!hasAccess) {
-
-      throw new Error(
-        "You do not have scanner access."
-      );
-
-    }
-
-
-    /*
-      CURRENT USER
+      Always re-check authorization
+      before starting scanner.
     */
 
     const {
-      data: authData,
-      error: authError
+      data
     } =
       await window.churchDB
         .auth
@@ -3804,126 +2413,136 @@ async function handleQRScan(
 
 
     if (
-      authError ||
-      !authData ||
-      !authData.user
+      !data ||
+      !data.user
     ) {
 
-      throw new Error(
-        "Please sign in before recording attendance."
+      alert(
+        "You must be logged in."
       );
-
-    }
-
-
-    /*
-      FIND MEMBER
-    */
-
-    const {
-      data: member,
-      error: memberError
-    } =
-      await window.churchDB
-        .from("members")
-        .select(`
-          id,
-          member_id,
-          church_id,
-          first_name,
-          middle_name,
-          last_name,
-          membership_status,
-          qr_token
-        `)
-        .eq(
-          "qr_token",
-          decodedText
-        )
-        .maybeSingle();
-
-
-    if (memberError) {
-      throw memberError;
-    }
-
-
-    if (!member) {
-
-      result.textContent =
-        "❌ Member QR code not found.";
-
-      result.style.color =
-        "#dc2626";
-
-      processingScan =
-        false;
 
       return;
 
     }
 
 
-    /*
-      SELECTED EVENT
-    */
+    const allowed =
+      await checkAdminAccess(
+        data.user
+      );
 
-    if (!selectedEventKey) {
 
-      throw new Error(
+    if (!allowed) {
+
+      alert(
+        "You do not have permission to scan QR codes."
+      );
+
+      return;
+
+    }
+
+
+    const eventId =
+      document
+        .getElementById(
+          "eventSelect"
+        )
+        .value;
+
+
+    if (!eventId) {
+
+      alert(
         "Please select an event first."
       );
 
+      return;
+
     }
 
 
-    const eventParts =
-      selectedEventKey.split("|");
+    if (scannerRunning) {
+
+      return;
+
+    }
 
 
-    const eventName =
-      eventParts[0];
+    document
+      .getElementById(
+        "scannerResult"
+      )
+      .innerHTML = "";
 
 
-    const eventDate =
-      eventParts[1];
-
-
-    /*
-      FIND EVENT FOR MEMBER'S CHURCH
-    */
-
-    const event =
-      qrEvents.find(
-        function(e) {
-
-          return (
-
-            e.name ===
-              eventName &&
-
-            e.event_date ===
-              eventDate &&
-
-            e.church_id ===
-              member.church_id
-
-          );
-
-        }
+    qrScanner =
+      new Html5Qrcode(
+        "reader"
       );
 
 
-    if (!event) {
+    try {
 
-      result.textContent =
-        "❌ This event is not available for the member's church.";
+      await qrScanner.start(
 
-      result.style.color =
-        "#dc2626";
+        {
+          facingMode:
+            "environment"
+        },
 
-      processingScan =
-        false;
+        {
+          fps: 10,
+
+          qrbox: {
+            width: 250,
+            height: 250
+          }
+
+        },
+
+        onQRCodeScanned,
+
+        function(errorMessage) {
+
+          // Ignore continuous scan errors.
+
+        }
+
+      );
+
+
+      scannerRunning =
+        true;
+
+
+    } catch (error) {
+
+      console.error(
+        "Scanner error:",
+        error
+      );
+
+
+      alert(
+        "Unable to start camera. Please allow camera access."
+      );
+
+    }
+
+  }
+
+
+
+  /* =========================================================
+     QR SCANNED
+  ========================================================= */
+
+  async function onQRCodeScanned(
+    decodedText
+  ) {
+
+    if (!decodedText) {
 
       return;
 
@@ -3931,514 +2550,607 @@ async function handleQRScan(
 
 
     /*
-      CHECK DUPLICATE
+      Stop temporarily so the same
+      QR isn't recorded multiple times.
     */
 
-    const {
-      data: existing,
-      error: existingError
-    } =
-      await window.churchDB
-        .from("attendance")
-        .select(
-          "id"
-        )
-        .eq(
-          "member_id",
-          member.id
-        )
-        .eq(
-          "event_id",
-          event.id
-        )
-        .limit(1);
+    if (scannerRunning) {
 
-
-    if (existingError) {
-      throw existingError;
-    }
-
-
-    if (
-      existing &&
-      existing.length > 0
-    ) {
-
-      result.innerHTML =
-
-        "⚠️ <strong>" +
-
-        escapeHtml(
-          member.first_name +
-          " " +
-          member.last_name
-        ) +
-
-        "</strong><br>" +
-
-        "Already recorded for this event.";
-
-
-      result.style.color =
-        "#92400e";
-
-
-      processingScan =
-        false;
-
-
-      return;
+      await stopScanner();
 
     }
 
-
-    /*
-      RECORD ATTENDANCE
-    */
 
     const {
-      error: attendanceError
-    } =
-      await window.churchDB
-        .from("attendance")
-        .insert({
-
-          member_id:
-            member.id,
-
-          church_id:
-            member.church_id,
-
-          event_id:
-            event.id,
-
-          scanned_by:
-            authData.user.id,
-
-          attendance_time:
-            new Date().toISOString()
-
-        });
-
-
-    if (attendanceError) {
-      throw attendanceError;
-    }
-
-
-    /*
-      SUCCESS
-    */
-
-    result.innerHTML =
-
-      "✅ <strong>Attendance Recorded!</strong><br><br>" +
-
-      escapeHtml(
-
-        member.first_name +
-
-        " " +
-
-        (
-          member.middle_name
-            ? member.middle_name +
-              " "
-            : ""
-        ) +
-
-        member.last_name
-
-      ) +
-
-      "<br><small>" +
-
-      escapeHtml(
-        member.member_id ||
-        ""
-      ) +
-
-      "</small>";
-
-
-    result.style.color =
-      "#16a34a";
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Attendance error:",
-      error
-    );
-
-
-    result.textContent =
-      "❌ Error: " +
-      error.message;
-
-
-    result.style.color =
-      "#dc2626";
-
-  }
-
-
-  setTimeout(
-    function() {
-
-      processingScan =
-        false;
-
-    },
-    2000
-  );
-
-}
-
-
-/* =====================================================
-   FORMAT TIME
-   ===================================================== */
-
-function formatTime(
-  time
-) {
-
-  if (!time) {
-
-    return "Time to be announced";
-
-  }
-
-
-  const parts =
-    time.split(":");
-
-
-  let hour =
-    parseInt(
-      parts[0],
-      10
-    );
-
-
-  const minutes =
-    parts[1] ||
-    "00";
-
-
-  const ampm =
-    hour >= 12
-      ? "PM"
-      : "AM";
-
-
-  hour =
-    hour % 12;
-
-
-  if (
-    hour === 0
-  ) {
-
-    hour = 12;
-
-  }
-
-
-  return (
-    hour +
-    ":" +
-    minutes +
-    " " +
-    ampm
-  );
-
-}
-
-
-/* =====================================================
-   ESCAPE HTML
-   ===================================================== */
-
-function escapeHtml(
-  value
-) {
-
-  if (
-    value === null ||
-    value === undefined
-  ) {
-
-    return "";
-
-  }
-
-
-  return String(value)
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-/* =====================================================
-   AUTH STATE
-   ===================================================== */
-
-function setupAuthState() {
-
-  if (!window.churchDB) {
-    return;
-  }
-
-
-  window.churchDB.auth.onAuthStateChange(
-    async function(
-      event,
-      session
-    ) {
-
-      console.log(
-        "Auth state:",
-        event
-      );
-
-
-      if (
-        session &&
-        session.user
-      ) {
-
-        try {
-
-          await completeMemberRegistration();
-
-        }
-
-        catch (error) {
-
-          console.warn(
-            "Member registration:",
-            error.message
-          );
-
-        }
-
-
-        await updateUserInterface();
-
-
-        await checkScannerAccess();
-
-      }
-
-      else {
-
-        currentMember =
-          null;
-
-        currentProfile =
-          null;
-
-
-        document.getElementById(
-          "member-portal"
-        ).style.display =
-          "none";
-
-
-        document.getElementById(
-          "qr-attendance"
-        ).style.display =
-          "none";
-
-
-        const button =
-          document.getElementById(
-            "headerAuthButton"
-          );
-
-
-        button.textContent =
-          "Sign In";
-
-
-        button.className =
-          "signin";
-
-
-        button.onclick =
-          function() {
-
-            openAuth("login");
-
-          };
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   START APPLICATION
-   ===================================================== */
-
-async function startApplication() {
-
-  console.log(
-    "Starting Aim High For Jesus Church Attendance System..."
-  );
-
-
-  const connected =
-    initializeApplication();
-
-
-  if (!connected) {
-
-    const eventsList =
-      document.getElementById(
-        "events-list"
-      );
-
-
-    if (eventsList) {
-
-      eventsList.innerHTML =
-        "<p style='color:#dc2626;'>" +
-        "Unable to connect to the database. " +
-        "Please refresh the page." +
-        "</p>";
-
-    }
-
-
-    return;
-
-  }
-
-
-  setupEventSelection();
-
-
-  await loadChurches();
-
-
-  await loadEvents();
-
-
-  await loadQREvents();
-
-
-  setupAuthState();
-
-
-  /*
-    Check existing login session.
-  */
-
-  try {
-
-    const {
-      data
+      data: userData
     } =
       await window.churchDB
         .auth
-        .getSession();
+        .getUser();
 
 
     if (
-      data &&
-      data.session
+      !userData ||
+      !userData.user
     ) {
 
-      try {
+      alert(
+        "Your login session has expired."
+      );
 
-        await completeMemberRegistration();
+      return;
+
+    }
+
+
+    const allowed =
+      await checkAdminAccess(
+        userData.user
+      );
+
+
+    if (!allowed) {
+
+      alert(
+        "You are not authorized to record attendance."
+      );
+
+      return;
+
+    }
+
+
+    const eventId =
+      document
+        .getElementById(
+          "eventSelect"
+        )
+        .value;
+
+
+    if (!eventId) {
+
+      alert(
+        "Please select an event."
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      /*
+        Find member by unique QR token.
+      */
+
+      const {
+        data: member,
+        error: memberError
+      } =
+        await window.churchDB
+          .from("members")
+          .select(`
+            id,
+            member_id,
+            first_name,
+            last_name,
+            church_id
+          `)
+          .eq(
+            "qr_token",
+            decodedText
+          )
+          .maybeSingle();
+
+
+      if (memberError) {
+
+        throw memberError;
 
       }
 
-      catch (error) {
 
-        console.warn(
-          "Existing registration:",
-          error.message
+      if (!member) {
+
+        showScannerError(
+          "QR code not recognized."
+        );
+
+        return;
+
+      }
+
+
+      /*
+        Prevent duplicate attendance
+        for the same member and event.
+      */
+
+      const {
+        data: existing,
+        error: existingError
+      } =
+        await window.churchDB
+          .from("attendance")
+          .select("id")
+          .eq(
+            "member_id",
+            member.id
+          )
+          .eq(
+            "event_id",
+            eventId
+          )
+          .limit(1);
+
+
+      if (existingError) {
+
+        console.error(
+          existingError
         );
 
       }
 
 
-      await updateUserInterface();
+      if (
+        existing &&
+        existing.length > 0
+      ) {
+
+        showScannerMessage(
+          `${member.first_name} ${member.last_name} is already marked present for this event.`,
+          false
+        );
+
+        return;
+
+      }
 
 
-      await checkScannerAccess();
+      /*
+        Record attendance.
+      */
+
+      const {
+        error: attendanceError
+      } =
+        await window.churchDB
+          .from("attendance")
+          .insert({
+            member_id:
+              member.id,
+
+            church_id:
+              member.church_id,
+
+            event_id:
+              eventId,
+
+            scanned_by:
+              userData.user.id,
+
+            attendance_time:
+              new Date()
+                .toISOString()
+          });
+
+
+      if (attendanceError) {
+
+        throw attendanceError;
+
+      }
+
+
+      showScannerMessage(
+        `Attendance recorded successfully for ${member.first_name} ${member.last_name}.`,
+        true
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Attendance error:",
+        error
+      );
+
+
+      showScannerError(
+        error.message ||
+        "Unable to record attendance."
+      );
 
     }
 
   }
 
-  catch (error) {
 
-    console.error(
-      "Session check error:",
-      error
+
+  /* =========================================================
+     STOP SCANNER
+  ========================================================= */
+
+  async function stopScanner() {
+
+    if (
+      !qrScanner ||
+      !scannerRunning
+    ) {
+
+      return;
+
+    }
+
+
+    try {
+
+      await qrScanner.stop();
+
+      await qrScanner.clear();
+
+    } catch (error) {
+
+      console.warn(
+        "Scanner stop:",
+        error
+      );
+
+    }
+
+
+    scannerRunning =
+      false;
+
+  }
+
+
+
+  /* =========================================================
+     SCANNER MESSAGES
+  ========================================================= */
+
+  function showScannerMessage(
+    message,
+    success
+  ) {
+
+    const result =
+      document.getElementById(
+        "scannerResult"
+      );
+
+
+    result.innerHTML = `
+
+      <div
+        class="scan-card"
+        style="
+          background:
+            ${success
+              ? "#f0fdf4"
+              : "#fff7ed"};
+          border-color:
+            ${success
+              ? "#bbf7d0"
+              : "#fed7aa"};
+        "
+      >
+
+        <strong>
+          ${success
+            ? "✓ Attendance Recorded"
+            : "Already Recorded"}
+        </strong>
+
+        <p>
+          ${escapeHTML(
+            message
+          )}
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  function showScannerError(
+    message
+  ) {
+
+    const result =
+      document.getElementById(
+        "scannerResult"
+      );
+
+
+    result.innerHTML = `
+
+      <div
+        class="scan-card"
+        style="
+          background:#fee2e2;
+          border-color:#fecaca;
+          color:#991b1b;
+        "
+      >
+
+        <strong>
+          Scan Error
+        </strong>
+
+        <p>
+          ${escapeHTML(
+            message
+          )}
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  /* =========================================================
+     MESSAGES
+  ========================================================= */
+
+  function showRegistrationError(
+    message
+  ) {
+
+    const element =
+      document.getElementById(
+        "registrationError"
+      );
+
+
+    element.textContent =
+      message;
+
+
+    element.style.display =
+      "block";
+
+  }
+
+
+  function showRegistrationSuccess(
+    message
+  ) {
+
+    const element =
+      document.getElementById(
+        "registrationSuccess"
+      );
+
+
+    element.textContent =
+      message;
+
+
+    element.style.display =
+      "block";
+
+  }
+
+
+  function hideRegistrationMessages() {
+
+    document
+      .getElementById(
+        "registrationError"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "registrationSuccess"
+      )
+      .style.display =
+        "none";
+
+  }
+
+
+  function showLoginError(
+    message
+  ) {
+
+    const element =
+      document.getElementById(
+        "loginError"
+      );
+
+
+    element.textContent =
+      message;
+
+
+    element.style.display =
+      "block";
+
+  }
+
+
+  function hideLoginError() {
+
+    document
+      .getElementById(
+        "loginError"
+      )
+      .style.display =
+        "none";
+
+  }
+
+
+
+  /* =========================================================
+     DATE FORMATTING
+  ========================================================= */
+
+  function formatDate(
+    dateString
+  ) {
+
+    if (!dateString) {
+
+      return "";
+
+    }
+
+
+    const date =
+      new Date(
+        dateString +
+        "T00:00:00"
+      );
+
+
+    return date.toLocaleDateString(
+      undefined,
+      {
+        weekday:
+          "short",
+
+        year:
+          "numeric",
+
+        month:
+          "long",
+
+        day:
+          "numeric"
+      }
     );
 
   }
 
-}
 
 
-/* =====================================================
-   START
-   ===================================================== */
+  function formatTime(
+    timeString
+  ) {
 
-if (
-  document.readyState ===
-  "loading"
-) {
+    if (!timeString) {
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    startApplication
+      return "";
+
+    }
+
+
+    const parts =
+      timeString
+        .split(":");
+
+
+    const hours =
+      parseInt(
+        parts[0],
+        10
+      );
+
+
+    const minutes =
+      parts[1] ||
+      "00";
+
+
+    const suffix =
+      hours >= 12
+        ? "PM"
+        : "AM";
+
+
+    const displayHour =
+      hours % 12 || 12;
+
+
+    return `${displayHour}:${minutes} ${suffix}`;
+
+  }
+
+
+
+  /* =========================================================
+     SECURITY / HTML ESCAPING
+  ========================================================= */
+
+  function escapeHTML(
+    value
+  ) {
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
+
+      return "";
+
+    }
+
+
+    return String(value)
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+
+  /* =========================================================
+     CLOSE MODAL WHEN CLICKING OUTSIDE
+  ========================================================= */
+
+  window.addEventListener(
+    "click",
+    function(event) {
+
+      const modal =
+        document.getElementById(
+          "loginModal"
+        );
+
+
+      if (
+        event.target === modal
+      ) {
+
+        closeLogin();
+
+      }
+
+    }
   );
-
-}
-
-else {
-
-  startApplication();
-
-}
 
 </script>
 
