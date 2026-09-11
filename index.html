@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="UTF-8">
@@ -11,19 +12,30 @@
 
   <meta
     name="description"
-    content="Aim High For Jesus - Church Attendance Management System"
+    content="Aim High For Jesus - Church Attendance System"
   >
 
   <title>Aim High For Jesus</title>
 
-  <!-- QR GENERATOR -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <!-- QR SCANNER -->
-  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <!-- QR CODE GENERATOR -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+  </script>
+
+
+  <!-- QR CODE SCANNER -->
+  <script
+    src="https://unpkg.com/html5-qrcode"
+    type="text/javascript">
+  </script>
+
 
   <!-- SUPABASE -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+
 
   <!-- YOUR SUPABASE CONNECTION -->
   <script src="supabase.js"></script>
@@ -35,9 +47,11 @@
       box-sizing: border-box;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
+
 
     body {
       margin: 0;
@@ -47,9 +61,12 @@
         "Segoe UI",
         Arial,
         sans-serif;
+
       background: #f5f7fb;
+
       color: #172033;
     }
+
 
     button,
     input,
@@ -57,454 +74,815 @@
       font: inherit;
     }
 
+
     button {
       cursor: pointer;
     }
+
 
     /* =====================================================
        HEADER
     ===================================================== */
 
     header {
-      background: linear-gradient(
-        135deg,
-        #111827,
-        #1e3a8a
-      );
+
+      background:
+        linear-gradient(
+          135deg,
+          #111827,
+          #1e3a8a
+        );
+
       color: white;
-      padding: 18px 20px;
+
+      padding: 16px 20px;
+
       position: sticky;
+
       top: 0;
+
       z-index: 100;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+
+      box-shadow:
+        0 4px 15px rgba(0,0,0,0.15);
     }
 
+
     .header-inner {
+
       max-width: 1100px;
+
       margin: auto;
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       gap: 15px;
     }
 
+
     .brand {
+
       display: flex;
+
       align-items: center;
-      gap: 12px;
+
+      gap: 10px;
     }
+
 
     .brand-icon {
-      width: 45px;
-      height: 45px;
+
+      width: 44px;
+
+      height: 44px;
+
       border-radius: 50%;
+
       background: white;
+
       color: #1e3a8a;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
+      font-size: 21px;
+
       font-weight: 900;
-      font-size: 20px;
     }
 
-    .brand-text h1 {
+
+    .brand h1 {
+
       margin: 0;
-      font-size: 20px;
+
+      font-size: 19px;
     }
 
-    .brand-text p {
-      margin: 3px 0 0;
-      opacity: 0.8;
-      font-size: 12px;
+
+    .brand p {
+
+      margin: 2px 0 0;
+
+      font-size: 11px;
+
+      opacity: .8;
     }
 
-    /* =====================================================
-       NAVIGATION
-    ===================================================== */
 
     nav {
+
       display: flex;
-      gap: 8px;
+
+      gap: 7px;
+
       flex-wrap: wrap;
+
       justify-content: flex-end;
     }
 
+
     nav button {
+
       border: none;
-      background: rgba(255,255,255,0.12);
+
       color: white;
-      padding: 10px 14px;
+
+      background:
+        rgba(255,255,255,.12);
+
+      padding: 9px 13px;
+
       border-radius: 8px;
+
       font-weight: 600;
     }
 
+
     nav button:hover {
-      background: rgba(255,255,255,0.22);
+
+      background:
+        rgba(255,255,255,.22);
     }
 
-    .admin-nav {
-      display: none;
-    }
 
     /* =====================================================
        HERO
     ===================================================== */
 
     .hero {
+
       background:
         linear-gradient(
           135deg,
           #1e3a8a,
           #2563eb
         );
+
       color: white;
-      padding: 65px 20px;
+
+      padding: 60px 20px;
     }
 
+
     .hero-inner {
+
       max-width: 1100px;
+
       margin: auto;
     }
 
+
     .hero h2 {
+
       margin: 0 0 12px;
-      font-size: clamp(32px, 7vw, 58px);
+
+      font-size:
+        clamp(
+          34px,
+          8vw,
+          58px
+        );
+
       line-height: 1.05;
     }
 
+
     .hero p {
+
       max-width: 650px;
+
       font-size: 18px;
+
       line-height: 1.6;
-      opacity: 0.92;
+
+      opacity: .92;
     }
 
+
     .hero-buttons {
+
       display: flex;
-      gap: 12px;
+
+      gap: 10px;
+
       flex-wrap: wrap;
+
       margin-top: 25px;
     }
 
-    /* =====================================================
-       BUTTONS
-    ===================================================== */
-
-    .btn {
-      border: none;
-      border-radius: 10px;
-      padding: 13px 18px;
-      font-weight: 700;
-      transition: 0.2s;
-    }
-
-    .btn-primary {
-      background: white;
-      color: #1e3a8a;
-    }
-
-    .btn-blue {
-      background: #2563eb;
-      color: white;
-    }
-
-    .btn-dark {
-      background: #111827;
-      color: white;
-    }
-
-    .btn-danger {
-      background: #dc2626;
-      color: white;
-    }
-
-    .btn-green {
-      background: #16a34a;
-      color: white;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      opacity: 0.92;
-    }
 
     /* =====================================================
        MAIN
     ===================================================== */
 
     main {
+
       max-width: 1100px;
+
       margin: auto;
-      padding: 35px 20px 70px;
+
+      padding:
+        35px 20px 70px;
     }
 
+
     section {
+
       margin-bottom: 45px;
     }
 
+
     .section-title {
+
       margin-bottom: 20px;
     }
 
+
     .section-title h2 {
+
       margin: 0;
+
       font-size: 28px;
     }
 
+
     .section-title p {
+
       margin: 6px 0 0;
+
       color: #667085;
     }
 
+
     /* =====================================================
-       EVENT CARDS
+       BUTTONS
+    ===================================================== */
+
+    .btn {
+
+      border: none;
+
+      border-radius: 9px;
+
+      padding: 13px 17px;
+
+      font-weight: 700;
+    }
+
+
+    .btn-blue {
+
+      background: #2563eb;
+
+      color: white;
+    }
+
+
+    .btn-dark {
+
+      background: #111827;
+
+      color: white;
+    }
+
+
+    .btn-green {
+
+      background: #16a34a;
+
+      color: white;
+    }
+
+
+    .btn-red {
+
+      background: #dc2626;
+
+      color: white;
+    }
+
+
+    .btn-white {
+
+      background: white;
+
+      color: #1e3a8a;
+    }
+
+
+    .btn:disabled {
+
+      opacity: .6;
+
+      cursor: not-allowed;
+    }
+
+
+    /* =====================================================
+       EVENTS
     ===================================================== */
 
     .events-grid {
+
       display: grid;
+
       grid-template-columns:
-        repeat(auto-fit, minmax(270px, 1fr));
+        repeat(
+          auto-fit,
+          minmax(270px, 1fr)
+        );
+
       gap: 18px;
     }
 
+
     .event-card {
+
       background: white;
-      border-radius: 16px;
+
+      border-radius: 15px;
+
       padding: 22px;
-      box-shadow:
-        0 5px 20px rgba(15,23,42,0.08);
+
       border: 1px solid #e5e7eb;
+
+      box-shadow:
+        0 5px 20px
+        rgba(15,23,42,.07);
     }
 
+
     .event-badge {
+
       display: inline-block;
+
       background: #dbeafe;
+
       color: #1d4ed8;
+
       padding: 5px 9px;
+
       border-radius: 999px;
+
       font-size: 12px;
+
       font-weight: 700;
+
       margin-bottom: 10px;
     }
 
+
     .event-card h3 {
+
       margin: 0 0 10px;
+
       font-size: 20px;
     }
 
+
     .event-info {
+
       color: #667085;
-      line-height: 1.7;
+
       font-size: 14px;
+
+      line-height: 1.8;
     }
+
 
     /* =====================================================
        REGISTRATION
     ===================================================== */
 
     .registration-box {
-      background: white;
-      border-radius: 18px;
-      padding: 28px;
-      box-shadow:
-        0 5px 20px rgba(15,23,42,0.08);
+
       max-width: 650px;
+
       margin: auto;
+
+      background: white;
+
+      border-radius: 17px;
+
+      padding: 28px;
+
+      box-shadow:
+        0 5px 20px
+        rgba(15,23,42,.08);
     }
 
+
     .form-group {
+
       margin-bottom: 17px;
     }
 
+
     .form-group label {
+
       display: block;
+
       margin-bottom: 7px;
+
       font-weight: 700;
     }
 
+
     .form-group input,
     .form-group select {
+
       width: 100%;
+
       padding: 13px;
-      border: 1px solid #d0d5dd;
+
+      border:
+        1px solid #d0d5dd;
+
       border-radius: 9px;
-      outline: none;
+
       background: white;
+
+      outline: none;
     }
+
 
     .form-group input:focus,
     .form-group select:focus {
+
       border-color: #2563eb;
+
       box-shadow:
-        0 0 0 3px rgba(37,99,235,0.12);
+        0 0 0 3px
+        rgba(37,99,235,.12);
     }
 
+
     .message {
-      padding: 12px;
-      border-radius: 9px;
-      margin-bottom: 15px;
+
       display: none;
+
+      padding: 12px;
+
+      border-radius: 9px;
+
+      margin-bottom: 15px;
+
       font-size: 14px;
     }
 
-    .message.error {
+
+    .message-error {
+
       background: #fee2e2;
+
       color: #991b1b;
     }
 
-    .message.success {
+
+    .message-success {
+
       background: #dcfce7;
+
       color: #166534;
     }
+
 
     /* =====================================================
        QR RESULT
     ===================================================== */
 
     #qrResult {
+
       display: none;
+
       margin-top: 25px;
+
       text-align: center;
+
       background: #f8fafc;
+
       padding: 25px;
+
       border-radius: 15px;
     }
 
+
     #qrcode {
+
       width: 256px;
+
       min-height: 256px;
+
       margin: 20px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: white;
+
       padding: 12px;
+
+      background: white;
+
       border-radius: 10px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
     }
 
+
     #qrcode img {
+
       max-width: 100%;
+
       height: auto;
     }
 
+
     .member-code {
-      font-size: 20px;
-      font-weight: 800;
+
       color: #1e3a8a;
+
+      font-size: 20px;
+
+      font-weight: 800;
+
+      margin: 7px 0;
     }
 
+
     /* =====================================================
-       ADMIN / SCANNER
+       ADMIN
     ===================================================== */
 
     #adminSection {
+
       display: none;
     }
 
-    .admin-box {
-      background: white;
-      border-radius: 18px;
-      padding: 25px;
-      box-shadow:
-        0 5px 20px rgba(15,23,42,0.08);
+
+    #attendanceSection {
+
+      display: none;
     }
 
+
+    .admin-box {
+
+      background: white;
+
+      border-radius: 17px;
+
+      padding: 25px;
+
+      box-shadow:
+        0 5px 20px
+        rgba(15,23,42,.08);
+    }
+
+
+    .admin-status {
+
+      background: #eff6ff;
+
+      color: #1e40af;
+
+      padding: 12px;
+
+      border-radius: 9px;
+
+      margin-bottom: 20px;
+
+      font-size: 14px;
+    }
+
+
     .scanner-controls {
+
       display: flex;
+
       gap: 10px;
+
       flex-wrap: wrap;
+
       margin-bottom: 20px;
     }
 
+
     .scanner-controls select {
+
       flex: 1;
+
       min-width: 220px;
+
       padding: 13px;
-      border: 1px solid #d0d5dd;
+
+      border:
+        1px solid #d0d5dd;
+
       border-radius: 9px;
     }
 
+
     #reader {
+
       width: 100%;
+
       max-width: 600px;
+
       margin: auto;
     }
 
+
     #scannerResult {
+
       margin-top: 20px;
     }
 
-    .scan-card {
-      padding: 18px;
+
+    .scan-message {
+
+      padding: 17px;
+
+      border-radius: 11px;
+
       background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 12px;
+
+      border:
+        1px solid #bbf7d0;
+
+      color: #166534;
     }
+
+
+    .scan-error {
+
+      padding: 17px;
+
+      border-radius: 11px;
+
+      background: #fee2e2;
+
+      border:
+        1px solid #fecaca;
+
+      color: #991b1b;
+    }
+
+
+    /* =====================================================
+       ATTENDANCE TABLE
+    ===================================================== */
+
+    .table-container {
+
+      width: 100%;
+
+      overflow-x: auto;
+    }
+
+
+    .attendance-table {
+
+      width: 100%;
+
+      border-collapse: collapse;
+
+      min-width: 600px;
+    }
+
+
+    .attendance-table th {
+
+      background: #f8fafc;
+
+      color: #344054;
+
+      text-align: left;
+
+      padding: 13px;
+
+      border-bottom:
+        2px solid #e5e7eb;
+
+      font-size: 14px;
+    }
+
+
+    .attendance-table td {
+
+      padding: 13px;
+
+      border-bottom:
+        1px solid #e5e7eb;
+
+      font-size: 14px;
+    }
+
+
+    .attendance-table tr:hover {
+
+      background: #f8fafc;
+    }
+
 
     /* =====================================================
        LOGIN MODAL
     ===================================================== */
 
     .modal {
+
       display: none;
+
       position: fixed;
+
       inset: 0;
-      background: rgba(0,0,0,0.65);
+
+      background:
+        rgba(0,0,0,.65);
+
       z-index: 1000;
+
       padding: 20px;
+
       overflow-y: auto;
     }
 
+
     .modal-content {
-      max-width: 450px;
+
+      max-width: 440px;
+
       margin: 70px auto;
+
       background: white;
-      border-radius: 18px;
+
+      border-radius: 17px;
+
       padding: 28px;
+
       position: relative;
     }
 
+
     .modal-close {
+
       position: absolute;
-      right: 18px;
-      top: 14px;
+
+      right: 17px;
+
+      top: 12px;
+
       border: none;
+
       background: none;
-      font-size: 25px;
+
+      font-size: 27px;
     }
 
+
     .modal-content h2 {
+
       margin-top: 0;
     }
 
-    /* =====================================================
-       ADMIN STATUS
-    ===================================================== */
-
-    .admin-status {
-      background: #eff6ff;
-      color: #1e40af;
-      padding: 12px 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      font-size: 14px;
-    }
 
     /* =====================================================
        FOOTER
     ===================================================== */
 
     footer {
+
       background: #111827;
+
       color: white;
+
       text-align: center;
+
       padding: 30px 20px;
     }
 
-    footer p {
-      margin: 5px;
-      opacity: 0.8;
+
+    footer h3 {
+
+      margin: 0 0 7px;
     }
+
+
+    footer p {
+
+      margin: 5px;
+
+      opacity: .75;
+
+      font-size: 13px;
+    }
+
 
     /* =====================================================
        MOBILE
@@ -513,27 +891,34 @@
     @media (max-width: 650px) {
 
       .header-inner {
+
         align-items: flex-start;
+
+        flex-direction: column;
       }
 
-      .brand-text h1 {
-        font-size: 17px;
-      }
 
       nav {
+
         width: 100%;
       }
 
+
       nav button {
+
         flex: 1;
       }
 
+
       .hero {
+
         padding: 45px 20px;
       }
 
+
       .registration-box,
       .admin-box {
+
         padding: 20px;
       }
 
@@ -546,7 +931,8 @@
 
 <body>
 
-<!-- =========================================================
+
+<!-- ========================================================
      HEADER
 ========================================================= -->
 
@@ -560,12 +946,14 @@
         ✝
       </div>
 
-      <div class="brand-text">
+      <div>
 
-        <h1>Aim High For Jesus</h1>
+        <h1>
+          Aim High For Jesus
+        </h1>
 
         <p>
-          RICM Church Attendance
+          RICM Attendance System
         </p>
 
       </div>
@@ -581,11 +969,13 @@
         Register
       </button>
 
+
       <button
         onclick="scrollToSection('events')"
       >
         Events
       </button>
+
 
       <button
         id="loginButton"
@@ -594,10 +984,11 @@
         Admin Login
       </button>
 
+
       <button
         id="logoutButton"
-        style="display:none;"
         onclick="logoutAdmin()"
+        style="display:none;"
       >
         Logout
       </button>
@@ -609,7 +1000,8 @@
 </header>
 
 
-<!-- =========================================================
+
+<!-- ========================================================
      HERO
 ========================================================= -->
 
@@ -621,24 +1013,26 @@
       Aim High For Jesus
     </h2>
 
+
     <p>
-      One Body. One Mission. One Purpose.
-      Register as a church member, receive your
-      personal QR code, and make attendance simple.
+      Register as a church member and
+      receive your personal QR code for
+      simple and secure attendance.
     </p>
 
 
     <div class="hero-buttons">
 
       <button
-        class="btn btn-primary"
+        class="btn btn-white"
         onclick="scrollToSection('register')"
       >
         Get My QR Code
       </button>
 
+
       <button
-        class="btn btn-primary"
+        class="btn btn-white"
         onclick="scrollToSection('events')"
       >
         View Events
@@ -651,16 +1045,17 @@
 </section>
 
 
-<!-- =========================================================
+
+<!-- ========================================================
      MAIN
 ========================================================= -->
 
 <main>
 
 
-  <!-- =======================================================
+  <!-- ======================================================
        EVENTS
-  ======================================================== -->
+  ======================================================= -->
 
   <section id="events">
 
@@ -671,7 +1066,7 @@
       </h2>
 
       <p>
-        RICM church events and gatherings.
+        Upcoming RICM gatherings.
       </p>
 
     </div>
@@ -695,9 +1090,9 @@
 
 
 
-  <!-- =======================================================
+  <!-- ======================================================
        MEMBER REGISTRATION
-  ======================================================== -->
+  ======================================================= -->
 
   <section id="register">
 
@@ -708,8 +1103,8 @@
       </h2>
 
       <p>
-        Create your personal QR code.
-        No email or password required.
+        No email. No password.
+        Just your name and church.
       </p>
 
     </div>
@@ -720,20 +1115,24 @@
 
       <div
         id="registrationError"
-        class="message error"
-      ></div>
+        class="message message-error"
+      >
+      </div>
 
 
       <div
         id="registrationSuccess"
-        class="message success"
-      ></div>
+        class="message message-success"
+      >
+      </div>
 
 
       <form
         id="registrationForm"
       >
 
+
+        <!-- FIRST NAME -->
 
         <div class="form-group">
 
@@ -744,12 +1143,15 @@
           <input
             id="firstName"
             type="text"
-            placeholder="Enter your first name"
+            placeholder="Enter first name"
+            autocomplete="given-name"
             required
           >
 
         </div>
 
+
+        <!-- LAST NAME -->
 
         <div class="form-group">
 
@@ -760,12 +1162,15 @@
           <input
             id="lastName"
             type="text"
-            placeholder="Enter your last name"
+            placeholder="Enter last name"
+            autocomplete="family-name"
             required
           >
 
         </div>
 
+
+        <!-- CHURCH -->
 
         <div class="form-group">
 
@@ -801,7 +1206,9 @@
 
 
 
-      <!-- QR RESULT -->
+      <!-- ==================================================
+           GENERATED QR
+      =================================================== -->
 
       <div id="qrResult">
 
@@ -809,21 +1216,21 @@
           Registration Successful!
         </h3>
 
+
         <p>
           Save this QR code.
-          It is your personal church attendance QR.
+          Use it for church attendance.
         </p>
 
 
-        <div
-          id="qrcode"
-        >
+        <div id="qrcode">
         </div>
 
 
         <div>
-          Member ID
+          Your Member ID
         </div>
+
 
         <div
           id="memberCode"
@@ -832,28 +1239,43 @@
         </div>
 
 
-        <p id="registeredName">
+        <p
+          id="registeredName"
+        >
         </p>
 
-        <p id="registeredChurch">
+
+        <p
+          id="registeredChurch"
+        >
         </p>
 
 
-        <button
-          class="btn btn-green"
-          onclick="downloadQR()"
+        <div
+          style="
+            display:flex;
+            justify-content:center;
+            gap:8px;
+            flex-wrap:wrap;
+          "
         >
-          Download My QR
-        </button>
+
+          <button
+            class="btn btn-green"
+            onclick="downloadQR()"
+          >
+            Download QR
+          </button>
 
 
-        <button
-          class="btn btn-dark"
-          onclick="printQR()"
-          style="margin-left:8px;"
-        >
-          Print QR
-        </button>
+          <button
+            class="btn btn-dark"
+            onclick="printQR()"
+          >
+            Print QR
+          </button>
+
+        </div>
 
       </div>
 
@@ -863,9 +1285,9 @@
 
 
 
-  <!-- =======================================================
-       ADMIN SCANNER
-  ======================================================== -->
+  <!-- ======================================================
+       ADMIN QR SCANNER
+  ======================================================= -->
 
   <section id="adminSection">
 
@@ -889,13 +1311,16 @@
         id="adminStatus"
         class="admin-status"
       >
-        Checking administrator access...
+        Authorized administrator.
       </div>
 
 
       <div class="scanner-controls">
 
-        <select id="eventSelect">
+
+        <select
+          id="eventSelect"
+        >
 
           <option value="">
             Select an event
@@ -905,7 +1330,6 @@
 
 
         <button
-          id="startScannerButton"
           class="btn btn-blue"
           onclick="startScanner()"
         >
@@ -914,21 +1338,111 @@
 
 
         <button
-          class="btn btn-danger"
+          class="btn btn-red"
           onclick="stopScanner()"
         >
           Stop
         </button>
 
+
       </div>
 
 
-      <div id="reader"></div>
+      <div id="reader">
+      </div>
 
 
-      <div
-        id="scannerResult"
+      <div id="scannerResult">
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ======================================================
+       ATTENDANCE
+  ======================================================= -->
+
+  <section id="attendanceSection">
+
+    <div class="section-title">
+
+      <h2>
+        Attendance
+      </h2>
+
+      <p>
+        Name, church, date and time.
+      </p>
+
+    </div>
+
+
+    <div class="admin-box">
+
+
+      <button
+        class="btn btn-blue"
+        onclick="loadAttendance()"
+        style="margin-bottom:20px;"
       >
+        Refresh Attendance
+      </button>
+
+
+      <div class="table-container">
+
+        <table class="attendance-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Name
+              </th>
+
+              <th>
+                Church
+              </th>
+
+              <th>
+                Date
+              </th>
+
+              <th>
+                Time
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody
+            id="attendanceTableBody"
+          >
+
+            <tr>
+
+              <td
+                colspan="4"
+                style="
+                  text-align:center;
+                  padding:25px;
+                "
+              >
+                Loading attendance...
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
       </div>
 
     </div>
@@ -939,7 +1453,8 @@
 </main>
 
 
-<!-- =========================================================
+
+<!-- ========================================================
      LOGIN MODAL
 ========================================================= -->
 
@@ -949,6 +1464,7 @@
 >
 
   <div class="modal-content">
+
 
     <button
       class="modal-close"
@@ -962,6 +1478,7 @@
       Admin Login
     </h2>
 
+
     <p>
       Only authorized system personnel can log in.
     </p>
@@ -969,17 +1486,19 @@
 
     <div
       id="loginError"
-      class="message error"
-    ></div>
+      class="message message-error"
+    >
+    </div>
 
 
     <form
       id="loginForm"
     >
 
+
       <div class="form-group">
 
-        <label>
+        <label for="loginEmail">
           Email
         </label>
 
@@ -995,7 +1514,7 @@
 
       <div class="form-group">
 
-        <label>
+        <label for="loginPassword">
           Password
         </label>
 
@@ -1017,6 +1536,7 @@
         Login
       </button>
 
+
     </form>
 
   </div>
@@ -1024,7 +1544,8 @@
 </div>
 
 
-<!-- =========================================================
+
+<!-- ========================================================
      FOOTER
 ========================================================= -->
 
@@ -1048,14 +1569,19 @@
 
 <script>
 
-  /* =========================================================
-     GLOBAL VARIABLES
+
+  /* ========================================================
+     VARIABLES
   ========================================================= */
 
   let currentAdmin = null;
+
   let currentAdminProfile = null;
+
   let qrScanner = null;
+
   let scannerRunning = false;
+
   let currentQRValue = null;
 
 
@@ -1067,7 +1593,7 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
      INITIALIZATION
   ========================================================= */
 
@@ -1076,16 +1602,17 @@
     async function() {
 
       console.log(
-        "Aim High For Jesus starting..."
+        "Aim High For Jesus loading..."
       );
 
 
       if (
-        typeof initializeSupabase !== "function"
+        typeof initializeSupabase !==
+        "function"
       ) {
 
         console.error(
-          "initializeSupabase() was not found."
+          "initializeSupabase() not found."
         );
 
         return;
@@ -1119,14 +1646,19 @@
 
 
 
-  /* =========================================================
-     SECTION NAVIGATION
+  /* ========================================================
+     NAVIGATION
   ========================================================= */
 
-  function scrollToSection(id) {
+  function scrollToSection(
+    id
+  ) {
 
     const element =
-      document.getElementById(id);
+      document.getElementById(
+        id
+      );
+
 
     if (element) {
 
@@ -1140,7 +1672,7 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
      LOAD CHURCHES
   ========================================================= */
 
@@ -1150,15 +1682,6 @@
       document.getElementById(
         "churchSelect"
       );
-
-
-    if (!select) return;
-
-
-    select.innerHTML =
-      `<option value="">
-        Select your church
-      </option>`;
 
 
     const {
@@ -1182,26 +1705,38 @@
     if (error) {
 
       console.error(
-        "Church loading error:",
+        "Church error:",
         error
       );
+
 
       select.innerHTML =
         `<option value="">
           Unable to load churches
         </option>`;
 
+
       return;
 
     }
 
 
-    if (!data || data.length === 0) {
+    select.innerHTML =
+      `<option value="">
+        Select your church
+      </option>`;
+
+
+    if (
+      !data ||
+      data.length === 0
+    ) {
 
       select.innerHTML =
         `<option value="">
           No churches available
         </option>`;
+
 
       return;
 
@@ -1216,13 +1751,16 @@
             "option"
           );
 
+
         option.value =
           church.id;
+
 
         option.textContent =
           church.branch_code
             ? `${church.name} (${church.branch_code})`
             : church.name;
+
 
         select.appendChild(
           option
@@ -1235,7 +1773,7 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
      LOAD EVENTS
   ========================================================= */
 
@@ -1246,13 +1784,11 @@
         "eventsLoading"
       );
 
+
     const grid =
       document.getElementById(
         "eventsGrid"
       );
-
-
-    if (!grid) return;
 
 
     const {
@@ -1274,9 +1810,7 @@
         `)
         .gte(
           "event_date",
-          new Date()
-            .toISOString()
-            .split("T")[0]
+          getToday()
         )
         .neq(
           "status",
@@ -1290,12 +1824,8 @@
         );
 
 
-    if (loading) {
-
-      loading.style.display =
-        "none";
-
-    }
+    loading.style.display =
+      "none";
 
 
     if (error) {
@@ -1305,32 +1835,32 @@
         error
       );
 
+
       grid.innerHTML =
         `<div class="event-card">
           <strong>
             Unable to load events.
           </strong>
-          <p>
-            Please refresh the page.
-          </p>
         </div>`;
+
 
       return;
 
     }
 
 
-    if (!data || data.length === 0) {
+    if (
+      !data ||
+      data.length === 0
+    ) {
 
       grid.innerHTML =
         `<div class="event-card">
           <strong>
             No upcoming events.
           </strong>
-          <p>
-            Check back later.
-          </p>
         </div>`;
+
 
       return;
 
@@ -1338,11 +1868,11 @@
 
 
     /*
-      The database has one event row per church
-      for body-wide events.
+      Group body-wide events.
 
-      We group them so the website displays
-      the anniversary only once.
+      Your database contains separate rows
+      for each RICM church, but the website
+      displays the body-wide event once.
     */
 
     const grouped = {};
@@ -1353,6 +1883,7 @@
 
         const key =
           `${event.name}|${event.event_date}`;
+
 
         if (!grouped[key]) {
 
@@ -1384,22 +1915,9 @@
               "div"
             );
 
+
           card.className =
             "event-card";
-
-
-          const date =
-            formatDate(
-              event.event_date
-            );
-
-
-          const time =
-            event.start_time
-              ? formatTime(
-                  event.start_time
-                )
-              : "Time to be announced";
 
 
           let churchText =
@@ -1414,6 +1932,14 @@
               "All RICM Churches — One Body";
 
           }
+
+
+          const time =
+            event.start_time
+              ? formatTime(
+                  event.start_time
+                )
+              : "Time to be announced";
 
 
           card.innerHTML = `
@@ -1434,26 +1960,36 @@
             <div class="event-info">
 
               <div>
-                📅 ${date}
+                📅
+                ${formatDate(
+                  event.event_date
+                )}
               </div>
 
               <div>
-                🕐 ${escapeHTML(time)}
+                🕐
+                ${escapeHTML(
+                  time
+                )}
               </div>
 
               <div>
-                ⛪ ${escapeHTML(
+                ⛪
+                ${escapeHTML(
                   churchText
                 )}
               </div>
 
               ${
                 event.description
-                  ? `<div>
-                      ℹ️ ${escapeHTML(
+                  ? `
+                    <div>
+                      ℹ️
+                      ${escapeHTML(
                         event.description
                       )}
-                    </div>`
+                    </div>
+                  `
                   : ""
               }
 
@@ -1473,7 +2009,7 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
      MEMBER REGISTRATION
   ========================================================= */
 
@@ -1556,10 +2092,12 @@
           );
 
 
-        button.disabled = true;
+        button.disabled =
+          true;
+
 
         button.textContent =
-          "Creating your QR...";
+          "Creating QR...";
 
 
         try {
@@ -1586,11 +2124,6 @@
 
           if (error) {
 
-            console.error(
-              "Registration error:",
-              error
-            );
-
             throw error;
 
           }
@@ -1602,23 +2135,19 @@
           ) {
 
             throw new Error(
-              "Registration did not return a member record."
+              "No member was created."
             );
 
           }
 
 
-          const member =
-            data[0];
-
-
           displayMemberQR(
-            member
+            data[0]
           );
 
 
           showRegistrationSuccess(
-            "Your QR code has been created successfully."
+            "Registration successful! Your QR code is ready."
           );
 
 
@@ -1635,6 +2164,7 @@
         } catch (error) {
 
           console.error(
+            "Registration error:",
             error
           );
 
@@ -1646,7 +2176,9 @@
 
         } finally {
 
-          button.disabled = false;
+          button.disabled =
+            false;
+
 
           button.textContent =
             "Generate My QR Code";
@@ -1658,41 +2190,39 @@
 
 
 
-  /* =========================================================
-     DISPLAY MEMBER QR
+  /* ========================================================
+     DISPLAY QR
   ========================================================= */
 
   function displayMemberQR(
     member
   ) {
 
-    const qrContainer =
+    const container =
       document.getElementById(
         "qrcode"
       );
 
 
-    qrContainer.innerHTML = "";
+    container.innerHTML =
+      "";
 
-
-    /*
-      Use the unique UUID QR token
-      as the actual QR value.
-    */
 
     currentQRValue =
       member.qr_token;
 
 
     new QRCode(
-      qrContainer,
+      container,
       {
         text:
           member.qr_token,
 
-        width: 230,
+        width:
+          230,
 
-        height: 230,
+        height:
+          230,
 
         correctLevel:
           QRCode.CorrectLevel.H
@@ -1735,28 +2265,26 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
      DOWNLOAD QR
   ========================================================= */
 
   function downloadQR() {
 
-    const qrContainer =
-      document.getElementById(
-        "qrcode"
-      );
-
-
     const image =
-      qrContainer.querySelector(
-        "img"
-      );
+      document
+        .getElementById(
+          "qrcode"
+        )
+        .querySelector(
+          "img"
+        );
 
 
     if (!image) {
 
       alert(
-        "QR code is not ready yet."
+        "QR code is not ready."
       );
 
       return;
@@ -1778,11 +2306,9 @@
       "Aim-High-For-Jesus-QR.png";
 
 
-    document
-      .body
-      .appendChild(
-        link
-      );
+    document.body.appendChild(
+      link
+    );
 
 
     link.click();
@@ -1794,7 +2320,7 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
      PRINT QR
   ========================================================= */
 
@@ -1803,29 +2329,25 @@
     const qr =
       document.getElementById(
         "qrcode"
-      )
-      .innerHTML;
+      ).innerHTML;
 
 
     const code =
       document.getElementById(
         "memberCode"
-      )
-      .textContent;
+      ).textContent;
 
 
     const name =
       document.getElementById(
         "registeredName"
-      )
-      .textContent;
+      ).textContent;
 
 
     const church =
       document.getElementById(
         "registeredChurch"
-      )
-      .textContent;
+      ).textContent;
 
 
     const printWindow =
@@ -1835,7 +2357,20 @@
       );
 
 
+    if (!printWindow) {
+
+      alert(
+        "Please allow pop-ups to print the QR."
+      );
+
+      return;
+
+    }
+
+
     printWindow.document.write(`
+
+      <!DOCTYPE html>
 
       <html>
 
@@ -1848,8 +2383,8 @@
         <style>
 
           body {
-            text-align:center;
             font-family:Arial;
+            text-align:center;
             padding:40px;
           }
 
@@ -1858,7 +2393,11 @@
           }
 
           h1 {
-            font-size:28px;
+            margin-bottom:5px;
+          }
+
+          p {
+            margin:6px;
           }
 
         </style>
@@ -1885,9 +2424,12 @@
           ${escapeHTML(church)}
         </p>
 
-        <strong>
-          ${escapeHTML(code)}
-        </strong>
+        <p>
+          Member ID:
+          <strong>
+            ${escapeHTML(code)}
+          </strong>
+        </p>
 
       </body>
 
@@ -1898,15 +2440,23 @@
 
     printWindow.document.close();
 
-    printWindow.focus();
 
-    printWindow.print();
+    setTimeout(
+      function() {
+
+        printWindow.focus();
+
+        printWindow.print();
+
+      },
+      500
+    );
 
   }
 
 
 
-  /* =========================================================
+  /* ========================================================
      LOGIN
   ========================================================= */
 
@@ -1935,7 +2485,7 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
      ADMIN LOGIN
   ========================================================= */
 
@@ -1948,6 +2498,9 @@
       async function(event) {
 
         event.preventDefault();
+
+
+        hideLoginError();
 
 
         const email =
@@ -1965,9 +2518,6 @@
               "loginPassword"
             )
             .value;
-
-
-        hideLoginError();
 
 
         try {
@@ -1991,7 +2541,10 @@
           }
 
 
-          if (!data.user) {
+          if (
+            !data ||
+            !data.user
+          ) {
 
             throw new Error(
               "Login failed."
@@ -2014,7 +2567,7 @@
 
 
             throw new Error(
-              "Your account does not have scanner/admin access."
+              "This account does not have admin or scanner access."
             );
 
           }
@@ -2022,14 +2575,20 @@
 
           closeLogin();
 
+
           showAdminSection();
 
+
           await loadAdminEvents();
+
+
+          await loadAttendance();
 
 
         } catch (error) {
 
           console.error(
+            "Login error:",
             error
           );
 
@@ -2046,8 +2605,8 @@
 
 
 
-  /* =========================================================
-     CHECK CURRENT ADMIN SESSION
+  /* ========================================================
+     CHECK SESSION
   ========================================================= */
 
   async function checkAdminSession() {
@@ -2086,11 +2645,7 @@
 
       await loadAdminEvents();
 
-    } else {
-
-      await window.churchDB
-        .auth
-        .signOut();
+      await loadAttendance();
 
     }
 
@@ -2098,8 +2653,8 @@
 
 
 
-  /* =========================================================
-     CHECK ADMIN ROLE
+  /* ========================================================
+     CHECK ADMIN ACCESS
   ========================================================= */
 
   async function checkAdminAccess(
@@ -2151,8 +2706,7 @@
     const role =
       String(
         data.role || ""
-      )
-      .toLowerCase();
+      ).toLowerCase();
 
 
     const allowed =
@@ -2179,20 +2733,26 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
      SHOW ADMIN
   ========================================================= */
 
   function showAdminSection() {
 
-    const section =
-      document.getElementById(
+    document
+      .getElementById(
         "adminSection"
-      );
+      )
+      .style.display =
+        "block";
 
 
-    section.style.display =
-      "block";
+    document
+      .getElementById(
+        "attendanceSection"
+      )
+      .style.display =
+        "block";
 
 
     document
@@ -2218,30 +2778,27 @@
 
 
     status.textContent =
-      `Authorized access: ${currentAdminProfile.role}`;
+      `Authorized: ${currentAdminProfile.role}`;
+
 
     status.style.background =
       "#dcfce7";
 
+
     status.style.color =
       "#166534";
-
-
-    section.scrollIntoView({
-      behavior: "smooth"
-    });
 
   }
 
 
 
-  /* =========================================================
+  /* ========================================================
      LOGOUT
   ========================================================= */
 
   async function logoutAdmin() {
 
-    stopScanner();
+    await stopScanner();
 
 
     await window.churchDB
@@ -2249,14 +2806,25 @@
       .signOut();
 
 
-    currentAdmin = null;
+    currentAdmin =
+      null;
 
-    currentAdminProfile = null;
+
+    currentAdminProfile =
+      null;
 
 
     document
       .getElementById(
         "adminSection"
+      )
+      .style.display =
+        "none";
+
+
+    document
+      .getElementById(
+        "attendanceSection"
       )
       .style.display =
         "none";
@@ -2277,17 +2845,12 @@
       .style.display =
         "none";
 
-
-    alert(
-      "You have been logged out."
-    );
-
   }
 
 
 
-  /* =========================================================
-     LOAD EVENTS FOR SCANNER
+  /* ========================================================
+     ADMIN EVENTS
   ========================================================= */
 
   async function loadAdminEvents() {
@@ -2310,14 +2873,15 @@
     } =
       await window.churchDB
         .from("events")
-        .select(
-          "id,name,event_date,start_time,status,church_id"
-        )
+        .select(`
+          id,
+          name,
+          event_date,
+          status
+        `)
         .gte(
           "event_date",
-          new Date()
-            .toISOString()
-            .split("T")[0]
+          getToday()
         )
         .neq(
           "status",
@@ -2334,7 +2898,7 @@
     if (error) {
 
       console.error(
-        "Admin event error:",
+        "Admin events error:",
         error
       );
 
@@ -2393,16 +2957,11 @@
 
 
 
-  /* =========================================================
-     START QR SCANNER
+  /* ========================================================
+     START SCANNER
   ========================================================= */
 
   async function startScanner() {
-
-    /*
-      Always re-check authorization
-      before starting scanner.
-    */
 
     const {
       data
@@ -2418,7 +2977,7 @@
     ) {
 
       alert(
-        "You must be logged in."
+        "Please log in first."
       );
 
       return;
@@ -2435,7 +2994,7 @@
     if (!allowed) {
 
       alert(
-        "You do not have permission to scan QR codes."
+        "You are not authorized to scan QR codes."
       );
 
       return;
@@ -2473,7 +3032,8 @@
       .getElementById(
         "scannerResult"
       )
-      .innerHTML = "";
+      .innerHTML =
+        "";
 
 
     qrScanner =
@@ -2503,11 +3063,7 @@
 
         onQRCodeScanned,
 
-        function(errorMessage) {
-
-          // Ignore continuous scan errors.
-
-        }
+        function() {}
 
       );
 
@@ -2525,7 +3081,7 @@
 
 
       alert(
-        "Unable to start camera. Please allow camera access."
+        "Unable to start the camera. Please allow camera access."
       );
 
     }
@@ -2534,7 +3090,7 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
      QR SCANNED
   ========================================================= */
 
@@ -2549,16 +3105,7 @@
     }
 
 
-    /*
-      Stop temporarily so the same
-      QR isn't recorded multiple times.
-    */
-
-    if (scannerRunning) {
-
-      await stopScanner();
-
-    }
+    await stopScanner();
 
 
     const {
@@ -2574,7 +3121,7 @@
       !userData.user
     ) {
 
-      alert(
+      showScannerError(
         "Your login session has expired."
       );
 
@@ -2591,7 +3138,7 @@
 
     if (!allowed) {
 
-      alert(
+      showScannerError(
         "You are not authorized to record attendance."
       );
 
@@ -2610,7 +3157,7 @@
 
     if (!eventId) {
 
-      alert(
+      showScannerError(
         "Please select an event."
       );
 
@@ -2622,7 +3169,7 @@
     try {
 
       /*
-        Find member by unique QR token.
+        Find the member using the QR token.
       */
 
       const {
@@ -2664,8 +3211,8 @@
 
 
       /*
-        Prevent duplicate attendance
-        for the same member and event.
+        Check whether this member has
+        already been recorded for this event.
       */
 
       const {
@@ -2674,7 +3221,9 @@
       } =
         await window.churchDB
           .from("attendance")
-          .select("id")
+          .select(
+            "id"
+          )
           .eq(
             "member_id",
             member.id
@@ -2688,9 +3237,7 @@
 
       if (existingError) {
 
-        console.error(
-          existingError
-        );
+        throw existingError;
 
       }
 
@@ -2705,13 +3252,17 @@
           false
         );
 
+
+        await loadAttendance();
+
+
         return;
 
       }
 
 
       /*
-        Record attendance.
+        Save attendance.
       */
 
       const {
@@ -2720,6 +3271,7 @@
         await window.churchDB
           .from("attendance")
           .insert({
+
             member_id:
               member.id,
 
@@ -2735,6 +3287,7 @@
             attendance_time:
               new Date()
                 .toISOString()
+
           });
 
 
@@ -2746,9 +3299,16 @@
 
 
       showScannerMessage(
-        `Attendance recorded successfully for ${member.first_name} ${member.last_name}.`,
+        `Attendance recorded for ${member.first_name} ${member.last_name}.`,
         true
       );
+
+
+      /*
+        Refresh attendance immediately.
+      */
+
+      await loadAttendance();
 
 
     } catch (error) {
@@ -2770,7 +3330,7 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
      STOP SCANNER
   ========================================================= */
 
@@ -2790,7 +3350,9 @@
 
       await qrScanner.stop();
 
+
       await qrScanner.clear();
+
 
     } catch (error) {
 
@@ -2809,7 +3371,295 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
+     ATTENDANCE
+  ========================================================= */
+
+  async function loadAttendance() {
+
+    const tbody =
+      document.getElementById(
+        "attendanceTableBody"
+      );
+
+
+    if (!tbody) {
+
+      return;
+
+    }
+
+
+    tbody.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="4"
+          style="
+            text-align:center;
+            padding:25px;
+          "
+        >
+          Loading attendance...
+        </td>
+
+      </tr>
+
+    `;
+
+
+    const {
+      data: userData
+    } =
+      await window.churchDB
+        .auth
+        .getUser();
+
+
+    if (
+      !userData ||
+      !userData.user
+    ) {
+
+      return;
+
+    }
+
+
+    const allowed =
+      await checkAdminAccess(
+        userData.user
+      );
+
+
+    if (!allowed) {
+
+      tbody.innerHTML = `
+
+        <tr>
+
+          <td
+            colspan="4"
+            style="
+              text-align:center;
+              padding:25px;
+            "
+          >
+            You are not authorized.
+          </td>
+
+        </tr>
+
+      `;
+
+
+      return;
+
+    }
+
+
+    /*
+      Get attendance plus
+      member and church information.
+    */
+
+    const {
+      data,
+      error
+    } =
+      await window.churchDB
+        .from("attendance")
+        .select(`
+          attendance_time,
+          members (
+            first_name,
+            last_name,
+            churches (
+              name,
+              branch_code
+            )
+          )
+        `)
+        .order(
+          "attendance_time",
+          {
+            ascending: false
+          }
+        );
+
+
+    if (error) {
+
+      console.error(
+        "Attendance loading error:",
+        error
+      );
+
+
+      tbody.innerHTML = `
+
+        <tr>
+
+          <td
+            colspan="4"
+            style="
+              text-align:center;
+              padding:25px;
+            "
+          >
+            Unable to load attendance.
+          </td>
+
+        </tr>
+
+      `;
+
+
+      return;
+
+    }
+
+
+    if (
+      !data ||
+      data.length === 0
+    ) {
+
+      tbody.innerHTML = `
+
+        <tr>
+
+          <td
+            colspan="4"
+            style="
+              text-align:center;
+              padding:25px;
+            "
+          >
+            No attendance records yet.
+          </td>
+
+        </tr>
+
+      `;
+
+
+      return;
+
+    }
+
+
+    tbody.innerHTML =
+      "";
+
+
+    data.forEach(
+      record => {
+
+        const member =
+          record.members;
+
+
+        const church =
+          member &&
+          member.churches
+            ? (
+                member.churches.branch_code
+                  ? `${member.churches.name} (${member.churches.branch_code})`
+                  : member.churches.name
+              )
+            : "Unknown";
+
+
+        const name =
+          member
+            ? `${member.first_name} ${member.last_name}`
+            : "Unknown";
+
+
+        const dateTime =
+          new Date(
+            record.attendance_time
+          );
+
+
+        const date =
+          dateTime.toLocaleDateString(
+            undefined,
+            {
+              year:
+                "numeric",
+
+              month:
+                "short",
+
+              day:
+                "numeric"
+            }
+          );
+
+
+        const time =
+          dateTime.toLocaleTimeString(
+            undefined,
+            {
+              hour:
+                "numeric",
+
+              minute:
+                "2-digit"
+            }
+          );
+
+
+        const row =
+          document.createElement(
+            "tr"
+          );
+
+
+        row.innerHTML = `
+
+          <td>
+            ${escapeHTML(
+              name
+            )}
+          </td>
+
+          <td>
+            ${escapeHTML(
+              church
+            )}
+          </td>
+
+          <td>
+            ${escapeHTML(
+              date
+            )}
+          </td>
+
+          <td>
+            ${escapeHTML(
+              time
+            )}
+          </td>
+
+        `;
+
+
+        tbody.appendChild(
+          row
+        );
+
+      }
+    );
+
+  }
+
+
+
+  /* ========================================================
      SCANNER MESSAGES
   ========================================================= */
 
@@ -2827,23 +3677,26 @@
     result.innerHTML = `
 
       <div
-        class="scan-card"
+        class="scan-message"
         style="
-          background:
-            ${success
-              ? "#f0fdf4"
-              : "#fff7ed"};
-          border-color:
-            ${success
-              ? "#bbf7d0"
-              : "#fed7aa"};
+          ${
+            success
+              ? ""
+              : `
+                background:#fff7ed;
+                border-color:#fed7aa;
+                color:#9a3412;
+              `
+          }
         "
       >
 
         <strong>
-          ${success
-            ? "✓ Attendance Recorded"
-            : "Already Recorded"}
+          ${
+            success
+              ? "✓ Attendance Recorded"
+              : "Already Recorded"
+          }
         </strong>
 
         <p>
@@ -2872,14 +3725,7 @@
 
     result.innerHTML = `
 
-      <div
-        class="scan-card"
-        style="
-          background:#fee2e2;
-          border-color:#fecaca;
-          color:#991b1b;
-        "
-      >
+      <div class="scan-error">
 
         <strong>
           Scan Error
@@ -2899,7 +3745,7 @@
 
 
 
-  /* =========================================================
+  /* ========================================================
      MESSAGES
   ========================================================= */
 
@@ -2996,9 +3842,43 @@
 
 
 
-  /* =========================================================
-     DATE FORMATTING
+  /* ========================================================
+     DATE
   ========================================================= */
+
+  function getToday() {
+
+    const now =
+      new Date();
+
+
+    const year =
+      now.getFullYear();
+
+
+    const month =
+      String(
+        now.getMonth() + 1
+      ).padStart(
+        2,
+        "0"
+      );
+
+
+    const day =
+      String(
+        now.getDate()
+      ).padStart(
+        2,
+        "0"
+      );
+
+
+    return `${year}-${month}-${day}`;
+
+  }
+
+
 
   function formatDate(
     dateString
@@ -3051,8 +3931,9 @@
 
 
     const parts =
-      timeString
-        .split(":");
+      timeString.split(
+        ":"
+      );
 
 
     const hours =
@@ -3083,8 +3964,8 @@
 
 
 
-  /* =========================================================
-     SECURITY / HTML ESCAPING
+  /* ========================================================
+     SECURITY
   ========================================================= */
 
   function escapeHTML(
@@ -3102,22 +3983,27 @@
 
 
     return String(value)
+
       .replace(
         /&/g,
         "&amp;"
       )
+
       .replace(
         /</g,
         "&lt;"
       )
+
       .replace(
         />/g,
         "&gt;"
       )
+
       .replace(
         /"/g,
         "&quot;"
       )
+
       .replace(
         /'/g,
         "&#039;"
@@ -3127,8 +4013,8 @@
 
 
 
-  /* =========================================================
-     CLOSE MODAL WHEN CLICKING OUTSIDE
+  /* ========================================================
+     CLOSE LOGIN WHEN CLICKING OUTSIDE
   ========================================================= */
 
   window.addEventListener(
@@ -3152,7 +4038,10 @@
     }
   );
 
+
 </script>
 
+
 </body>
+
 </html>
